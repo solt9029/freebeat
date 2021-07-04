@@ -1,0 +1,15 @@
+overwrite: true
+schema: "freebeat-api/schema.graphql"
+generates:
+  graphql/generated/graphql-client.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      withComponent: false
+      withHooks: true
+      withHOC: false
+  graphql/generated/schema.json:
+    plugins:
+      - introspection
