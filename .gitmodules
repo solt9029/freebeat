@@ -1,0 +1,3 @@
+[submodule "freebeat-api"]
+	path = freebeat-api
+	url = git@github.com:solt9029/freebeat-api.git
