@@ -1,5 +1,6 @@
 import { CssBaseline } from '@material-ui/core'
 import { StylesProvider, ThemeProvider } from '@material-ui/styles'
+import Head from 'next/head'
 import * as React from 'react'
 import theme from '../theme'
 
@@ -13,6 +14,12 @@ function App({ Component, pageProps }) {
 
   return (
     <>
+      <Head>
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1"
+        />
+      </Head>
       <style jsx global>{`
         body {
           margin: 0px;
