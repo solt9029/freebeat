@@ -1,7 +1,9 @@
+import { ApolloProvider } from '@apollo/client'
 import { CssBaseline } from '@material-ui/core'
 import { StylesProvider, ThemeProvider } from '@material-ui/styles'
 import Head from 'next/head'
 import * as React from 'react'
+import apolloClient from '../apollo-client'
 import Navbar from '../components/organisms/Navbar'
 import theme from '../theme'
 
@@ -27,13 +29,15 @@ function App({ Component, pageProps }) {
           padding: 0px;
         }
       `}</style>
-      <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Navbar />
-          <Component {...pageProps} />
-        </ThemeProvider>
-      </StylesProvider>
+      <ApolloProvider client={apolloClient}>
+        <StylesProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Navbar />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </StylesProvider>
+      </ApolloProvider>
     </>
   )
 }
