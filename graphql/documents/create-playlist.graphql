@@ -1,0 +1,8 @@
+mutation createPlaylist {
+  createPlaylist(input: {}) {
+    playlist {
+      id
+      key
+    }
+  }
+}

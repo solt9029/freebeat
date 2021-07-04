@@ -1,5 +1,7 @@
 overwrite: true
 schema: "freebeat-api/schema.graphql"
+documents:
+  - "graphql/documents/**/*.graphql"
 generates:
   graphql/generated/graphql-client.tsx:
     plugins:
