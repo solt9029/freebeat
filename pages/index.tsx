@@ -87,7 +87,7 @@ const IndexPage = () => {
           <Box className={classes.buttonBox}>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               size="large"
               className={classes.button}
             >
@@ -95,7 +95,7 @@ const IndexPage = () => {
             </Button>
             <Button
               variant="outlined"
-              color="primary"
+              color="secondary"
               size="large"
               className={classes.button}
             >
