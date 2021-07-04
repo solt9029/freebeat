@@ -1,4 +1,5 @@
-import { Box, Container, makeStyles, Typography } from '@material-ui/core'
+import { Box, Container, makeStyles } from '@material-ui/core'
+import TopDescription from '../components/atoms/TopDescription'
 import TopTitle from '../components/atoms/TopTitle'
 import TopLinkButtonList from '../components/organisms/TopLinkButtonList'
 
@@ -46,21 +47,19 @@ const IndexPage = () => {
   const classes = useStyles()
 
   return (
-    <>
-      <Container fixed className={classes.titleBox}>
-        <Box mx={2}>
-          <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
-          <Box className={classes.descriptionBox}>
-            <Typography variant="h2" style={{ lineHeight: 1.8 }}>
-              FreeBeatは、YouTube動画でプレイリストを作り、好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。
-            </Typography>
-          </Box>
-          <Box className={classes.buttonBox}>
-            <TopLinkButtonList />
-          </Box>
+    <Container fixed className={classes.titleBox}>
+      <Box mx={2}>
+        <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
+        <Box className={classes.descriptionBox}>
+          <TopDescription>
+            FreeBeatは、YouTube動画でプレイリストを作り、好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。
+          </TopDescription>
         </Box>
-      </Container>
-    </>
+        <Box className={classes.buttonBox}>
+          <TopLinkButtonList />
+        </Box>
+      </Box>
+    </Container>
   )
 }
 
