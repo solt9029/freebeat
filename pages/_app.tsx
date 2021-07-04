@@ -2,6 +2,7 @@ import { CssBaseline } from '@material-ui/core'
 import { StylesProvider, ThemeProvider } from '@material-ui/styles'
 import Head from 'next/head'
 import * as React from 'react'
+import Navbar from '../components/organisms/Navbar'
 import theme from '../theme'
 
 function App({ Component, pageProps }) {
@@ -29,6 +30,7 @@ function App({ Component, pageProps }) {
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
+          <Navbar />
           <Component {...pageProps} />
         </ThemeProvider>
       </StylesProvider>
