@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Box,
   Container,
   makeStyles,
   Toolbar,
@@ -7,18 +8,30 @@ import {
 } from '@material-ui/core'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    // flexGrow: 1,
-    // textAlign: 'center',
-    // height: '600px',
-    paddingTop: '100px',
-    backgroundColor: '#880000',
-    color: 'white',
-    width: '100%',
+  titleBox: {
+    textAlign: 'center',
+    paddingTop: '70px',
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: '90px',
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingTop: '120px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      paddingTop: '140px',
+    },
   },
-
-  title: {
-    fontSize: '8rem',
+  descriptionBox: {
+    marginTop: '70px',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: '90px',
+    },
+    [theme.breakpoints.up('md')]: {
+      marginTop: '120px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: '140px',
+    },
   },
 }))
 
@@ -34,15 +47,19 @@ const IndexPage = () => {
           </Container>
         </Toolbar>
       </AppBar>
-      <div className={classes.root}>
-        <Container>
-          <h1 className={classes.title}>
-            統一されたBPMで
-            <br />
-            集中して作業しよう
-          </h1>
-        </Container>
-      </div>
+
+      <Container fixed className={classes.titleBox}>
+        <Box mx={2}>
+          <Typography variant="h1">
+            統一されたBPMで集中して作業しよう
+          </Typography>
+          <Box className={classes.descriptionBox}>
+            <Typography variant="h2" style={{ lineHeight: 1.8 }}>
+              FreeBeatは、YouTube動画でプレイリストを作り、好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。
+            </Typography>
+          </Box>
+        </Box>
+      </Container>
     </>
   )
 }
