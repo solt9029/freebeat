@@ -1,6 +1,7 @@
 import {
   AppBar,
   Box,
+  Button,
   Container,
   makeStyles,
   Toolbar,
@@ -15,22 +16,47 @@ const useStyles = makeStyles((theme) => ({
       paddingTop: '90px',
     },
     [theme.breakpoints.up('md')]: {
-      paddingTop: '120px',
+      paddingTop: '100px',
     },
     [theme.breakpoints.up('lg')]: {
-      paddingTop: '140px',
+      paddingTop: '100px',
     },
   },
   descriptionBox: {
+    marginTop: '60px',
+    [theme.breakpoints.up('sm')]: {
+      marginTop: '70px',
+    },
+    [theme.breakpoints.up('md')]: {
+      marginTop: '80px',
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: '90px',
+    },
+  },
+  buttonBox: {
     marginTop: '70px',
     [theme.breakpoints.up('sm')]: {
       marginTop: '90px',
     },
     [theme.breakpoints.up('md')]: {
-      marginTop: '120px',
+      marginTop: '100px',
     },
     [theme.breakpoints.up('lg')]: {
-      marginTop: '140px',
+      marginTop: '110px',
+    },
+  },
+  button: {
+    fontSize: '1rem',
+    margin: '8px',
+    [theme.breakpoints.up('sm')]: {
+      fontSize: '1.1rem',
+    },
+    [theme.breakpoints.up('md')]: {
+      fontSize: '1.2rem',
+    },
+    [theme.breakpoints.up('lg')]: {
+      fontSize: '1.3rem',
     },
   },
 }))
@@ -57,6 +83,24 @@ const IndexPage = () => {
             <Typography variant="h2" style={{ lineHeight: 1.8 }}>
               FreeBeatは、YouTube動画でプレイリストを作り、好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。
             </Typography>
+          </Box>
+          <Box className={classes.buttonBox}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              className={classes.button}
+            >
+              プレイリストを作る
+            </Button>
+            <Button
+              variant="outlined"
+              color="primary"
+              size="large"
+              className={classes.button}
+            >
+              プレイリストを探す
+            </Button>
           </Box>
         </Box>
       </Container>
