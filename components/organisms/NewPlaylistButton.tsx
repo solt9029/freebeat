@@ -1,18 +1,19 @@
 import React, { useCallback } from 'react'
-import Lockr from 'lockr'
+import { useRouter } from 'next/dist/client/router'
 import { useCreatePlaylistMutation } from '../../graphql/generated/graphql-client'
 import { addPlaylistKey } from '../../local-storage'
 import TopButton from '../atoms/TopButton'
 
 function NewPlaylistButton() {
+  const router = useRouter()
+
   const [createPlaylist] = useCreatePlaylistMutation({
     onCompleted: (data) => {
-      console.log(data.createPlaylist.playlist.id)
       addPlaylistKey(
         data.createPlaylist.playlist.id,
         data.createPlaylist.playlist.key,
       )
-      console.log(Lockr.get('keys'))
+      router.push(`/playlists/${data.createPlaylist.playlist.id}/edit`)
     },
     onError: (error) => {
       console.log(error)
