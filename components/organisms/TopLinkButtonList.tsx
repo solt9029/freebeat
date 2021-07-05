@@ -1,5 +1,6 @@
 import { Button, makeStyles } from '@material-ui/core'
 import React from 'react'
+import NewPlaylistButton from './NewPlaylistButton'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -22,14 +23,7 @@ function TopLinkButtonList() {
 
   return (
     <>
-      <Button
-        variant="contained"
-        color="secondary"
-        size="large"
-        className={classes.button}
-      >
-        プレイリストを作る
-      </Button>
+      <NewPlaylistButton />
       <Button
         variant="outlined"
         color="secondary"
