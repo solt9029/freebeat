@@ -268,6 +268,29 @@ export type CreatePlaylistMutation = (
   )> }
 );
 
+export type PlaylistQueryVariables = Exact<{
+  id: Scalars['Int'];
+}>;
+
+
+export type PlaylistQuery = (
+  { __typename?: 'Query' }
+  & { playlist: (
+    { __typename?: 'Base' }
+    & Pick<Base, 'id' | 'title' | 'defaultBpm'>
+    & { videos: (
+      { __typename?: 'VideoConnection' }
+      & { edges?: Maybe<Array<Maybe<(
+        { __typename?: 'VideoEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Video' }
+          & Pick<Video, 'id' | 'youtubeVideoId' | 'bpm'>
+        )> }
+      )>>> }
+    ) }
+  ) }
+);
+
 
 export const CreatePlaylistDocument = gql`
     mutation createPlaylist {
@@ -304,3 +327,49 @@ export function useCreatePlaylistMutation(baseOptions?: Apollo.MutationHookOptio
 export type CreatePlaylistMutationHookResult = ReturnType<typeof useCreatePlaylistMutation>;
 export type CreatePlaylistMutationResult = Apollo.MutationResult<CreatePlaylistMutation>;
 export type CreatePlaylistMutationOptions = Apollo.BaseMutationOptions<CreatePlaylistMutation, CreatePlaylistMutationVariables>;
+export const PlaylistDocument = gql`
+    query playlist($id: Int!) {
+  playlist(id: $id) {
+    id
+    title
+    defaultBpm
+    videos {
+      edges {
+        node {
+          id
+          youtubeVideoId
+          bpm
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePlaylistQuery__
+ *
+ * To run a query within a React component, call `usePlaylistQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlaylistQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlaylistQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function usePlaylistQuery(baseOptions: Apollo.QueryHookOptions<PlaylistQuery, PlaylistQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlaylistQuery, PlaylistQueryVariables>(PlaylistDocument, options);
+      }
+export function usePlaylistLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlaylistQuery, PlaylistQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlaylistQuery, PlaylistQueryVariables>(PlaylistDocument, options);
+        }
+export type PlaylistQueryHookResult = ReturnType<typeof usePlaylistQuery>;
+export type PlaylistLazyQueryHookResult = ReturnType<typeof usePlaylistLazyQuery>;
+export type PlaylistQueryResult = Apollo.QueryResult<PlaylistQuery, PlaylistQueryVariables>;

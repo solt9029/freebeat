@@ -19,7 +19,8 @@
     "lockr": "^0.8.5",
     "next": "latest",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-youtube": "^7.13.1"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.21.6",

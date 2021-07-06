@@ -1,0 +1,16 @@
+query playlist($id: Int!) {
+  playlist(id: $id) {
+    id
+    title
+    defaultBpm
+    videos {
+      edges {
+        node {
+          id
+          youtubeVideoId
+          bpm
+        }
+      }
+    }
+  }
+}
