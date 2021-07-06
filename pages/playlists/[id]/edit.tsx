@@ -84,21 +84,49 @@ const EditPage = () => {
               {/* </div> */}
             </Grid>
             <Grid item xs={12} sm={6} md={8}>
-              <TextField
-                className={classes.form}
-                InputProps={{
-                  classes: {
-                    input: classes.formInput,
-                  },
-                }}
-                label="タイトル"
-              />
-              <Box mt={2}>
-                <PlayCircleOutline style={{ fontSize: 60 }} />
-                <Shuffle style={{ fontSize: 60 }} />
-                <ShareRounded style={{ fontSize: 60 }} />
-                <RepeatRounded style={{ fontSize: 60 }} />
-              </Box>
+              <Grid container spacing={2}>
+                <Grid item lg={12} xs={12}>
+                  <TextField
+                    className={classes.form}
+                    InputProps={{
+                      classes: {
+                        input: classes.formInput,
+                      },
+                    }}
+                    label="タイトル"
+                  />
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                  <TextField
+                    className={classes.form}
+                    InputProps={{
+                      classes: {
+                        input: classes.formInput,
+                      },
+                    }}
+                    label="デフォルトのBPM"
+                  />
+                </Grid>
+                <Grid item sm={6} xs={12}>
+                  <TextField
+                    className={classes.form}
+                    InputProps={{
+                      classes: {
+                        input: classes.formInput,
+                      },
+                    }}
+                    label="編集キー"
+                  />
+                  <small>プレイリストを編集するために必要な暗号です。</small>
+                </Grid>
+
+                <Grid item sm={6} xs={12}>
+                  <PlayCircleOutline style={{ fontSize: 40 }} />
+                  <Shuffle style={{ fontSize: 40 }} />
+                  <ShareRounded style={{ fontSize: 40 }} />
+                  <RepeatRounded style={{ fontSize: 40 }} />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Container>
