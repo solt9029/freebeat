@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Grid,
   IconButton,
@@ -44,6 +45,12 @@ const useStyles = makeStyles((theme) => ({
   },
   formInput: {
     fontSize: '1.5rem',
+  },
+  button: {
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
   },
 }))
 
@@ -129,6 +136,32 @@ const EditPage = () => {
               </Grid>
             </Grid>
           </Grid>
+          <Box mt={10}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={10}>
+                <TextField
+                  className={classes.form}
+                  InputProps={{
+                    classes: {
+                      input: classes.formInput,
+                    },
+                  }}
+                  label="YouTubeの動画またはプレイリストのURL"
+                />
+              </Grid>
+              <Grid item xs={12} sm={2}>
+                <div style={{ position: 'relative', height: '100%' }}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                  >
+                    登録
+                  </Button>
+                </div>
+              </Grid>
+            </Grid>
+          </Box>
         </Container>
       </Box>
     </div>
