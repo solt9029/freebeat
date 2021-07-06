@@ -1,6 +1,25 @@
-import { Box, Container, Grid, makeStyles, TextField } from '@material-ui/core'
+import {
+  Box,
+  Container,
+  Grid,
+  IconButton,
+  makeStyles,
+  TextField,
+} from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import YouTube from 'react-youtube'
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled'
+import {
+  PlayCircleOutline,
+  RepeatRounded,
+  ShareOutlined,
+  ShareRounded,
+  Shuffle,
+  ShuffleOutlined,
+  ShuffleRounded,
+} from '@material-ui/icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRandom } from '@fortawesome/free-solid-svg-icons'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
 
 const useStyles = makeStyles((theme) => ({
@@ -43,43 +62,48 @@ const EditPage = () => {
   console.log(loading)
 
   return (
-    <Box mt={5}>
-      <Container>
-        <Grid spacing={3} container>
-          <Grid item xs={12} sm={6} md={4}>
-            <div className={classes.wrapper}>
-              <YouTube
-                containerClassName={classes.content}
-                opts={{
-                  height: '100%',
-                  width: '100%',
-                  playerVars: {
-                    playsinline: 1,
+    <div>
+      <Box py={5}>
+        <Container>
+          <Grid spacing={3} container>
+            <Grid item xs={12} sm={6} md={4}>
+              <div className={classes.wrapper}>
+                <YouTube
+                  containerClassName={classes.content}
+                  opts={{
+                    height: '100%',
+                    width: '100%',
+                    playerVars: {
+                      playsinline: 1,
+                    },
+                  }}
+                  videoId="eqr98KBmsJk"
+                />
+              </div>
+
+              {/* </div> */}
+            </Grid>
+            <Grid item xs={12} sm={6} md={8}>
+              <TextField
+                className={classes.form}
+                InputProps={{
+                  classes: {
+                    input: classes.formInput,
                   },
                 }}
-                videoId="eqr98KBmsJk"
+                label="タイトル"
               />
-            </div>
-
-            {/* </div> */}
+              <Box mt={2}>
+                <PlayCircleOutline style={{ fontSize: 60 }} />
+                <Shuffle style={{ fontSize: 60 }} />
+                <ShareRounded style={{ fontSize: 60 }} />
+                <RepeatRounded style={{ fontSize: 60 }} />
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={6} md={8}>
-            <TextField
-              className={classes.form}
-              InputProps={{
-                classes: {
-                  input: classes.formInput,
-                },
-              }}
-              label="タイトル"
-            />
-          </Grid>
-        </Grid>
-
-        {id}
-        {data?.playlist?.defaultBpm}
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+    </div>
   )
 }
 
