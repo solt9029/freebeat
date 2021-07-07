@@ -1,9 +1,18 @@
 import {
+  Avatar,
   Box,
   Button,
+  Card,
+  CardActions,
+  CardContent,
   Container,
   Grid,
   IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemSecondaryAction,
+  ListItemText,
   makeStyles,
   Slider,
   TextField,
@@ -13,6 +22,8 @@ import { useRouter } from 'next/dist/client/router'
 import YouTube from 'react-youtube'
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled'
 import {
+  Comment,
+  Delete,
   PlayCircleOutline,
   RepeatRounded,
   ShareOutlined,
@@ -24,6 +35,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRandom } from '@fortawesome/free-solid-svg-icons'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
+import YoutubeCard from '../../../components/organisms/YoutubeCard'
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -186,6 +198,16 @@ const EditPage = () => {
                     </Button>
                   </Grid>
                 </Grid>
+                <Box mt={3}>
+                  {data &&
+                    data.playlist.videos.edges.map((edge) => (
+                      <Box m={1}>
+                        <YoutubeCard
+                          youtubeVideoId={edge.node.youtubeVideoId}
+                        />
+                      </Box>
+                    ))}
+                </Box>
               </Grid>
             </Grid>
           </Box>
