@@ -5,7 +5,9 @@ import {
   Grid,
   IconButton,
   makeStyles,
+  Slider,
   TextField,
+  Typography,
 } from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import YouTube from 'react-youtube'
@@ -58,10 +60,12 @@ const EditPage = () => {
 
   const {
     query: { id },
+    isReady,
   } = useRouter()
 
   const { data, loading } = usePlaylistQuery({
     variables: { id: parseInt(id?.toString()) },
+    skip: !isReady,
   })
 
   console.log(data)
@@ -102,18 +106,7 @@ const EditPage = () => {
                     label="タイトル"
                   />
                 </Grid>
-                <Grid item sm={6} xs={12}>
-                  <TextField
-                    className={classes.form}
-                    InputProps={{
-                      classes: {
-                        input: classes.formInput,
-                      },
-                    }}
-                    label="デフォルトのBPM"
-                  />
-                </Grid>
-                <Grid item sm={6} xs={12}>
+                <Grid item sm={12} xs={12}>
                   <TextField
                     className={classes.form}
                     InputProps={{
@@ -135,9 +128,15 @@ const EditPage = () => {
               </Grid>
             </Grid>
           </Grid>
-          <Box mt={10}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} sm={9} md={10}>
+          <Box mt={5}>
+            <Grid container spacing={5}>
+              <Grid
+                item
+                md={4}
+                sm={12}
+                style={{ borderRight: 'solid 1px #AAA' }}
+              >
+                <Typography variant="h6">再生設定</Typography>
                 <TextField
                   className={classes.form}
                   InputProps={{
@@ -145,23 +144,48 @@ const EditPage = () => {
                       input: classes.formInput,
                     },
                   }}
-                  label="YouTubeの動画またはプレイリストのURL"
+                  label="デフォルトのBPM"
+                />
+                <TextField
+                  className={classes.form}
+                  InputProps={{
+                    classes: {
+                      input: classes.formInput,
+                    },
+                  }}
+                  label="BPM変化量の許容値"
                 />
               </Grid>
-              <Grid
-                item
-                xs={12}
-                sm={3}
-                md={2}
-                style={{ display: 'flex', alignItems: 'flex-end' }}
-              >
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className={classes.button}
-                >
-                  登録
-                </Button>
+              <Grid item md={8} sm={12}>
+                <Typography variant="h6">動画一覧</Typography>
+                <Grid container spacing={3}>
+                  <Grid item xs={12} sm={9} md={10}>
+                    <TextField
+                      className={classes.form}
+                      InputProps={{
+                        classes: {
+                          input: classes.formInput,
+                        },
+                      }}
+                      label="YouTubeの動画またはプレイリストのURL"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={3}
+                    md={2}
+                    style={{ display: 'flex', alignItems: 'flex-end' }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      className={classes.button}
+                    >
+                      登録
+                    </Button>
+                  </Grid>
+                </Grid>
               </Grid>
             </Grid>
           </Box>
