@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core'
 import { Delete, DeleteOutline, DeleteOutlined } from '@material-ui/icons'
 import React from 'react'
+import YouTube from 'react-youtube'
 
 type Props = {
   youtubeVideoId: string

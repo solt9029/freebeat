@@ -106,6 +106,13 @@ const EditPage = () => {
               {/* </div> */}
             </Grid>
             <Grid item xs={12} sm={6} md={8}>
+              <Grid item sm={12} xs={12}>
+                <PlayCircleOutline style={{ fontSize: 40 }} />
+                <Shuffle style={{ fontSize: 40 }} />
+                <ShareRounded style={{ fontSize: 40 }} />
+                <RepeatRounded style={{ fontSize: 40 }} />
+              </Grid>
+
               <Grid container spacing={2}>
                 <Grid item lg={12} xs={12}>
                   <TextField
@@ -130,13 +137,6 @@ const EditPage = () => {
                   />
                   <small>プレイリストを編集するために必要な暗号です。</small>
                 </Grid>
-
-                <Grid item sm={6} xs={12}>
-                  <PlayCircleOutline style={{ fontSize: 40 }} />
-                  <Shuffle style={{ fontSize: 40 }} />
-                  <ShareRounded style={{ fontSize: 40 }} />
-                  <RepeatRounded style={{ fontSize: 40 }} />
-                </Grid>
               </Grid>
             </Grid>
           </Grid>
@@ -148,16 +148,22 @@ const EditPage = () => {
                 sm={12}
                 style={{ borderRight: 'solid 1px #AAA' }}
               >
-                <Typography variant="h6">再生設定</Typography>
-                <TextField
-                  className={classes.form}
-                  InputProps={{
-                    classes: {
-                      input: classes.formInput,
-                    },
-                  }}
-                  label="デフォルトのBPM"
-                />
+                <Box mb={2}>
+                  <Typography variant="h6">再生設定</Typography>
+                </Box>
+
+                <Box mb={2}>
+                  <TextField
+                    className={classes.form}
+                    InputProps={{
+                      classes: {
+                        input: classes.formInput,
+                      },
+                    }}
+                    label="デフォルトのBPM"
+                  />
+                </Box>
+
                 <TextField
                   className={classes.form}
                   InputProps={{
