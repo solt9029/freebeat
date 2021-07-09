@@ -1,16 +1,36 @@
 import {
-  Box,
   Button,
   Card,
   CardActions,
   CardContent,
   Grid,
+  makeStyles,
   TextField,
-  Typography,
 } from '@material-ui/core'
-import { Delete, DeleteOutline, DeleteOutlined } from '@material-ui/icons'
+import { DeleteOutlined } from '@material-ui/icons'
 import React from 'react'
-import YouTube from 'react-youtube'
+
+const useStyles = makeStyles(() => ({
+  title: {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    fontSize: '1rem',
+  },
+  field: {
+    width: '100%',
+  },
+  img: {
+    borderRadius: '1.5%',
+    width: '100%',
+  },
+  card: {
+    width: '100%',
+  },
+  button: {
+    justifyContent: 'flex-start',
+  },
+}))
 
 type Props = {
   youtubeVideoId: string
@@ -18,34 +38,26 @@ type Props = {
 }
 
 function YoutubeCard(props: Props) {
+  const classes = useStyles()
+
   return (
-    <Card variant="outlined" style={{ width: '100%' }}>
+    <Card variant="outlined" className={classes.card}>
       <CardContent>
         <Grid container spacing={2}>
           <Grid item sm={3} xs={12} zeroMinWidth>
             <img
               src={`https://i.ytimg.com/vi/${props.youtubeVideoId}/mqdefault.jpg`}
-              // height="100%"
-              style={{ borderRadius: '1.5%', width: '100%' }}
+              className={classes.img}
             />
           </Grid>
           <Grid item sm={9} xs={12} zeroMinWidth>
-            <div
-              style={{
-                overflow: 'hidden',
-                whiteSpace: 'nowrap',
-                textOverflow: 'ellipsis',
-                fontSize: '1rem',
-              }}
-            >
-              {props.youtubeVideoTitle}
-            </div>
-            <TextField style={{ width: '100%' }} label="BPM" />
+            <div className={classes.title}>{props.youtubeVideoTitle}</div>
+            <TextField className={classes.field} label="BPM" />
           </Grid>
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small">
+        <Button size="small" fullWidth className={classes.button}>
           <DeleteOutlined />
           プレイリストから削除
         </Button>
