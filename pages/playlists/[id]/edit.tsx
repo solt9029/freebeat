@@ -54,13 +54,10 @@ const EditPage = () => {
     isReady,
   } = useRouter()
 
-  const { data, loading } = usePlaylistQuery({
+  const { data } = usePlaylistQuery({
     variables: { id: parseInt(id?.toString()) },
     skip: !isReady,
   })
-
-  console.log(data)
-  console.log(loading)
 
   return (
     <div>

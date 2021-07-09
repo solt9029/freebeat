@@ -2,13 +2,45 @@ import { ApolloProvider } from '@apollo/client'
 import { CssBaseline } from '@material-ui/core'
 import { StylesProvider, ThemeProvider } from '@material-ui/styles'
 import Head from 'next/head'
-import * as React from 'react'
+import { createContext, Dispatch, useEffect, useReducer } from 'react'
 import apolloClient from '../apollo-client'
 import Navbar from '../components/organisms/Navbar'
 import theme from '../theme'
 
+type AppAction = {
+  type: 'SET_KEY'
+  payload: string
+}
+
+type AppContextInterface = {
+  state: AppStateInterface
+  dispatch: Dispatch<AppAction>
+}
+
+type AppStateInterface = {
+  key: string
+}
+
+const initialState = { key: '' }
+
+const AppContext = createContext<AppContextInterface>({
+  state: initialState,
+  dispatch: () => {},
+})
+
+const appReducer = (state: AppStateInterface, action: AppAction) => {
+  switch (action.type) {
+    case 'SET_KEY':
+      return { ...state, key: action.payload }
+    default:
+      return state
+  }
+}
+
 function App({ Component, pageProps }) {
-  React.useEffect(() => {
+  const [state, dispatch] = useReducer(appReducer, initialState)
+
+  useEffect(() => {
     const jssStyles: Element | null = document.querySelector('#jss-server-side')
     if (jssStyles) {
       jssStyles.parentElement?.removeChild(jssStyles)
@@ -30,13 +62,15 @@ function App({ Component, pageProps }) {
         }
       `}</style>
       <ApolloProvider client={apolloClient}>
-        <StylesProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Navbar />
-            <Component {...pageProps} />
-          </ThemeProvider>
-        </StylesProvider>
+        <AppContext.Provider value={{ state, dispatch }}>
+          <StylesProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <Navbar />
+              <Component {...pageProps} />
+            </ThemeProvider>
+          </StylesProvider>
+        </AppContext.Provider>
       </ApolloProvider>
     </>
   )
