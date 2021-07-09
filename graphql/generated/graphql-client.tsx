@@ -269,6 +269,25 @@ export type CreatePlaylistMutation = (
   )> }
 );
 
+export type UpdatePlaylistMutationVariables = Exact<{
+  id: Scalars['Int'];
+  title?: Maybe<Scalars['String']>;
+  defaultBpm?: Maybe<Scalars['Int']>;
+  key: Scalars['String'];
+}>;
+
+
+export type UpdatePlaylistMutation = (
+  { __typename?: 'Mutation' }
+  & { updatePlaylist?: Maybe<(
+    { __typename?: 'UpdatePlaylistPayload' }
+    & { playlist: (
+      { __typename?: 'Base' }
+      & Pick<Base, 'id'>
+    ) }
+  )> }
+);
+
 export type PlaylistQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -328,6 +347,46 @@ export function useCreatePlaylistMutation(baseOptions?: Apollo.MutationHookOptio
 export type CreatePlaylistMutationHookResult = ReturnType<typeof useCreatePlaylistMutation>;
 export type CreatePlaylistMutationResult = Apollo.MutationResult<CreatePlaylistMutation>;
 export type CreatePlaylistMutationOptions = Apollo.BaseMutationOptions<CreatePlaylistMutation, CreatePlaylistMutationVariables>;
+export const UpdatePlaylistDocument = gql`
+    mutation updatePlaylist($id: Int!, $title: String, $defaultBpm: Int, $key: String!) {
+  updatePlaylist(
+    input: {id: $id, title: $title, defaultBpm: $defaultBpm, key: $key}
+  ) {
+    playlist {
+      id
+    }
+  }
+}
+    `;
+export type UpdatePlaylistMutationFn = Apollo.MutationFunction<UpdatePlaylistMutation, UpdatePlaylistMutationVariables>;
+
+/**
+ * __useUpdatePlaylistMutation__
+ *
+ * To run a mutation, you first call `useUpdatePlaylistMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePlaylistMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePlaylistMutation, { data, loading, error }] = useUpdatePlaylistMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      title: // value for 'title'
+ *      defaultBpm: // value for 'defaultBpm'
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useUpdatePlaylistMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePlaylistMutation, UpdatePlaylistMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePlaylistMutation, UpdatePlaylistMutationVariables>(UpdatePlaylistDocument, options);
+      }
+export type UpdatePlaylistMutationHookResult = ReturnType<typeof useUpdatePlaylistMutation>;
+export type UpdatePlaylistMutationResult = Apollo.MutationResult<UpdatePlaylistMutation>;
+export type UpdatePlaylistMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistMutation, UpdatePlaylistMutationVariables>;
 export const PlaylistDocument = gql`
     query playlist($id: Int!) {
   playlist(id: $id) {

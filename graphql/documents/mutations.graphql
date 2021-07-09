@@ -6,3 +6,11 @@ mutation createPlaylist {
     }
   }
 }
+
+mutation updatePlaylist($id: Int!, $title: String, $defaultBpm: Int, $key: String!) {
+  updatePlaylist(input: {id: $id, title: $title, defaultBpm: $defaultBpm, key: $key}) {
+    playlist {
+      id
+    }
+  }
+}

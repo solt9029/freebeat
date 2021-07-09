@@ -1,7 +1,11 @@
 import { debounce, makeStyles, TextField } from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
-import React, { useCallback, useState } from 'react'
-import { usePlaylistQuery } from '../../graphql/generated/graphql-client'
+import React, { useCallback, useContext, useState } from 'react'
+import {
+  usePlaylistQuery,
+  useUpdatePlaylistMutation,
+} from '../../graphql/generated/graphql-client'
+import { AppContext } from '../../pages/_app'
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -11,6 +15,8 @@ const useStyles = makeStyles(() => ({
 
 function PlaylistTitleField() {
   const classes = useStyles()
+
+  const { state } = useContext(AppContext)
 
   const [title, setTitle] = useState('')
 
@@ -27,12 +33,26 @@ function PlaylistTitleField() {
     skip: !isReady,
   })
 
+  const [updatePlaylist] = useUpdatePlaylistMutation({
+    onCompleted: (data) => {
+      console.log(data)
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
+
   const updateTitle = useCallback(
-    debounce((title: string) => {
-      // update title
-      console.log(title)
+    debounce((value: string) => {
+      updatePlaylist({
+        variables: {
+          id: parseInt(id?.toString()),
+          key: state.key,
+          title: value,
+        },
+      })
     }, 1000),
-    [],
+    [id, updatePlaylist, state],
   )
 
   const handleChange = useCallback(
