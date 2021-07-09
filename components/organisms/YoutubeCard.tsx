@@ -14,6 +14,7 @@ import YouTube from 'react-youtube'
 
 type Props = {
   youtubeVideoId: string
+  youtubeVideoTitle?: string
 }
 
 function YoutubeCard(props: Props) {
@@ -21,19 +22,25 @@ function YoutubeCard(props: Props) {
     <Card variant="outlined" style={{ width: '100%' }}>
       <CardContent>
         <Grid container spacing={2}>
-          <Grid item sm={3} xs={12}>
+          <Grid item sm={3} xs={12} zeroMinWidth>
             <img
               src={`https://i.ytimg.com/vi/${props.youtubeVideoId}/mqdefault.jpg`}
-              width="100%"
               // height="100%"
-              style={{ borderRadius: '1.5%' }}
+              style={{ borderRadius: '1.5%', width: '100%' }}
             />
           </Grid>
-          <Grid item sm={9} xs={12}>
-            <Box m={1}>
-              <Typography variant="h6">魔法</Typography>
-              <TextField style={{ width: '100%' }} label="BPM" />
-            </Box>
+          <Grid item sm={9} xs={12} zeroMinWidth>
+            <div
+              style={{
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
+                textOverflow: 'ellipsis',
+                fontSize: '1rem',
+              }}
+            >
+              {props.youtubeVideoTitle}
+            </div>
+            <TextField style={{ width: '100%' }} label="BPM" />
           </Grid>
         </Grid>
       </CardContent>

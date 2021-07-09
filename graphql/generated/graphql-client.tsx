@@ -232,6 +232,7 @@ export type Video = {
   playlistId: Scalars['Int'];
   updatedAt: Scalars['ISO8601DateTime'];
   youtubeVideoId: Scalars['String'];
+  youtubeVideoTitle?: Maybe<Scalars['String']>;
 };
 
 /** The connection type for Video. */
@@ -284,7 +285,7 @@ export type PlaylistQuery = (
         { __typename?: 'VideoEdge' }
         & { node?: Maybe<(
           { __typename?: 'Video' }
-          & Pick<Video, 'id' | 'youtubeVideoId' | 'bpm'>
+          & Pick<Video, 'id' | 'youtubeVideoId' | 'youtubeVideoTitle' | 'bpm'>
         )> }
       )>>> }
     ) }
@@ -338,6 +339,7 @@ export const PlaylistDocument = gql`
         node {
           id
           youtubeVideoId
+          youtubeVideoTitle
           bpm
         }
       }

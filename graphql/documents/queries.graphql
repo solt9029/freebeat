@@ -8,6 +8,7 @@ query playlist($id: Int!) {
         node {
           id
           youtubeVideoId
+          youtubeVideoTitle
           bpm
         }
       }

@@ -144,9 +144,10 @@ const EditPage = () => {
             <Grid container spacing={5}>
               <Grid
                 item
-                md={4}
-                sm={12}
-                style={{ borderRight: 'solid 1px #AAA' }}
+                sm={4}
+                xs={12}
+                style={{ borderRight: 'solid 1px #AAA', width: '100%' }}
+                zeroMinWidth
               >
                 <Box mb={2}>
                   <Typography variant="h6">再生設定</Typography>
@@ -174,7 +175,7 @@ const EditPage = () => {
                   label="BPM変化量の許容値"
                 />
               </Grid>
-              <Grid item md={8} sm={12}>
+              <Grid item sm={8} xs={12} zeroMinWidth>
                 <Typography variant="h6">動画一覧</Typography>
                 <Grid container spacing={3}>
                   <Grid item xs={12} sm={9} md={10}>
@@ -200,16 +201,18 @@ const EditPage = () => {
                       color="secondary"
                       className={classes.button}
                     >
-                      登録
+                      追加
                     </Button>
                   </Grid>
                 </Grid>
+
                 <Box mt={3}>
                   {data &&
                     data.playlist.videos.edges.map((edge) => (
                       <Box m={1}>
                         <YoutubeCard
                           youtubeVideoId={edge.node.youtubeVideoId}
+                          youtubeVideoTitle={edge.node.youtubeVideoTitle}
                         />
                       </Box>
                     ))}
