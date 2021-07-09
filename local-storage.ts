@@ -16,3 +16,7 @@ export const addPlaylistKey = (playlistId: string, key: string) => {
     [playlistId]: key,
   })
 }
+
+export const getPlaylistKey = (playlistId: string) => {
+  return (Lockr.get(KEYS, {}) as Keys)[playlistId]
+}

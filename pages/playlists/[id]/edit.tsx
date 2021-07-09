@@ -15,8 +15,11 @@ import {
   ShareRounded,
   Shuffle,
 } from '@material-ui/icons'
+import { useContext, useEffect } from 'react'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
 import YoutubeCard from '../../../components/organisms/YoutubeCard'
+import { getPlaylistKey } from '../../../local-storage'
+import { AppContext } from '../../_app'
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -49,10 +52,18 @@ const useStyles = makeStyles(() => ({
 const EditPage = () => {
   const classes = useStyles()
 
+  const { dispatch } = useContext(AppContext)
+
   const {
     query: { id },
     isReady,
   } = useRouter()
+
+  useEffect(() => {
+    if (isReady && id) {
+      dispatch({ type: 'SET_KEY', payload: getPlaylistKey(id.toString()) })
+    }
+  }, [id, isReady])
 
   const { data } = usePlaylistQuery({
     variables: { id: parseInt(id?.toString()) },

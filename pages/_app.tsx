@@ -23,7 +23,7 @@ type AppStateInterface = {
 
 const initialState = { key: '' }
 
-const AppContext = createContext<AppContextInterface>({
+export const AppContext = createContext<AppContextInterface>({
   state: initialState,
   dispatch: () => {},
 })
