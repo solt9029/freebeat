@@ -20,6 +20,7 @@ import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
 import YoutubeCard from '../../../components/organisms/YoutubeCard'
 import { getPlaylistKey } from '../../../local-storage'
 import { AppContext } from '../../_app'
+import PlaylistTitleField from '../../../components/organisms/PlaylistTitleField'
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -99,15 +100,7 @@ const EditPage = () => {
 
             <Grid container spacing={2}>
               <Grid item lg={12} xs={12}>
-                <TextField
-                  className={classes.form}
-                  InputProps={{
-                    classes: {
-                      input: classes.formInput,
-                    },
-                  }}
-                  label="タイトル"
-                />
+                <PlaylistTitleField />
               </Grid>
               <Grid item sm={12} xs={12}>
                 <TextField
