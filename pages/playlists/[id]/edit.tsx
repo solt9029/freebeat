@@ -1,43 +1,24 @@
 import {
-  Avatar,
   Box,
   Button,
-  Card,
-  CardActions,
-  CardContent,
   Container,
   Grid,
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
-  ListItemText,
   makeStyles,
-  Slider,
   TextField,
   Typography,
 } from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import YouTube from 'react-youtube'
-import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled'
 import {
-  Comment,
-  Delete,
   PlayCircleOutline,
   RepeatRounded,
-  ShareOutlined,
   ShareRounded,
   Shuffle,
-  ShuffleOutlined,
-  ShuffleRounded,
 } from '@material-ui/icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRandom } from '@fortawesome/free-solid-svg-icons'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
 import YoutubeCard from '../../../components/organisms/YoutubeCard'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   wrapper: {
     position: 'relative',
     width: '100%',
@@ -62,8 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: '100%',
-    // bottom: 0,
-    // height: '100%',
   },
 }))
 
@@ -102,8 +81,6 @@ const EditPage = () => {
                   videoId="eqr98KBmsJk"
                 />
               </div>
-
-              {/* </div> */}
             </Grid>
             <Grid item xs={12} sm={6} md={8}>
               <Grid item sm={12} xs={12}>
