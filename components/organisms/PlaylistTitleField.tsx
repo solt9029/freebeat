@@ -1,5 +1,4 @@
 import { debounce, makeStyles, TextField } from '@material-ui/core'
-import { useRouter } from 'next/dist/client/router'
 import React, { useCallback, useContext, useState } from 'react'
 import {
   usePlaylistQuery,
@@ -20,17 +19,12 @@ function PlaylistTitleField() {
 
   const [title, setTitle] = useState('')
 
-  const {
-    query: { id },
-    isReady,
-  } = useRouter()
-
   usePlaylistQuery({
-    variables: { id: parseInt(id?.toString()) },
+    variables: { id: state.playlistId },
     onCompleted: (data) => {
       setTitle(data.playlist.title)
     },
-    skip: !isReady,
+    skip: state.playlistId === undefined,
   })
 
   const [updatePlaylist] = useUpdatePlaylistMutation({
@@ -46,13 +40,13 @@ function PlaylistTitleField() {
     debounce((value: string) => {
       updatePlaylist({
         variables: {
-          id: parseInt(id?.toString()),
+          id: state.playlistId,
           key: state.key,
           title: value,
         },
       })
     }, 1000),
-    [id, updatePlaylist, state],
+    [updatePlaylist, state],
   )
 
   const handleChange = useCallback(
