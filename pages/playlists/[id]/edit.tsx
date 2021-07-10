@@ -112,13 +112,7 @@ const EditPage = () => {
         </Grid>
         <Box mt={5}>
           <Grid container spacing={5}>
-            <Grid
-              item
-              sm={4}
-              xs={12}
-              style={{ borderRight: 'solid 1px #AAA', width: '100%' }}
-              zeroMinWidth
-            >
+            <Grid item sm={4} xs={12} zeroMinWidth>
               <Box mb={2}>
                 <Typography variant="h6">再生設定</Typography>
               </Box>
