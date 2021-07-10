@@ -78,13 +78,16 @@ function NewVideoForm() {
           onChange={handleChange}
           value={youtubeUrl}
         />
+        <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
+          1つのプレイリストに50個までの動画を追加することができます。
+        </small>
       </Grid>
       <Grid
         item
         xs={12}
         sm={3}
         md={2}
-        style={{ display: 'flex', alignItems: 'flex-end' }}
+        style={{ display: 'flex', alignItems: 'center' }}
       >
         <Button
           fullWidth
