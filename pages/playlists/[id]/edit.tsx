@@ -111,12 +111,7 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <FormControlLabel
-                  style={{ marginLeft: 0 }}
-                  control={<Switch color="secondary" />}
-                  label="シャッフル再生"
-                  labelPlacement="start"
-                />
+                <PlaylistDefaultBpmField />
               </Box>
 
               <Box mb={2}>
@@ -129,18 +124,25 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <PlaylistDefaultBpmField />
+                <TextField
+                  className={classes.form}
+                  InputProps={{
+                    classes: {
+                      input: classes.formInput,
+                    },
+                  }}
+                  label="BPM変化量の許容値"
+                />
               </Box>
 
-              <TextField
-                className={classes.form}
-                InputProps={{
-                  classes: {
-                    input: classes.formInput,
-                  },
-                }}
-                label="BPM変化量の許容値"
-              />
+              <Box mb={2}>
+                <FormControlLabel
+                  style={{ marginLeft: 0 }}
+                  control={<Switch color="secondary" />}
+                  label="シャッフル再生"
+                  labelPlacement="start"
+                />
+              </Box>
             </Grid>
             <Grid item sm={8} xs={12} zeroMinWidth>
               <Typography variant="h6">動画一覧</Typography>

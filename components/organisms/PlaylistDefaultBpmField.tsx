@@ -50,13 +50,18 @@ function PlaylistDefaultBpmField() {
   )
 
   return (
-    <TextField
-      type="number"
-      onChange={handleChange}
-      fullWidth
-      value={defaultBpm || ''}
-      label="デフォルトのBPM"
-    />
+    <>
+      <TextField
+        type="number"
+        onChange={handleChange}
+        fullWidth
+        value={defaultBpm || ''}
+        label="デフォルトのBPM"
+      />
+      <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
+        デフォルトのBPMになるように自動的に倍速調整して動画を再生します
+      </small>
+    </>
   )
 }
 
