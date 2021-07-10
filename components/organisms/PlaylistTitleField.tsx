@@ -2,7 +2,7 @@ import { debounce, makeStyles, TextField } from '@material-ui/core'
 import React, { useCallback, useContext, useState } from 'react'
 import {
   usePlaylistQuery,
-  useUpdatePlaylistMutation,
+  useUpdatePlaylistTitleMutation,
 } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../pages/_app'
 
@@ -27,7 +27,7 @@ function PlaylistTitleField() {
     skip: state.playlistId === undefined,
   })
 
-  const [updatePlaylist] = useUpdatePlaylistMutation({
+  const [updatePlaylistTitle] = useUpdatePlaylistTitleMutation({
     onCompleted: (data) => {
       console.log(data)
     },
@@ -38,7 +38,7 @@ function PlaylistTitleField() {
 
   const updateTitle = useCallback(
     debounce((value: string) => {
-      updatePlaylist({
+      updatePlaylistTitle({
         variables: {
           id: state.playlistId,
           key: state.key,
@@ -46,7 +46,7 @@ function PlaylistTitleField() {
         },
       })
     }, 1000),
-    [updatePlaylist, state],
+    [updatePlaylistTitle, state],
   )
 
   const handleChange = useCallback(

@@ -1,12 +1,12 @@
 import { debounce, TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
-import { useUpdatePlaylistMutation } from '../../graphql/generated/graphql-client'
+import { useUpdatePlaylistDefaultBpmMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../pages/_app'
 
 function PlaylistDefaultBpmField() {
   const { state, dispatch } = useContext(AppContext)
 
-  const [updatePlaylist] = useUpdatePlaylistMutation({
+  const [updatePlaylistDefaultBpm] = useUpdatePlaylistDefaultBpmMutation({
     onCompleted: (data) => {
       console.log(data)
     },
@@ -17,7 +17,7 @@ function PlaylistDefaultBpmField() {
 
   const updateDefaultBpm = useCallback(
     debounce((value: number) => {
-      updatePlaylist({
+      updatePlaylistDefaultBpm({
         variables: {
           id: state.playlistId,
           key: state.key,
@@ -25,7 +25,7 @@ function PlaylistDefaultBpmField() {
         },
       })
     }, 1000),
-    [updatePlaylist, state.key, state.playlistId],
+    [updatePlaylistDefaultBpm, state.key, state.playlistId],
   )
 
   const handleChange = useCallback(

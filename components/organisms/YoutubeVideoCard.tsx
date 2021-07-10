@@ -11,10 +11,7 @@ import {
 } from '@material-ui/core'
 import { DeleteOutlined } from '@material-ui/icons'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
-import {
-  PlaylistDocument,
-  useUpdateVideoMutation,
-} from '../../graphql/generated/graphql-client'
+import { useUpdateVideoMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../pages/_app'
 
 const useStyles = makeStyles(() => ({
