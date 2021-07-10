@@ -9,7 +9,7 @@ export type Keys = {
 }
 
 // utils
-export const addPlaylistKey = (playlistId: string, key: string) => {
+export const setPlaylistKey = (playlistId: number, key: string) => {
   const keys = Lockr.get(KEYS, {}) as Keys
   Lockr.set(KEYS, {
     ...keys,

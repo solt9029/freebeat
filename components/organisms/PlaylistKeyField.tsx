@@ -1,5 +1,6 @@
 import { TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
+import { setPlaylistKey } from '../../local-storage'
 import { AppContext } from '../../pages/_app'
 
 function PlaylistKeyField() {
@@ -8,6 +9,7 @@ function PlaylistKeyField() {
   const handleChange = useCallback(
     (event) => {
       dispatch({ type: 'SET_KEY', payload: event.target.value })
+      setPlaylistKey(state.playlistId, event.target.value)
     },
     [dispatch],
   )

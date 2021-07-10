@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { useRouter } from 'next/dist/client/router'
 import { useCreatePlaylistMutation } from '../../graphql/generated/graphql-client'
-import { addPlaylistKey } from '../../local-storage'
+import { setPlaylistKey } from '../../local-storage'
 import TopButton from '../atoms/TopButton'
 
 function NewPlaylistButton() {
@@ -9,8 +9,8 @@ function NewPlaylistButton() {
 
   const [createPlaylist] = useCreatePlaylistMutation({
     onCompleted: (data) => {
-      addPlaylistKey(
-        data.createPlaylist.playlist.id,
+      setPlaylistKey(
+        parseInt(data.createPlaylist.playlist.id),
         data.createPlaylist.playlist.key,
       )
       router.push(`/playlists/${data.createPlaylist.playlist.id}/edit`)
