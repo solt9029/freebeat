@@ -23,7 +23,6 @@ const EditPage = () => {
 
   const {
     query: { id },
-    isReady,
   } = useRouter()
 
   const { data } = usePlaylistQuery({
@@ -33,14 +32,14 @@ const EditPage = () => {
   })
 
   useEffect(() => {
-    if (isReady && id) {
+    if (id) {
       dispatch({
         type: 'SET_KEY',
         payload: getPlaylistKey(id.toString()) || '',
       })
       dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
     }
-  }, [id, isReady, dispatch])
+  }, [id, dispatch])
 
   useEffect(() => {
     dispatch({
