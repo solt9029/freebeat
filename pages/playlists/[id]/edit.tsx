@@ -22,6 +22,7 @@ import { getPlaylistKey } from '../../../local-storage'
 import { AppContext } from '../../_app'
 import PlaylistTitleField from '../../../components/organisms/PlaylistTitleField'
 import PlaylistKeyField from '../../../components/organisms/PlaylistKeyField'
+import AddVideoForm from '../../../components/organisms/AddVideoForm'
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -147,34 +148,7 @@ const EditPage = () => {
             </Grid>
             <Grid item sm={8} xs={12} zeroMinWidth>
               <Typography variant="h6">動画一覧</Typography>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={9} md={10}>
-                  <TextField
-                    className={classes.form}
-                    InputProps={{
-                      classes: {
-                        input: classes.formInput,
-                      },
-                    }}
-                    label="YouTubeの動画またはプレイリストのURL"
-                  />
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={3}
-                  md={2}
-                  style={{ display: 'flex', alignItems: 'flex-end' }}
-                >
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    className={classes.button}
-                  >
-                    追加
-                  </Button>
-                </Grid>
-              </Grid>
+              <AddVideoForm />
 
               <Box mt={3}>
                 {data &&

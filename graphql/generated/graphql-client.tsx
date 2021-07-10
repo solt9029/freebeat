@@ -288,6 +288,42 @@ export type UpdatePlaylistMutation = (
   )> }
 );
 
+export type CreateVideoMutationVariables = Exact<{
+  playlistId: Scalars['Int'];
+  youtubeVideoId: Scalars['String'];
+  key: Scalars['String'];
+}>;
+
+
+export type CreateVideoMutation = (
+  { __typename?: 'Mutation' }
+  & { createVideo?: Maybe<(
+    { __typename?: 'CreateVideoPayload' }
+    & { video: (
+      { __typename?: 'Video' }
+      & Pick<Video, 'id'>
+    ) }
+  )> }
+);
+
+export type CreateVideosMutationVariables = Exact<{
+  playlistId: Scalars['Int'];
+  youtubePlaylistId: Scalars['String'];
+  key: Scalars['String'];
+}>;
+
+
+export type CreateVideosMutation = (
+  { __typename?: 'Mutation' }
+  & { createVideos?: Maybe<(
+    { __typename?: 'CreateVideosPayload' }
+    & { videos: Array<(
+      { __typename?: 'Video' }
+      & Pick<Video, 'id'>
+    )> }
+  )> }
+);
+
 export type PlaylistQueryVariables = Exact<{
   id: Scalars['Int'];
 }>;
@@ -387,6 +423,84 @@ export function useUpdatePlaylistMutation(baseOptions?: Apollo.MutationHookOptio
 export type UpdatePlaylistMutationHookResult = ReturnType<typeof useUpdatePlaylistMutation>;
 export type UpdatePlaylistMutationResult = Apollo.MutationResult<UpdatePlaylistMutation>;
 export type UpdatePlaylistMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistMutation, UpdatePlaylistMutationVariables>;
+export const CreateVideoDocument = gql`
+    mutation createVideo($playlistId: Int!, $youtubeVideoId: String!, $key: String!) {
+  createVideo(
+    input: {playlistId: $playlistId, youtubeVideoId: $youtubeVideoId, key: $key}
+  ) {
+    video {
+      id
+    }
+  }
+}
+    `;
+export type CreateVideoMutationFn = Apollo.MutationFunction<CreateVideoMutation, CreateVideoMutationVariables>;
+
+/**
+ * __useCreateVideoMutation__
+ *
+ * To run a mutation, you first call `useCreateVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateVideoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createVideoMutation, { data, loading, error }] = useCreateVideoMutation({
+ *   variables: {
+ *      playlistId: // value for 'playlistId'
+ *      youtubeVideoId: // value for 'youtubeVideoId'
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useCreateVideoMutation(baseOptions?: Apollo.MutationHookOptions<CreateVideoMutation, CreateVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateVideoMutation, CreateVideoMutationVariables>(CreateVideoDocument, options);
+      }
+export type CreateVideoMutationHookResult = ReturnType<typeof useCreateVideoMutation>;
+export type CreateVideoMutationResult = Apollo.MutationResult<CreateVideoMutation>;
+export type CreateVideoMutationOptions = Apollo.BaseMutationOptions<CreateVideoMutation, CreateVideoMutationVariables>;
+export const CreateVideosDocument = gql`
+    mutation createVideos($playlistId: Int!, $youtubePlaylistId: String!, $key: String!) {
+  createVideos(
+    input: {playlistId: $playlistId, youtubePlaylistId: $youtubePlaylistId, key: $key}
+  ) {
+    videos {
+      id
+    }
+  }
+}
+    `;
+export type CreateVideosMutationFn = Apollo.MutationFunction<CreateVideosMutation, CreateVideosMutationVariables>;
+
+/**
+ * __useCreateVideosMutation__
+ *
+ * To run a mutation, you first call `useCreateVideosMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateVideosMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createVideosMutation, { data, loading, error }] = useCreateVideosMutation({
+ *   variables: {
+ *      playlistId: // value for 'playlistId'
+ *      youtubePlaylistId: // value for 'youtubePlaylistId'
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useCreateVideosMutation(baseOptions?: Apollo.MutationHookOptions<CreateVideosMutation, CreateVideosMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateVideosMutation, CreateVideosMutationVariables>(CreateVideosDocument, options);
+      }
+export type CreateVideosMutationHookResult = ReturnType<typeof useCreateVideosMutation>;
+export type CreateVideosMutationResult = Apollo.MutationResult<CreateVideosMutation>;
+export type CreateVideosMutationOptions = Apollo.BaseMutationOptions<CreateVideosMutation, CreateVideosMutationVariables>;
 export const PlaylistDocument = gql`
     query playlist($id: Int!) {
   playlist(id: $id) {
