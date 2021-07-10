@@ -16,7 +16,7 @@ import PlaylistTitleField from '../../../components/organisms/PlaylistTitleField
 import PlaylistKeyField from '../../../components/organisms/PlaylistKeyField'
 import NewVideoForm from '../../../components/organisms/NewVideoForm'
 import PlaylistDefaultBpmField from '../../../components/organisms/PlaylistDefaultBpmField'
-import Youtube from '../../../components/organisms/Youtube'
+import YoutubePlayer from '../../../components/organisms/YoutubePlayer'
 
 const EditPage = () => {
   const { state, dispatch } = useContext(AppContext)
@@ -53,7 +53,7 @@ const EditPage = () => {
       <Container>
         <Grid spacing={3} container>
           <Grid item xs={12} sm={6} md={4}>
-            <Youtube />
+            <YoutubePlayer />
           </Grid>
           <Grid item xs={12} sm={6} md={8}>
             <Grid item sm={12} xs={12}></Grid>

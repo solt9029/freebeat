@@ -23,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }))
 
-function Youtube() {
+function YoutubePlayer() {
   const classes = useStyles()
 
   const [videoId, setVideoId] = useState<string | undefined>(undefined)
@@ -62,4 +62,4 @@ function Youtube() {
   )
 }
 
-export default Youtube
+export default YoutubePlayer
