@@ -53,7 +53,7 @@ const useStyles = makeStyles(() => ({
 const EditPage = () => {
   const classes = useStyles()
 
-  const { dispatch } = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
 
   const {
     query: { id },
@@ -63,12 +63,13 @@ const EditPage = () => {
   useEffect(() => {
     if (isReady && id) {
       dispatch({ type: 'SET_KEY', payload: getPlaylistKey(id.toString()) })
+      dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
     }
   }, [id, isReady])
 
   const { data } = usePlaylistQuery({
     variables: { id: parseInt(id?.toString()) },
-    skip: !isReady,
+    skip: state.playlistId === undefined,
   })
 
   return (

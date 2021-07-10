@@ -7,10 +7,15 @@ import apolloClient from '../apollo-client'
 import Navbar from '../components/organisms/Navbar'
 import theme from '../theme'
 
-type AppAction = {
-  type: 'SET_KEY'
-  payload: string
-}
+type AppAction =
+  | {
+      type: 'SET_KEY'
+      payload: string
+    }
+  | {
+      type: 'SET_PLAYLIST_ID'
+      payload: number
+    }
 
 type AppContextInterface = {
   state: AppStateInterface
@@ -18,20 +23,26 @@ type AppContextInterface = {
 }
 
 type AppStateInterface = {
+  playlistId?: number
   key: string
 }
 
-const initialState = { key: '' }
+const initialState = { key: '', playlistId: undefined }
 
 export const AppContext = createContext<AppContextInterface>({
   state: initialState,
   dispatch: () => {},
 })
 
-const appReducer = (state: AppStateInterface, action: AppAction) => {
+const appReducer = (
+  state: AppStateInterface,
+  action: AppAction,
+): AppStateInterface => {
   switch (action.type) {
     case 'SET_KEY':
       return { ...state, key: action.payload }
+    case 'SET_PLAYLIST_ID':
+      return { ...state, playlistId: action.payload }
     default:
       return state
   }
