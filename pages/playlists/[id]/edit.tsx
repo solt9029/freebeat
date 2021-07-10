@@ -69,13 +69,17 @@ const EditPage = () => {
     }
   }, [id, isReady])
 
-  const { data } = usePlaylistQuery({
+  const { data, loading } = usePlaylistQuery({
     variables: { id: state.playlistId },
     onCompleted: (data) => {
+      console.log(data)
       dispatch({ type: 'SET_DEFAULT_BPM', payload: data.playlist.defaultBpm })
     },
     skip: state.playlistId === undefined,
   })
+
+  console.log(data)
+  console.log(loading)
 
   return (
     <Box py={5}>
@@ -159,7 +163,7 @@ const EditPage = () => {
                   data.playlist.videos.edges.map((edge, index) => (
                     <Box m={1} key={index}>
                       <YoutubeVideoCard
-                        initialBpm={edge.node.bpm}
+                        bpm={edge.node.bpm}
                         id={parseInt(edge.node.id)}
                         youtubeVideoId={edge.node.youtubeVideoId}
                         youtubeVideoTitle={edge.node.youtubeVideoTitle}

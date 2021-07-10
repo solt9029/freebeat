@@ -25,7 +25,7 @@ function PlaylistDefaultBpmField() {
         },
       })
     }, 1000),
-    [updatePlaylist, state],
+    [updatePlaylist, state.key, state.playlistId],
   )
 
   const handleChange = useCallback(

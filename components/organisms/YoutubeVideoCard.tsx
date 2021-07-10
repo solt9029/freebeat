@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@material-ui/core'
 import { DeleteOutlined } from '@material-ui/icons'
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import {
   PlaylistDocument,
   useUpdateVideoMutation,
@@ -41,7 +41,7 @@ const useStyles = makeStyles(() => ({
 
 type Props = {
   id: number
-  initialBpm?: number
+  bpm?: number
   youtubeVideoId: string
   youtubeVideoTitle?: string
 }
@@ -50,7 +50,11 @@ function YoutubeVideoCard(props: Props) {
   const classes = useStyles()
   const { state } = useContext(AppContext)
 
-  const [bpm, setBpm] = useState(props.initialBpm)
+  const [bpm, setBpm] = useState<number | undefined>(undefined)
+
+  useEffect(() => {
+    setBpm(props.bpm)
+  }, [props.bpm, setBpm])
 
   const [updateVideo] = useUpdateVideoMutation({
     onCompleted: (data) => {
@@ -59,9 +63,6 @@ function YoutubeVideoCard(props: Props) {
     onError: (error) => {
       console.log(error)
     },
-    refetchQueries: [
-      { query: PlaylistDocument, variables: { id: state.playlistId } },
-    ],
   })
 
   const updateBpm = useCallback(
