@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -51,8 +52,14 @@ function YoutubeVideoCard(props: Props) {
             />
           </Grid>
           <Grid item sm={9} xs={12} zeroMinWidth>
-            <div className={classes.title}>{props.youtubeVideoTitle}</div>
+            <Box mb={1}>
+              <div className={classes.title}>{props.youtubeVideoTitle}</div>
+            </Box>
+
             <TextField className={classes.field} label="BPM" />
+            <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
+              この音楽のBPMを入力してください。
+            </small>
           </Grid>
         </Grid>
       </CardContent>
