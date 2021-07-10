@@ -37,7 +37,7 @@ type Props = {
   youtubeVideoTitle?: string
 }
 
-function YoutubeCard(props: Props) {
+function YoutubeVideoCard(props: Props) {
   const classes = useStyles()
 
   return (
@@ -66,4 +66,4 @@ function YoutubeCard(props: Props) {
   )
 }
 
-export default YoutubeCard
+export default YoutubeVideoCard

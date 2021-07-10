@@ -11,16 +11,9 @@ import {
 } from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import YouTube from 'react-youtube'
-import {
-  Label,
-  PlayCircleOutline,
-  RepeatRounded,
-  ShareRounded,
-  Shuffle,
-} from '@material-ui/icons'
 import { useContext, useEffect } from 'react'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
-import YoutubeCard from '../../../components/organisms/YoutubeCard'
+import YoutubeVideoCard from '../../../components/organisms/YoutubeVideoCard'
 import { getPlaylistKey } from '../../../local-storage'
 import { AppContext } from '../../_app'
 import PlaylistTitleField from '../../../components/organisms/PlaylistTitleField'
@@ -157,7 +150,7 @@ const EditPage = () => {
                 {data &&
                   data.playlist.videos.edges.map((edge) => (
                     <Box m={1}>
-                      <YoutubeCard
+                      <YoutubeVideoCard
                         youtubeVideoId={edge.node.youtubeVideoId}
                         youtubeVideoTitle={edge.node.youtubeVideoTitle}
                       />
