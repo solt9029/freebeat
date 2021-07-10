@@ -125,15 +125,6 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>再生順</small>
-                <Select native fullWidth label="再生順">
-                  <option>上から順に再生</option>
-                  <option>BPMの昇順に再生</option>
-                  <option>BPMの降順に再生</option>
-                </Select>
-              </Box>
-
-              <Box mb={2}>
                 <TextField
                   className={classes.form}
                   InputProps={{
@@ -146,12 +137,13 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <FormControlLabel
-                  style={{ marginLeft: 0 }}
-                  control={<Switch color="secondary" />}
-                  label="シャッフル再生"
-                  labelPlacement="start"
-                />
+                <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>再生順</small>
+                <Select native fullWidth label="再生順">
+                  <option>シャッフル</option>
+                  <option>上から順</option>
+                  <option>BPMの昇順</option>
+                  <option>BPMの降順</option>
+                </Select>
               </Box>
             </Grid>
             <Grid item sm={8} xs={12} zeroMinWidth>
