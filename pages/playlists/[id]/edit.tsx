@@ -26,6 +26,12 @@ const EditPage = () => {
     isReady,
   } = useRouter()
 
+  const { data } = usePlaylistQuery({
+    variables: { id: state.playlistId },
+    onCompleted: () => {},
+    skip: state.playlistId === undefined,
+  })
+
   useEffect(() => {
     if (isReady && id) {
       dispatch({
@@ -34,19 +40,22 @@ const EditPage = () => {
       })
       dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
     }
-  }, [id, isReady])
+  }, [id, isReady, dispatch])
 
-  const { data, loading } = usePlaylistQuery({
-    variables: { id: state.playlistId },
-    onCompleted: (data) => {
-      console.log(data)
-      dispatch({ type: 'SET_DEFAULT_BPM', payload: data.playlist.defaultBpm })
-    },
-    skip: state.playlistId === undefined,
-  })
+  useEffect(() => {
+    dispatch({
+      type: 'SET_VIDEOS',
+      payload: data.playlist.videos.edges.map((edge) => ({
+        id: parseInt(edge.node.id),
+        bpm: edge.node.bpm,
+        youtubeVideoId: edge.node.youtubeVideoId,
+      })),
+    })
+  }, [data?.playlist?.videos, dispatch])
 
-  console.log(data)
-  console.log(loading)
+  useEffect(() => {
+    dispatch({ type: 'SET_DEFAULT_BPM', payload: data.playlist.defaultBpm })
+  }, [data?.playlist?.defaultBpm, dispatch])
 
   return (
     <Box py={5}>

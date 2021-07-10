@@ -7,6 +7,12 @@ import apolloClient from '../apollo-client'
 import Navbar from '../components/organisms/Navbar'
 import theme from '../theme'
 
+type Video = {
+  id: number
+  youtubeVideoId: string
+  bpm: number
+}
+
 type AppAction =
   | {
       type: 'SET_KEY'
@@ -20,6 +26,14 @@ type AppAction =
       type: 'SET_DEFAULT_BPM'
       payload: number
     }
+  | {
+      type: 'SET_VIDEOS'
+      payload: Video[]
+    }
+  | {
+      type: 'UPDATE_VIDEO_BPM'
+      payload: Pick<Video, 'id' | 'bpm'>
+    }
 
 type AppContextInterface = {
   state: AppStateInterface
@@ -30,9 +44,15 @@ type AppStateInterface = {
   playlistId?: number
   key: string
   defaultBpm?: number
+  videos: Video[]
 }
 
-const initialState = { key: '', playlistId: undefined, defaultBpm: undefined }
+const initialState = {
+  key: '',
+  playlistId: undefined,
+  defaultBpm: undefined,
+  videos: [],
+}
 
 export const AppContext = createContext<AppContextInterface>({
   state: initialState,
@@ -50,6 +70,18 @@ const appReducer = (
       return { ...state, playlistId: action.payload }
     case 'SET_DEFAULT_BPM':
       return { ...state, defaultBpm: action.payload }
+    case 'SET_VIDEOS':
+      return { ...state, videos: action.payload }
+    case 'UPDATE_VIDEO_BPM': {
+      const videos = state.videos.map((video) => {
+        if (video.id === action.payload.id) {
+          video.bpm = action.payload.bpm
+        }
+        return video
+      })
+      console.log({ ...state, videos: videos })
+      return { ...state, videos: videos }
+    }
     default:
       return state
   }

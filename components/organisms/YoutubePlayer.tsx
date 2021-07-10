@@ -34,6 +34,7 @@ function YoutubePlayer() {
   const classes = useStyles()
 
   const [videoIds, setVideoIds] = useState<string[]>([])
+  const [playbackRate, setPlaybackRate] = useState(1)
   const { state } = useContext(AppContext)
 
   const { data } = usePlaylistQuery({
@@ -62,12 +63,15 @@ function YoutubePlayer() {
           playsinline
           controls
           loop
-          playbackRate={2}
+          playbackRate={playbackRate}
           // onReady=
           onPlay={() => {
-            console.log(videoRef.current)
-            // get currently playing video url!!
-            console.log(videoRef.current?.player?.player?.player?.getVideoUrl())
+            const url = new URL(
+              videoRef.current?.player?.player?.player?.getVideoUrl(),
+            )
+            const youtubeVideoId = url.searchParams.get('v')
+
+            // const videoId =
           }}
           url={videoIds.map(
             (videoId) => `https://www.youtube.com/watch?v=${videoId}`,
