@@ -68,7 +68,7 @@ const EditPage = () => {
   }, [id, isReady])
 
   const { data } = usePlaylistQuery({
-    variables: { id: parseInt(id?.toString()) },
+    variables: { id: state.playlistId },
     skip: state.playlistId === undefined,
   })
 
