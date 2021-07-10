@@ -55,6 +55,7 @@ function NewVideoForm() {
           key: state.key,
         },
       })
+      return
     }
 
     const youtubePlaylistId = url.searchParams.get('list')
