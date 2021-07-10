@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import React, { useCallback, useContext, useEffect, useState } from 'react'
+import ReactPlayer from 'react-player'
 import YouTube from 'react-youtube'
 import { usePlaylistQuery } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../pages/_app'
@@ -26,7 +27,7 @@ const useStyles = makeStyles(() => ({
 function YoutubePlayer() {
   const classes = useStyles()
 
-  const [videoId, setVideoId] = useState<string | undefined>(undefined)
+  const [videoIds, setVideoIds] = useState<string[]>([])
   const { state } = useContext(AppContext)
 
   const { data } = usePlaylistQuery({
@@ -36,28 +37,30 @@ function YoutubePlayer() {
   })
 
   useEffect(() => {
-    if (
-      videoId === undefined &&
-      data &&
-      data.playlist.videos.edges.length > 0
-    ) {
-      setVideoId(data.playlist.videos.edges[0].node.youtubeVideoId)
+    if (videoIds.length === 0 && data) {
+      setVideoIds(
+        data.playlist.videos.edges.map((edge) => edge.node.youtubeVideoId),
+      )
     }
-  }, [data, setVideoId, videoId])
+  }, [data, setVideoIds, videoIds])
 
   return (
     <div className={classes.wrapper}>
-      <YouTube
-        containerClassName={classes.content}
-        opts={{
-          height: '100%',
-          width: '100%',
-          playerVars: {
-            playsinline: 1,
-          },
-        }}
-        videoId={videoId}
-      />
+      <div className={classes.content}>
+        <ReactPlayer
+          width="100%"
+          height="100%"
+          playsinline
+          controls
+          loop
+          playbackRate={2}
+          // onReady=
+          onPlay={() => {}}
+          url={videoIds.map(
+            (videoId) => `https://www.youtube.com/watch?v=${videoId}`,
+          )}
+        />
+      </div>
     </div>
   )
 }
