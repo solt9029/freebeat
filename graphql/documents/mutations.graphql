@@ -30,3 +30,11 @@ mutation createVideos($playlistId: Int!, $youtubePlaylistId: String!, $key: Stri
     }
   }
 }
+
+mutation updateVideo($id: Int!, $bpm: Int!, $key: String!) {
+  updateVideo(input: {id: $id, bpm: $bpm, key: $key}) {
+    video {
+      id
+    }
+  }
+}

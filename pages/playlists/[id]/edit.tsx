@@ -159,6 +159,8 @@ const EditPage = () => {
                   data.playlist.videos.edges.map((edge, index) => (
                     <Box m={1} key={index}>
                       <YoutubeVideoCard
+                        initialBpm={edge.node.bpm}
+                        id={parseInt(edge.node.id)}
                         youtubeVideoId={edge.node.youtubeVideoId}
                         youtubeVideoTitle={edge.node.youtubeVideoTitle}
                       />

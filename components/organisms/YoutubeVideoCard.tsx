@@ -4,12 +4,18 @@ import {
   Card,
   CardActions,
   CardContent,
+  debounce,
   Grid,
   makeStyles,
   TextField,
 } from '@material-ui/core'
 import { DeleteOutlined } from '@material-ui/icons'
-import React from 'react'
+import React, { useCallback, useContext, useState } from 'react'
+import {
+  PlaylistDocument,
+  useUpdateVideoMutation,
+} from '../../graphql/generated/graphql-client'
+import { AppContext } from '../../pages/_app'
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -34,12 +40,50 @@ const useStyles = makeStyles(() => ({
 }))
 
 type Props = {
+  id: number
+  initialBpm?: number
   youtubeVideoId: string
   youtubeVideoTitle?: string
 }
 
 function YoutubeVideoCard(props: Props) {
   const classes = useStyles()
+  const { state } = useContext(AppContext)
+
+  const [bpm, setBpm] = useState(props.initialBpm)
+
+  const [updateVideo] = useUpdateVideoMutation({
+    onCompleted: (data) => {
+      console.log(data)
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+    refetchQueries: [
+      { query: PlaylistDocument, variables: { id: state.playlistId } },
+    ],
+  })
+
+  const updateBpm = useCallback(
+    debounce((value: number) => {
+      updateVideo({
+        variables: {
+          id: props.id,
+          key: state.key,
+          bpm: value,
+        },
+      })
+    }, 1000),
+    [updateVideo, state.key, props.id],
+  )
+
+  const handleChange = useCallback(
+    (event) => {
+      setBpm(parseInt(event.target.value))
+      updateBpm(parseInt(event.target.value))
+    },
+    [setBpm, updateBpm],
+  )
 
   return (
     <Card variant="outlined" className={classes.card}>
@@ -56,7 +100,13 @@ function YoutubeVideoCard(props: Props) {
               <div className={classes.title}>{props.youtubeVideoTitle}</div>
             </Box>
 
-            <TextField className={classes.field} label="BPM" />
+            <TextField
+              type="number"
+              className={classes.field}
+              label="BPM"
+              value={bpm || ''}
+              onChange={handleChange}
+            />
             <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
               この音楽のBPMを入力してください。
             </small>
