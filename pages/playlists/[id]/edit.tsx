@@ -125,15 +125,7 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <TextField
-                  className={classes.form}
-                  InputProps={{
-                    classes: {
-                      input: classes.formInput,
-                    },
-                  }}
-                  label="BPM変化量の許容値"
-                />
+                <TextField fullWidth label="BPM変化量の許容値" />
               </Box>
 
               <Box mb={2}>
