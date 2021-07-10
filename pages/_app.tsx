@@ -16,6 +16,10 @@ type AppAction =
       type: 'SET_PLAYLIST_ID'
       payload: number
     }
+  | {
+      type: 'SET_DEFAULT_BPM'
+      payload: number
+    }
 
 type AppContextInterface = {
   state: AppStateInterface
@@ -25,9 +29,10 @@ type AppContextInterface = {
 type AppStateInterface = {
   playlistId?: number
   key: string
+  defaultBpm?: number
 }
 
-const initialState = { key: '', playlistId: undefined }
+const initialState = { key: '', playlistId: undefined, defaultBpm: undefined }
 
 export const AppContext = createContext<AppContextInterface>({
   state: initialState,
@@ -43,6 +48,8 @@ const appReducer = (
       return { ...state, key: action.payload }
     case 'SET_PLAYLIST_ID':
       return { ...state, playlistId: action.payload }
+    case 'SET_DEFAULT_BPM':
+      return { ...state, defaultBpm: action.payload }
     default:
       return state
   }

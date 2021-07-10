@@ -61,7 +61,10 @@ const EditPage = () => {
 
   useEffect(() => {
     if (isReady && id) {
-      dispatch({ type: 'SET_KEY', payload: getPlaylistKey(id.toString()) })
+      dispatch({
+        type: 'SET_KEY',
+        payload: getPlaylistKey(id.toString()) || '',
+      })
       dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
     }
   }, [id, isReady])
