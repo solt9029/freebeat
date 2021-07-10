@@ -20,7 +20,9 @@ function PlaylistKeyField() {
         value={state.key}
         label="編集キー"
       />
-      <small>プレイリストを編集するために必要な暗号です。</small>
+      <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
+        プレイリストを編集するために必要な暗号です。
+      </small>
     </>
   )
 }

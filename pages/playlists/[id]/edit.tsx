@@ -1,14 +1,18 @@
 import {
   Box,
   Container,
+  FormControlLabel,
   Grid,
   makeStyles,
+  Select,
+  Switch,
   TextField,
   Typography,
 } from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import YouTube from 'react-youtube'
 import {
+  Label,
   PlayCircleOutline,
   RepeatRounded,
   ShareRounded,
@@ -94,12 +98,7 @@ const EditPage = () => {
             </div>
           </Grid>
           <Grid item xs={12} sm={6} md={8}>
-            <Grid item sm={12} xs={12}>
-              <PlayCircleOutline style={{ fontSize: 40 }} />
-              <Shuffle style={{ fontSize: 40 }} />
-              <ShareRounded style={{ fontSize: 40 }} />
-              <RepeatRounded style={{ fontSize: 40 }} />
-            </Grid>
+            <Grid item sm={12} xs={12}></Grid>
 
             <Grid container spacing={2}>
               <Grid item lg={12} xs={12}>
@@ -122,6 +121,24 @@ const EditPage = () => {
             >
               <Box mb={2}>
                 <Typography variant="h6">再生設定</Typography>
+              </Box>
+
+              <Box mb={2}>
+                <FormControlLabel
+                  style={{ marginLeft: 0 }}
+                  control={<Switch color="secondary" />}
+                  label="シャッフル再生"
+                  labelPlacement="start"
+                />
+              </Box>
+
+              <Box mb={2}>
+                <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>再生順</small>
+                <Select native fullWidth label="再生順">
+                  <option>上から順に再生</option>
+                  <option>BPMの昇順に再生</option>
+                  <option>BPMの降順に再生</option>
+                </Select>
               </Box>
 
               <Box mb={2}>
