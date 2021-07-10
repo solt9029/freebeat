@@ -7,7 +7,7 @@ import {
   useCreateVideosMutation,
 } from '../../graphql/generated/graphql-client'
 
-function AddVideoForm() {
+function NewVideoForm() {
   const { state } = useContext(AppContext)
 
   const [youtubeUrl, setYoutubeUrl] = useState('')
@@ -19,7 +19,9 @@ function AddVideoForm() {
     refetchQueries: [
       { query: PlaylistDocument, variables: { id: state.playlistId } },
     ],
-    onError: (error) => {},
+    onError: (error) => {
+      console.log(error)
+    },
   })
 
   const [createVideos] = useCreateVideosMutation({
@@ -29,7 +31,9 @@ function AddVideoForm() {
     refetchQueries: [
       { query: PlaylistDocument, variables: { id: state.playlistId } },
     ],
-    onError: (error) => {},
+    onError: (error) => {
+      console.log(error)
+    },
   })
 
   const handleChange = useCallback(
@@ -95,4 +99,4 @@ function AddVideoForm() {
   )
 }
 
-export default AddVideoForm
+export default NewVideoForm

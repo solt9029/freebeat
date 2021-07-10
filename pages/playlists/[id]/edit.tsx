@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Container,
   Grid,
   makeStyles,
@@ -22,7 +21,7 @@ import { getPlaylistKey } from '../../../local-storage'
 import { AppContext } from '../../_app'
 import PlaylistTitleField from '../../../components/organisms/PlaylistTitleField'
 import PlaylistKeyField from '../../../components/organisms/PlaylistKeyField'
-import AddVideoForm from '../../../components/organisms/AddVideoForm'
+import NewVideoForm from '../../../components/organisms/NewVideoForm'
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -148,7 +147,7 @@ const EditPage = () => {
             </Grid>
             <Grid item sm={8} xs={12} zeroMinWidth>
               <Typography variant="h6">動画一覧</Typography>
-              <AddVideoForm />
+              <NewVideoForm />
 
               <Box mt={3}>
                 {data &&
