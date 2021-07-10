@@ -1,6 +1,8 @@
 import { makeStyles } from '@material-ui/core'
-import React from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import YouTube from 'react-youtube'
+import { usePlaylistQuery } from '../../graphql/generated/graphql-client'
+import { AppContext } from '../../pages/_app'
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -24,6 +26,25 @@ const useStyles = makeStyles(() => ({
 function Youtube() {
   const classes = useStyles()
 
+  const [videoId, setVideoId] = useState<string | undefined>(undefined)
+  const { state } = useContext(AppContext)
+
+  const { data } = usePlaylistQuery({
+    variables: { id: state.playlistId },
+    onCompleted: () => {},
+    onError: () => {},
+  })
+
+  useEffect(() => {
+    if (
+      videoId === undefined &&
+      data &&
+      data.playlist.videos.edges.length > 0
+    ) {
+      setVideoId(data.playlist.videos.edges[0].node.youtubeVideoId)
+    }
+  }, [data, setVideoId, videoId])
+
   return (
     <div className={classes.wrapper}>
       <YouTube
@@ -35,7 +56,7 @@ function Youtube() {
             playsinline: 1,
           },
         }}
-        videoId="eqr98KBmsJk"
+        videoId={videoId}
       />
     </div>
   )
