@@ -21,6 +21,7 @@ import YoutubeCard from '../../../components/organisms/YoutubeCard'
 import { getPlaylistKey } from '../../../local-storage'
 import { AppContext } from '../../_app'
 import PlaylistTitleField from '../../../components/organisms/PlaylistTitleField'
+import PlaylistKeyField from '../../../components/organisms/PlaylistKeyField'
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -104,16 +105,7 @@ const EditPage = () => {
                 <PlaylistTitleField />
               </Grid>
               <Grid item sm={12} xs={12}>
-                <TextField
-                  className={classes.form}
-                  InputProps={{
-                    classes: {
-                      input: classes.formInput,
-                    },
-                  }}
-                  label="編集キー"
-                />
-                <small>プレイリストを編集するために必要な暗号です。</small>
+                <PlaylistKeyField />
               </Grid>
             </Grid>
           </Grid>
