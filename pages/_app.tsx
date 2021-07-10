@@ -20,11 +20,11 @@ type AppAction =
     }
   | {
       type: 'SET_PLAYLIST_ID'
-      payload: number
+      payload: number | undefined
     }
   | {
       type: 'SET_DEFAULT_BPM'
-      payload: number
+      payload: number | undefined
     }
   | {
       type: 'SET_VIDEOS'
@@ -33,6 +33,10 @@ type AppAction =
   | {
       type: 'UPDATE_VIDEO_BPM'
       payload: Pick<Video, 'id' | 'bpm'>
+    }
+  | {
+      type: 'REFRESH_STATE'
+      payload: Pick<AppStateInterface, 'defaultBpm' | 'title' | 'videos'>
     }
 
 type AppContextInterface = {
@@ -44,14 +48,18 @@ type AppStateInterface = {
   playlistId?: number
   key: string
   defaultBpm?: number
+  title: string
   videos: Video[]
+  youtubeUrl: string
 }
 
 const initialState = {
   key: '',
   playlistId: undefined,
   defaultBpm: undefined,
+  title: '',
   videos: [],
+  youtubeUrl: '',
 }
 
 export const AppContext = createContext<AppContextInterface>({
@@ -82,6 +90,8 @@ const appReducer = (
       console.log({ ...state, videos: videos })
       return { ...state, videos: videos }
     }
+    case 'REFRESH_STATE':
+      return { ...state, ...action.payload }
     default:
       return state
   }

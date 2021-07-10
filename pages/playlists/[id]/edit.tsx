@@ -32,29 +32,33 @@ const EditPage = () => {
   })
 
   useEffect(() => {
-    if (id) {
-      dispatch({
-        type: 'SET_KEY',
-        payload: getPlaylistKey(id.toString()) || '',
-      })
-      dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
+    if (id === undefined) {
+      return
     }
+    dispatch({
+      type: 'SET_KEY',
+      payload: getPlaylistKey(id.toString()) || '',
+    })
+    dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
   }, [id, dispatch])
 
   useEffect(() => {
+    if (data?.playlist === undefined) {
+      return
+    }
     dispatch({
-      type: 'SET_VIDEOS',
-      payload: data.playlist.videos.edges.map((edge) => ({
-        id: parseInt(edge.node.id),
-        bpm: edge.node.bpm,
-        youtubeVideoId: edge.node.youtubeVideoId,
-      })),
+      type: 'REFRESH_STATE',
+      payload: {
+        defaultBpm: data.playlist.defaultBpm,
+        title: data.playlist.title,
+        videos: data.playlist.videos.edges.map((edge) => ({
+          id: parseInt(edge.node.id),
+          bpm: edge.node.bpm,
+          youtubeVideoId: edge.node.youtubeVideoId,
+        })),
+      },
     })
-  }, [data?.playlist?.videos, dispatch])
-
-  useEffect(() => {
-    dispatch({ type: 'SET_DEFAULT_BPM', payload: data.playlist.defaultBpm })
-  }, [data?.playlist?.defaultBpm, dispatch])
+  }, [data?.playlist, dispatch])
 
   return (
     <Box py={5}>
