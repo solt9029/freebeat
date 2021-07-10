@@ -71,6 +71,9 @@ const EditPage = () => {
 
   const { data } = usePlaylistQuery({
     variables: { id: state.playlistId },
+    onCompleted: (data) => {
+      dispatch({ type: 'SET_DEFAULT_BPM', payload: data.playlist.defaultBpm })
+    },
     skip: state.playlistId === undefined,
   })
 

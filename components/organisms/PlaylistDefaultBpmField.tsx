@@ -1,23 +1,10 @@
 import { debounce, TextField } from '@material-ui/core'
-import React, { useCallback, useContext, useState } from 'react'
-import {
-  usePlaylistQuery,
-  useUpdatePlaylistMutation,
-} from '../../graphql/generated/graphql-client'
+import React, { useCallback, useContext } from 'react'
+import { useUpdatePlaylistMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../pages/_app'
 
 function PlaylistDefaultBpmField() {
-  const { state } = useContext(AppContext)
-
-  const [defaultBpm, setDefaultBpm] = useState<number | undefined>(undefined)
-
-  usePlaylistQuery({
-    variables: { id: state.playlistId },
-    onCompleted: (data) => {
-      setDefaultBpm(data.playlist.defaultBpm)
-    },
-    skip: state.playlistId === undefined,
-  })
+  const { state, dispatch } = useContext(AppContext)
 
   const [updatePlaylist] = useUpdatePlaylistMutation({
     onCompleted: (data) => {
@@ -43,10 +30,10 @@ function PlaylistDefaultBpmField() {
 
   const handleChange = useCallback(
     (event) => {
-      setDefaultBpm(event.target.value)
+      dispatch({ type: 'SET_DEFAULT_BPM', payload: event.target.value })
       updateDefaultBpm(parseInt(event.target.value))
     },
-    [setDefaultBpm, updateDefaultBpm],
+    [dispatch, updateDefaultBpm],
   )
 
   return (
@@ -55,7 +42,7 @@ function PlaylistDefaultBpmField() {
         type="number"
         onChange={handleChange}
         fullWidth
-        value={defaultBpm || ''}
+        value={state.defaultBpm || ''}
         label="デフォルトのBPM"
       />
       <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
