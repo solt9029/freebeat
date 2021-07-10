@@ -22,6 +22,7 @@ import { AppContext } from '../../_app'
 import PlaylistTitleField from '../../../components/organisms/PlaylistTitleField'
 import PlaylistKeyField from '../../../components/organisms/PlaylistKeyField'
 import NewVideoForm from '../../../components/organisms/NewVideoForm'
+import PlaylistDefaultBpmField from '../../../components/organisms/PlaylistDefaultBpmField'
 
 const useStyles = makeStyles(() => ({
   wrapper: {
@@ -124,15 +125,7 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <TextField
-                  className={classes.form}
-                  InputProps={{
-                    classes: {
-                      input: classes.formInput,
-                    },
-                  }}
-                  label="デフォルトのBPM"
-                />
+                <PlaylistDefaultBpmField />
               </Box>
 
               <TextField
