@@ -1,5 +1,11 @@
 import { makeStyles } from '@material-ui/core'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import ReactPlayer from 'react-player'
 import YouTube from 'react-youtube'
 import { usePlaylistQuery } from '../../graphql/generated/graphql-client'
@@ -36,6 +42,8 @@ function YoutubePlayer() {
     onError: () => {},
   })
 
+  const videoRef = useRef(null)
+
   useEffect(() => {
     if (videoIds.length === 0 && data) {
       setVideoIds(
@@ -48,6 +56,7 @@ function YoutubePlayer() {
     <div className={classes.wrapper}>
       <div className={classes.content}>
         <ReactPlayer
+          ref={videoRef}
           width="100%"
           height="100%"
           playsinline
@@ -55,7 +64,11 @@ function YoutubePlayer() {
           loop
           playbackRate={2}
           // onReady=
-          onPlay={() => {}}
+          onPlay={() => {
+            console.log(videoRef.current)
+            // get currently playing video url!!
+            console.log(videoRef.current?.player?.player?.player?.getVideoUrl())
+          }}
           url={videoIds.map(
             (videoId) => `https://www.youtube.com/watch?v=${videoId}`,
           )}
