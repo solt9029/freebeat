@@ -95,41 +95,29 @@ const EditPage = () => {
               <Box mb={2}>
                 <TextField
                   fullWidth
-                  label="自動調整時の最大倍速"
+                  label="自動調整時の最大倍速（小数可）"
                   value={state.maxPlaybackRate?.toString() || ''}
                   onChange={(event) => {
                     dispatch({
                       type: 'SET_MAX_PLAYBACK_RATE',
-                      payload:
-                        event.target.value !== ''
-                          ? parseFloat(event.target.value)
-                          : undefined,
+                      payload: event.target.value,
                     })
                   }}
                 />
-                <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
-                  1〜4までの数字が指定できます（小数可）
-                </small>
               </Box>
 
               <Box mb={2}>
                 <TextField
                   fullWidth
-                  label="自動調整時の最小倍速"
+                  label="自動調整時の最小倍速（小数可）"
                   value={state.minPlaybackRate?.toString() || ''}
                   onChange={(event) => {
                     dispatch({
                       type: 'SET_MIN_PLAYBACK_RATE',
-                      payload:
-                        event.target.value !== ''
-                          ? parseFloat(event.target.value)
-                          : undefined,
+                      payload: event.target.value,
                     })
                   }}
                 />
-                <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
-                  0.1〜1までの倍速が指定できます（小数可）
-                </small>
               </Box>
 
               <Box mb={2}>

@@ -37,8 +37,8 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         state.videos,
         state.playingVideoId,
         action.payload,
-        state.maxPlaybackRate,
-        state.minPlaybackRate,
+        parseFloat(state.maxPlaybackRate) || 1,
+        parseFloat(state.minPlaybackRate) || 1,
       )
       return { ...state, defaultBpm: action.payload, playbackRate }
     }
@@ -94,8 +94,8 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         state.videos,
         action.payload,
         state.defaultBpm,
-        state.maxPlaybackRate,
-        state.minPlaybackRate,
+        parseFloat(state.maxPlaybackRate) || 1,
+        parseFloat(state.minPlaybackRate) || 1,
       )
       return { ...state, playingVideoId: action.payload, playbackRate }
     }
@@ -105,22 +105,20 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         state.videos,
         state.playingVideoId,
         state.defaultBpm,
-        action.payload,
-        state.minPlaybackRate,
+        parseFloat(action.payload) || 1,
+        parseFloat(state.minPlaybackRate) || 1,
       )
       return { ...state, maxPlaybackRate: action.payload, playbackRate }
     }
 
     case 'SET_MIN_PLAYBACK_RATE': {
-      console.log('minmin' + action.payload)
       const playbackRate = calcPlaybackRate(
         state.videos,
         state.playingVideoId,
         state.defaultBpm,
-        state.maxPlaybackRate,
-        action.payload,
+        parseFloat(state.maxPlaybackRate) || 1,
+        parseFloat(action.payload) || 1,
       )
-      console.log(playbackRate)
       return { ...state, minPlaybackRate: action.payload, playbackRate }
     }
 

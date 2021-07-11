@@ -39,9 +39,9 @@ export type AppAction =
     }
   | {
       type: 'SET_MAX_PLAYBACK_RATE'
-      payload?: number
+      payload?: string
     }
   | {
       type: 'SET_MIN_PLAYBACK_RATE'
-      payload?: number
+      payload?: string
     }

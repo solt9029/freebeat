@@ -15,6 +15,6 @@ export type AppState = {
   playbackRate: number
   playingVideoId?: number
   youtubeVideoUrls: string[]
-  maxPlaybackRate?: number
-  minPlaybackRate?: number
+  maxPlaybackRate?: string
+  minPlaybackRate?: string
 }

@@ -11,8 +11,8 @@ export const initialState = {
   playbackRate: 1,
   playingVideoId: undefined,
   youtubeVideoUrls: [],
-  maxPlaybackRate: 1.5,
-  minPlaybackRate: 0.75,
+  maxPlaybackRate: '1.5',
+  minPlaybackRate: '0.75',
 }
 
 export const AppContext = createContext<AppContextInterface>({
