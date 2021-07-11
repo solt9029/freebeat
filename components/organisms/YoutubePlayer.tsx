@@ -45,6 +45,9 @@ function YoutubePlayer() {
   }, [state.videos, state.defaultBpm, state.playingVideoId])
 
   const handlePlay = () => {
+    // this code should not be placed in onReady since urls are not suppilied on ready
+    playerRef.current?.getInternalPlayer()?.setLoop(true)
+
     const url = new URL(
       playerRef.current?.player?.player?.player?.getVideoUrl(),
     )
@@ -64,7 +67,6 @@ function YoutubePlayer() {
           height="100%"
           playsinline
           controls
-          loop={true}
           playbackRate={state.playbackRate}
           onPlay={handlePlay}
           url={state.youtubeVideoUrls}
