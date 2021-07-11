@@ -90,19 +90,25 @@ const EditPage = () => {
               <Box mb={2}>
                 <TextField
                   fullWidth
-                  label="最大倍速"
+                  label="自動調整時の最大倍速"
                   type="number"
-                  InputProps={{ inputProps: { min: 1, max: 4, step: 0.1 } }}
+                  inputProps={{ min: 1, max: 4, step: 0.1 }}
                 />
+                <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
+                  1〜4までの数字が指定できます（小数可）
+                </small>
               </Box>
 
               <Box mb={2}>
                 <TextField
                   fullWidth
-                  label="最小倍速"
+                  label="自動調整時の最小倍速"
                   type="number"
                   InputProps={{ inputProps: { min: 0.1, max: 1, step: 0.1 } }}
                 />
+                <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
+                  0.1〜1までの倍速が指定できます（小数可）
+                </small>
               </Box>
 
               <Box mb={2}>
