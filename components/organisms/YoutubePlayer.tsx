@@ -34,8 +34,7 @@ function YoutubePlayer() {
   const classes = useStyles()
 
   const [videoIds, setVideoIds] = useState<string[]>([])
-  const [playbackRate, setPlaybackRate] = useState(1)
-  const { state } = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
 
   const { data } = usePlaylistQuery({
     variables: { id: state.playlistId },
@@ -63,18 +62,33 @@ function YoutubePlayer() {
           playsinline
           controls
           loop
-          playbackRate={playbackRate}
-          // onReady=
+          playbackRate={state.playbackRate}
           onPlay={() => {
             const url = new URL(
               videoRef.current?.player?.player?.player?.getVideoUrl(),
             )
             const youtubeVideoId = url.searchParams.get('v')
+            const bpm = state.videos.find(
+              (video) => video.youtubeVideoId === youtubeVideoId,
+            )?.bpm
+            console.log(bpm)
+            console.log(state.defaultBpm)
 
-            // const videoId =
+            if (bpm && state.defaultBpm) {
+              dispatch({
+                type: 'SET_PLAYBACK_RATE',
+                payload: state.defaultBpm / bpm,
+              })
+            } else {
+              dispatch({
+                type: 'SET_PLAYBACK_RATE',
+                payload: 1,
+              })
+            }
           }}
-          url={videoIds.map(
-            (videoId) => `https://www.youtube.com/watch?v=${videoId}`,
+          url={state.videos.map(
+            (video) =>
+              `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
           )}
         />
       </div>
