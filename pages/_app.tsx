@@ -121,11 +121,16 @@ const appReducer = (
       return { ...state, videos: videos }
     }
     case 'REFRESH_STATE': {
-      const youtubeVideoUrls = arrayShuffle(
-        action.payload.videos.map(
-          (video) => `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
-        ),
-      )
+      const youtubeVideoUrls =
+        state.videos.toString() === action.payload.videos.toString()
+          ? state.youtubeVideoUrls
+          : arrayShuffle(
+              action.payload.videos.map(
+                (video) =>
+                  `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
+              ),
+            )
+
       return {
         ...state,
         ...action.payload,

@@ -27,23 +27,28 @@ const EditPage = () => {
 
   const { data } = usePlaylistQuery({
     variables: { id: state.playlistId },
-    onCompleted: (data) => {
-      dispatch({
-        type: 'REFRESH_STATE',
-        payload: {
-          defaultBpm: data.playlist.defaultBpm,
-          title: data.playlist.title,
-          videos: data.playlist.videos.edges.map((edge) => ({
-            id: parseInt(edge.node.id),
-            bpm: edge.node.bpm,
-            youtubeVideoId: edge.node.youtubeVideoId,
-            youtubeVideoTitle: edge.node.youtubeVideoTitle,
-          })),
-        },
-      })
-    },
+    onCompleted: () => {},
     skip: state.playlistId === undefined,
   })
+
+  useEffect(() => {
+    if (data?.playlist === undefined) {
+      return
+    }
+    dispatch({
+      type: 'REFRESH_STATE',
+      payload: {
+        defaultBpm: data.playlist.defaultBpm,
+        title: data.playlist.title,
+        videos: data.playlist.videos.edges.map((edge) => ({
+          id: parseInt(edge.node.id),
+          bpm: edge.node.bpm,
+          youtubeVideoId: edge.node.youtubeVideoId,
+          youtubeVideoTitle: edge.node.youtubeVideoTitle,
+        })),
+      },
+    })
+  }, [data?.playlist, dispatch])
 
   useEffect(() => {
     if (id === undefined) {
