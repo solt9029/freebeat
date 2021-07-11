@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -9,10 +8,10 @@ import {
   makeStyles,
   TextField,
 } from '@material-ui/core'
-import { DeleteOutlined } from '@material-ui/icons'
 import React, { useCallback, useContext } from 'react'
 import { useUpdateVideoMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../contexts'
+import DeleteVideoButton from './DeleteVideoButton'
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -43,7 +42,7 @@ type Props = {
   youtubeVideoTitle?: string
 }
 
-function VideoCard(props: Props) {
+function YoutubeVideoCard(props: Props) {
   const classes = useStyles()
   const { state, dispatch } = useContext(AppContext)
 
@@ -109,13 +108,10 @@ function VideoCard(props: Props) {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small" fullWidth className={classes.button}>
-          <DeleteOutlined />
-          プレイリストから削除
-        </Button>
+        <DeleteVideoButton id={props.id} />
       </CardActions>
     </Card>
   )
 }
 
-export default VideoCard
+export default YoutubeVideoCard

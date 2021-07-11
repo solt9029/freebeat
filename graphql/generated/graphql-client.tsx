@@ -399,6 +399,42 @@ export type UpdatePlaylistTitleMutation = (
   )> }
 );
 
+export type UpdatePlaylistMaxPlaybackRateMutationVariables = Exact<{
+  id: Scalars['Int'];
+  maxPlaybackRate?: Maybe<Scalars['Float']>;
+  key: Scalars['String'];
+}>;
+
+
+export type UpdatePlaylistMaxPlaybackRateMutation = (
+  { __typename?: 'Mutation' }
+  & { updatePlaylistMaxPlaybackRate?: Maybe<(
+    { __typename?: 'UpdatePlaylistMaxPlaybackRatePayload' }
+    & { playlist: (
+      { __typename?: 'Base' }
+      & Pick<Base, 'id'>
+    ) }
+  )> }
+);
+
+export type UpdatePlaylistMinPlaybackRateMutationVariables = Exact<{
+  id: Scalars['Int'];
+  minPlaybackRate?: Maybe<Scalars['Float']>;
+  key: Scalars['String'];
+}>;
+
+
+export type UpdatePlaylistMinPlaybackRateMutation = (
+  { __typename?: 'Mutation' }
+  & { updatePlaylistMinPlaybackRate?: Maybe<(
+    { __typename?: 'UpdatePlaylistMinPlaybackRatePayload' }
+    & { playlist: (
+      { __typename?: 'Base' }
+      & Pick<Base, 'id'>
+    ) }
+  )> }
+);
+
 export type CreateVideoMutationVariables = Exact<{
   playlistId: Scalars['Int'];
   youtubeVideoId: Scalars['String'];
@@ -449,6 +485,23 @@ export type UpdateVideoMutation = (
     & { video: (
       { __typename?: 'Video' }
       & Pick<Video, 'id'>
+    ) }
+  )> }
+);
+
+export type DeleteVideoMutationVariables = Exact<{
+  id: Scalars['Int'];
+  key: Scalars['String'];
+}>;
+
+
+export type DeleteVideoMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteVideo?: Maybe<(
+    { __typename?: 'DeleteVideoPayload' }
+    & { playlist: (
+      { __typename?: 'Base' }
+      & Pick<Base, 'id'>
     ) }
   )> }
 );
@@ -588,6 +641,84 @@ export function useUpdatePlaylistTitleMutation(baseOptions?: Apollo.MutationHook
 export type UpdatePlaylistTitleMutationHookResult = ReturnType<typeof useUpdatePlaylistTitleMutation>;
 export type UpdatePlaylistTitleMutationResult = Apollo.MutationResult<UpdatePlaylistTitleMutation>;
 export type UpdatePlaylistTitleMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistTitleMutation, UpdatePlaylistTitleMutationVariables>;
+export const UpdatePlaylistMaxPlaybackRateDocument = gql`
+    mutation updatePlaylistMaxPlaybackRate($id: Int!, $maxPlaybackRate: Float, $key: String!) {
+  updatePlaylistMaxPlaybackRate(
+    input: {id: $id, maxPlaybackRate: $maxPlaybackRate, key: $key}
+  ) {
+    playlist {
+      id
+    }
+  }
+}
+    `;
+export type UpdatePlaylistMaxPlaybackRateMutationFn = Apollo.MutationFunction<UpdatePlaylistMaxPlaybackRateMutation, UpdatePlaylistMaxPlaybackRateMutationVariables>;
+
+/**
+ * __useUpdatePlaylistMaxPlaybackRateMutation__
+ *
+ * To run a mutation, you first call `useUpdatePlaylistMaxPlaybackRateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePlaylistMaxPlaybackRateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePlaylistMaxPlaybackRateMutation, { data, loading, error }] = useUpdatePlaylistMaxPlaybackRateMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      maxPlaybackRate: // value for 'maxPlaybackRate'
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useUpdatePlaylistMaxPlaybackRateMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePlaylistMaxPlaybackRateMutation, UpdatePlaylistMaxPlaybackRateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePlaylistMaxPlaybackRateMutation, UpdatePlaylistMaxPlaybackRateMutationVariables>(UpdatePlaylistMaxPlaybackRateDocument, options);
+      }
+export type UpdatePlaylistMaxPlaybackRateMutationHookResult = ReturnType<typeof useUpdatePlaylistMaxPlaybackRateMutation>;
+export type UpdatePlaylistMaxPlaybackRateMutationResult = Apollo.MutationResult<UpdatePlaylistMaxPlaybackRateMutation>;
+export type UpdatePlaylistMaxPlaybackRateMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistMaxPlaybackRateMutation, UpdatePlaylistMaxPlaybackRateMutationVariables>;
+export const UpdatePlaylistMinPlaybackRateDocument = gql`
+    mutation updatePlaylistMinPlaybackRate($id: Int!, $minPlaybackRate: Float, $key: String!) {
+  updatePlaylistMinPlaybackRate(
+    input: {id: $id, minPlaybackRate: $minPlaybackRate, key: $key}
+  ) {
+    playlist {
+      id
+    }
+  }
+}
+    `;
+export type UpdatePlaylistMinPlaybackRateMutationFn = Apollo.MutationFunction<UpdatePlaylistMinPlaybackRateMutation, UpdatePlaylistMinPlaybackRateMutationVariables>;
+
+/**
+ * __useUpdatePlaylistMinPlaybackRateMutation__
+ *
+ * To run a mutation, you first call `useUpdatePlaylistMinPlaybackRateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePlaylistMinPlaybackRateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePlaylistMinPlaybackRateMutation, { data, loading, error }] = useUpdatePlaylistMinPlaybackRateMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      minPlaybackRate: // value for 'minPlaybackRate'
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useUpdatePlaylistMinPlaybackRateMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePlaylistMinPlaybackRateMutation, UpdatePlaylistMinPlaybackRateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePlaylistMinPlaybackRateMutation, UpdatePlaylistMinPlaybackRateMutationVariables>(UpdatePlaylistMinPlaybackRateDocument, options);
+      }
+export type UpdatePlaylistMinPlaybackRateMutationHookResult = ReturnType<typeof useUpdatePlaylistMinPlaybackRateMutation>;
+export type UpdatePlaylistMinPlaybackRateMutationResult = Apollo.MutationResult<UpdatePlaylistMinPlaybackRateMutation>;
+export type UpdatePlaylistMinPlaybackRateMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistMinPlaybackRateMutation, UpdatePlaylistMinPlaybackRateMutationVariables>;
 export const CreateVideoDocument = gql`
     mutation createVideo($playlistId: Int!, $youtubeVideoId: String!, $key: String!) {
   createVideo(
@@ -703,6 +834,42 @@ export function useUpdateVideoMutation(baseOptions?: Apollo.MutationHookOptions<
 export type UpdateVideoMutationHookResult = ReturnType<typeof useUpdateVideoMutation>;
 export type UpdateVideoMutationResult = Apollo.MutationResult<UpdateVideoMutation>;
 export type UpdateVideoMutationOptions = Apollo.BaseMutationOptions<UpdateVideoMutation, UpdateVideoMutationVariables>;
+export const DeleteVideoDocument = gql`
+    mutation deleteVideo($id: Int!, $key: String!) {
+  deleteVideo(input: {id: $id, key: $key}) {
+    playlist {
+      id
+    }
+  }
+}
+    `;
+export type DeleteVideoMutationFn = Apollo.MutationFunction<DeleteVideoMutation, DeleteVideoMutationVariables>;
+
+/**
+ * __useDeleteVideoMutation__
+ *
+ * To run a mutation, you first call `useDeleteVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteVideoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteVideoMutation, { data, loading, error }] = useDeleteVideoMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      key: // value for 'key'
+ *   },
+ * });
+ */
+export function useDeleteVideoMutation(baseOptions?: Apollo.MutationHookOptions<DeleteVideoMutation, DeleteVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteVideoMutation, DeleteVideoMutationVariables>(DeleteVideoDocument, options);
+      }
+export type DeleteVideoMutationHookResult = ReturnType<typeof useDeleteVideoMutation>;
+export type DeleteVideoMutationResult = Apollo.MutationResult<DeleteVideoMutation>;
+export type DeleteVideoMutationOptions = Apollo.BaseMutationOptions<DeleteVideoMutation, DeleteVideoMutationVariables>;
 export const PlaylistDocument = gql`
     query playlist($id: Int!) {
   playlist(id: $id) {

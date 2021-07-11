@@ -25,6 +25,22 @@ mutation updatePlaylistTitle($id: Int!, $title: String!, $key: String!) {
   }
 }
 
+mutation updatePlaylistMaxPlaybackRate($id: Int!, $maxPlaybackRate: Float, $key: String!) {
+  updatePlaylistMaxPlaybackRate(input: {id: $id, maxPlaybackRate: $maxPlaybackRate, key: $key}) {
+    playlist {
+      id
+    }
+  }
+}
+
+mutation updatePlaylistMinPlaybackRate($id: Int!, $minPlaybackRate: Float, $key: String!) {
+  updatePlaylistMinPlaybackRate(input: {id: $id, minPlaybackRate: $minPlaybackRate, key: $key}) {
+    playlist {
+      id
+    }
+  }
+}
+
 mutation createVideo($playlistId: Int!, $youtubeVideoId: String!, $key: String!) {
   createVideo(input: {playlistId: $playlistId, youtubeVideoId: $youtubeVideoId, key: $key}) {
     video {
@@ -44,6 +60,14 @@ mutation createVideos($playlistId: Int!, $youtubePlaylistId: String!, $key: Stri
 mutation updateVideo($id: Int!, $bpm: Int, $key: String!) {
   updateVideo(input: {id: $id, bpm: $bpm, key: $key}) {
     video {
+      id
+    }
+  }
+}
+
+mutation deleteVideo($id: Int!, $key: String!) {
+  deleteVideo(input: {id: $id, key: $key}) {
+    playlist {
       id
     }
   }
