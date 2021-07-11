@@ -26,7 +26,6 @@ const useStyles = makeStyles(() => ({
 function YoutubePlayer() {
   const classes = useStyles()
   const playerRef = useRef(null)
-  const [urls, setUrls] = useState<string[]>([])
   const { state, dispatch } = useContext(AppContext)
 
   useEffect(() => {
@@ -57,15 +56,6 @@ function YoutubePlayer() {
     dispatch({ type: 'SET_PLAYING_VIDEO_ID', payload: videoId })
   }
 
-  useEffect(() => {
-    const urls = arrayShuffle(
-      state.videos.map(
-        (video) => `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
-      ),
-    )
-    setUrls(urls)
-  }, [state.videos])
-
   return (
     <div className={classes.wrapper}>
       <div className={classes.content}>
@@ -75,10 +65,10 @@ function YoutubePlayer() {
           height="100%"
           playsinline
           controls
-          loop
+          loop={true}
           playbackRate={state.playbackRate}
           onPlay={handlePlay}
-          url={urls}
+          url={state.youtubeVideoUrls}
         />
       </div>
     </div>

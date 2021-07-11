@@ -1,6 +1,7 @@
 import { ApolloProvider } from '@apollo/client'
 import { CssBaseline } from '@material-ui/core'
 import { StylesProvider, ThemeProvider } from '@material-ui/styles'
+import arrayShuffle from 'array-shuffle'
 import Head from 'next/head'
 import { createContext, Dispatch, useEffect, useReducer } from 'react'
 import apolloClient from '../apollo-client'
@@ -70,6 +71,7 @@ type AppStateInterface = {
   youtubeUrl: string
   playbackRate: number
   playingVideoId?: number
+  youtubeVideoUrls: string[]
 }
 
 const initialState = {
@@ -81,6 +83,7 @@ const initialState = {
   youtubeUrl: '',
   playbackRate: 1,
   playingVideoId: undefined,
+  youtubeVideoUrls: [],
 }
 
 export const AppContext = createContext<AppContextInterface>({
@@ -99,8 +102,14 @@ const appReducer = (
       return { ...state, playlistId: action.payload }
     case 'SET_DEFAULT_BPM':
       return { ...state, defaultBpm: action.payload }
-    case 'SET_VIDEOS':
-      return { ...state, videos: action.payload }
+    case 'SET_VIDEOS': {
+      const youtubeVideoUrls = arrayShuffle(
+        action.payload.map(
+          (video) => `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
+        ),
+      )
+      return { ...state, videos: action.payload, youtubeVideoUrls }
+    }
     case 'UPDATE_VIDEO_BPM': {
       const videos = state.videos.map((video) => {
         if (video.id === action.payload.id) {
@@ -111,8 +120,21 @@ const appReducer = (
       console.log({ ...state, videos: videos })
       return { ...state, videos: videos }
     }
-    case 'REFRESH_STATE':
-      return { ...state, ...action.payload, youtubeUrl: '', playbackRate: 1 }
+    case 'REFRESH_STATE': {
+      const youtubeVideoUrls = arrayShuffle(
+        action.payload.videos.map(
+          (video) => `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
+        ),
+      )
+      return {
+        ...state,
+        ...action.payload,
+        youtubeUrl: '',
+        playbackRate: 1,
+        youtubeVideoUrls,
+      }
+    }
+
     case 'SET_TITLE':
       return { ...state, title: action.payload }
     case 'SET_YOUTUBE_URL':
