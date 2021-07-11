@@ -42,6 +42,10 @@ type AppAction =
       type: 'SET_TITLE'
       payload: string
     }
+  | {
+      type: 'SET_YOUTUBE_URL'
+      payload: string
+    }
 
 type AppContextInterface = {
   state: AppStateInterface
@@ -97,7 +101,9 @@ const appReducer = (
     case 'REFRESH_STATE':
       return { ...state, ...action.payload }
     case 'SET_TITLE':
-      return { ...state, title: action.payload }
+      return { ...state, title: action.payload, youtubeUrl: '' }
+    case 'SET_YOUTUBE_URL':
+      return { ...state, youtubeUrl: action.payload }
     default:
       return state
   }

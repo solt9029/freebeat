@@ -1,5 +1,5 @@
 import { Button, Grid, TextField } from '@material-ui/core'
-import React, { useCallback, useContext, useState } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { AppContext } from '../../pages/_app'
 import {
   PlaylistDocument,
@@ -8,13 +8,11 @@ import {
 } from '../../graphql/generated/graphql-client'
 
 function NewVideoForm() {
-  const { state } = useContext(AppContext)
-
-  const [youtubeUrl, setYoutubeUrl] = useState('')
+  const { state, dispatch } = useContext(AppContext)
 
   const [createVideo] = useCreateVideoMutation({
     onCompleted: () => {
-      setYoutubeUrl('')
+      dispatch({ type: 'SET_YOUTUBE_URL', payload: '' })
     },
     refetchQueries: [
       { query: PlaylistDocument, variables: { id: state.playlistId } },
@@ -26,7 +24,7 @@ function NewVideoForm() {
 
   const [createVideos] = useCreateVideosMutation({
     onCompleted: () => {
-      setYoutubeUrl('')
+      dispatch({ type: 'SET_YOUTUBE_URL', payload: '' })
     },
     refetchQueries: [
       { query: PlaylistDocument, variables: { id: state.playlistId } },
@@ -38,13 +36,13 @@ function NewVideoForm() {
 
   const handleChange = useCallback(
     (event) => {
-      setYoutubeUrl(event.target.value)
+      dispatch({ type: 'SET_YOUTUBE_URL', payload: event.target.value || '' })
     },
-    [setYoutubeUrl],
+    [dispatch],
   )
 
   const handleClick = useCallback(() => {
-    var url = new URL(youtubeUrl)
+    var url = new URL(state.youtubeUrl)
 
     const youtubeVideoId = url.searchParams.get('v')
     if (youtubeVideoId) {
@@ -68,7 +66,7 @@ function NewVideoForm() {
         },
       })
     }
-  }, [youtubeUrl, state, createVideo, createVideos])
+  }, [state, createVideo, createVideos])
 
   return (
     <Grid container spacing={3}>
@@ -77,7 +75,7 @@ function NewVideoForm() {
           fullWidth
           label="YouTubeの動画またはプレイリストのURL"
           onChange={handleChange}
-          value={youtubeUrl}
+          value={state.youtubeUrl}
         />
         <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
           1つのプレイリストに50個までの動画を追加することができます。
