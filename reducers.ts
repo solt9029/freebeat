@@ -6,10 +6,13 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
     case 'SET_KEY':
       return { ...state, key: action.payload }
+
     case 'SET_PLAYLIST_ID':
       return { ...state, playlistId: action.payload }
+
     case 'SET_DEFAULT_BPM':
       return { ...state, defaultBpm: action.payload }
+
     case 'SET_VIDEOS': {
       const youtubeVideoUrls = arrayShuffle(
         action.payload.map(
@@ -18,6 +21,7 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
       )
       return { ...state, videos: action.payload, youtubeVideoUrls }
     }
+
     case 'UPDATE_VIDEO_BPM': {
       const videos = state.videos.map((video) => {
         if (video.id === action.payload.id) {
@@ -28,6 +32,7 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
       console.log({ ...state, videos: videos })
       return { ...state, videos: videos }
     }
+
     case 'REFRESH_STATE': {
       const youtubeVideoUrls =
         state.videos.toString() === action.payload.videos.toString()
@@ -47,10 +52,13 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         youtubeVideoUrls,
       }
     }
+
     case 'SET_TITLE':
       return { ...state, title: action.payload }
+
     case 'SET_YOUTUBE_URL':
       return { ...state, youtubeUrl: action.payload }
+
     case 'SET_PLAYBACK_RATE': {
       let playbackRate = action.payload
       if (playbackRate > state.maxPlaybackRate) {
@@ -60,8 +68,10 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
       }
       return { ...state, playbackRate }
     }
+
     case 'SET_PLAYING_VIDEO_ID':
       return { ...state, playingVideoId: action.payload }
+
     case 'SET_MIN_PLAYBACK_RATE': {
       const playbackRate =
         state.playbackRate < action.payload
@@ -69,6 +79,7 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
           : state.playbackRate
       return { ...state, minPlaybackRate: action.payload, playbackRate }
     }
+
     case 'SET_MAX_PLAYBACK_RATE': {
       const playbackRate =
         state.playbackRate > action.payload
@@ -76,6 +87,7 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
           : state.playbackRate
       return { ...state, maxPlaybackRate: action.payload, playbackRate }
     }
+
     default:
       return state
   }
