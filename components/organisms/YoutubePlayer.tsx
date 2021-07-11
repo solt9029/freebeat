@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ReactPlayer from 'react-player'
-import { usePlaylistQuery } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../pages/_app'
 
 const useStyles = makeStyles(() => ({
@@ -25,28 +24,11 @@ const useStyles = makeStyles(() => ({
 
 function YoutubePlayer() {
   const classes = useStyles()
-
-  const [videoIds, setVideoIds] = useState<string[]>([])
+  const playerRef = useRef(null)
   const [playingVideoId, setPlayingVideoId] = useState<number | undefined>(
     undefined,
   )
   const { state, dispatch } = useContext(AppContext)
-
-  const { data } = usePlaylistQuery({
-    variables: { id: state.playlistId },
-    onCompleted: () => {},
-    onError: () => {},
-  })
-
-  const playerRef = useRef(null)
-
-  useEffect(() => {
-    if (videoIds.length === 0 && data) {
-      setVideoIds(
-        data.playlist.videos.edges.map((edge) => edge.node.youtubeVideoId),
-      )
-    }
-  }, [data, setVideoIds, videoIds])
 
   useEffect(() => {
     const bpm = state.videos.find((video) => video.id === playingVideoId)?.bpm
@@ -63,6 +45,21 @@ function YoutubePlayer() {
     }
   }, [state.videos, state.defaultBpm, playingVideoId])
 
+  const handlePlay = () => {
+    const url = new URL(
+      playerRef.current?.player?.player?.player?.getVideoUrl(),
+    )
+    const youtubeVideoId = url.searchParams.get('v')
+    const videoId = state.videos.find(
+      (video) => video.youtubeVideoId === youtubeVideoId,
+    )?.id
+    setPlayingVideoId(videoId)
+  }
+
+  const url = state.videos.map(
+    (video) => `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
+  )
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.content}>
@@ -74,20 +71,8 @@ function YoutubePlayer() {
           controls
           loop
           playbackRate={state.playbackRate}
-          onPlay={() => {
-            const url = new URL(
-              playerRef.current?.player?.player?.player?.getVideoUrl(),
-            )
-            const youtubeVideoId = url.searchParams.get('v')
-            const videoId = state.videos.find(
-              (video) => video.youtubeVideoId === youtubeVideoId,
-            )?.id
-            setPlayingVideoId(videoId)
-          }}
-          url={state.videos.map(
-            (video) =>
-              `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
-          )}
+          onPlay={handlePlay}
+          url={url}
         />
       </div>
     </div>
