@@ -34,6 +34,7 @@ function YoutubePlayer() {
   const classes = useStyles()
 
   const [videoIds, setVideoIds] = useState<string[]>([])
+  const [isReady, setIsReady] = useState(false)
   const { state, dispatch } = useContext(AppContext)
 
   const { data } = usePlaylistQuery({
@@ -52,6 +53,35 @@ function YoutubePlayer() {
     }
   }, [data, setVideoIds, videoIds])
 
+  useEffect(() => {
+    if (!isReady) {
+      return
+    }
+
+    const urlString = playerRef?.current?.player?.player?.player?.getVideoUrl()
+    if (urlString === undefined) {
+      return
+    }
+
+    const url = new URL(urlString)
+    const youtubeVideoId = url.searchParams.get('v')
+    const bpm = state.videos.find(
+      (video) => video.youtubeVideoId === youtubeVideoId,
+    )?.bpm
+
+    if (bpm && state.defaultBpm) {
+      dispatch({
+        type: 'SET_PLAYBACK_RATE',
+        payload: state.defaultBpm / bpm,
+      })
+    } else {
+      dispatch({
+        type: 'SET_PLAYBACK_RATE',
+        payload: 1,
+      })
+    }
+  }, [state.videos, playerRef, state.defaultBpm])
+
   return (
     <div className={classes.wrapper}>
       <div className={classes.content}>
@@ -63,6 +93,9 @@ function YoutubePlayer() {
           controls
           loop
           playbackRate={state.playbackRate}
+          onReady={() => {
+            setIsReady(true)
+          }}
           onPlay={() => {
             const url = new URL(
               playerRef.current?.player?.player?.player?.getVideoUrl(),
