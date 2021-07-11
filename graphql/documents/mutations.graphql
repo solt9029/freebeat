@@ -11,8 +11,6 @@ mutation updatePlaylistDefaultBpm($id: Int!, $defaultBpm: Int, $key: String!) {
   updatePlaylistDefaultBpm(input: {id: $id, defaultBpm: $defaultBpm, key: $key}) {
     playlist {
       id
-      defaultBpm
-      title
     }
   }
 }

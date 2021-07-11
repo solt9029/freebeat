@@ -376,7 +376,7 @@ export type UpdatePlaylistDefaultBpmMutation = (
     { __typename?: 'UpdatePlaylistDefaultBpmPayload' }
     & { playlist: (
       { __typename?: 'Base' }
-      & Pick<Base, 'id' | 'defaultBpm' | 'title'>
+      & Pick<Base, 'id'>
     ) }
   )> }
 );
@@ -570,8 +570,6 @@ export const UpdatePlaylistDefaultBpmDocument = gql`
   updatePlaylistDefaultBpm(input: {id: $id, defaultBpm: $defaultBpm, key: $key}) {
     playlist {
       id
-      defaultBpm
-      title
     }
   }
 }

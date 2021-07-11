@@ -18,6 +18,7 @@ import NewVideoForm from '../../../components/organisms/NewVideoForm'
 import PlaylistDefaultBpmField from '../../../components/organisms/PlaylistDefaultBpmField'
 import YoutubePlayer from '../../../components/organisms/YoutubePlayer'
 import MaxPlaybackRateField from '../../../components/organisms/MaxPlaybackRateField'
+import MinPlaybackRateField from '../../../components/organisms/MinPlaybackRateField'
 
 const EditPage = () => {
   const { state, dispatch } = useContext(AppContext)
@@ -36,6 +37,8 @@ const EditPage = () => {
     if (data?.playlist === undefined) {
       return
     }
+
+    console.log('refresh' + data.playlist.defaultBpm)
     dispatch({
       type: 'REFRESH_STATE',
       payload: {
@@ -100,17 +103,7 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <TextField
-                  fullWidth
-                  label="自動調整時の最小倍速（小数可）"
-                  value={state.minPlaybackRate?.toString() || ''}
-                  onChange={(event) => {
-                    dispatch({
-                      type: 'SET_MIN_PLAYBACK_RATE',
-                      payload: event.target.value,
-                    })
-                  }}
-                />
+                <MinPlaybackRateField />
               </Box>
 
               <Box mb={2}>

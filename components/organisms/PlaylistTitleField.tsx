@@ -33,7 +33,7 @@ function PlaylistTitleField() {
         },
       })
     }, 1000),
-    [updatePlaylistTitle, state],
+    [updatePlaylistTitle, state.key, state.playlistId],
   )
 
   const handleChange = useCallback(
