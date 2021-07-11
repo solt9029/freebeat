@@ -97,6 +97,13 @@ const EditPage = () => {
                   fullWidth
                   label="自動調整時の最大倍速"
                   type="number"
+                  value={state.maxPlaybackRate || ''}
+                  onChange={(event) => {
+                    dispatch({
+                      type: 'SET_MAX_PLAYBACK_RATE',
+                      payload: parseInt(event.target.value) || 1,
+                    })
+                  }}
                   inputProps={{ min: 1, max: 4, step: 0.1 }}
                 />
                 <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>
@@ -109,6 +116,13 @@ const EditPage = () => {
                   fullWidth
                   label="自動調整時の最小倍速"
                   type="number"
+                  value={state.minPlaybackRate || ''}
+                  onChange={(event) => {
+                    dispatch({
+                      type: 'SET_MIN_PLAYBACK_RATE',
+                      payload: parseInt(event.target.value) || 1,
+                    })
+                  }}
                   InputProps={{ inputProps: { min: 0.1, max: 1, step: 0.1 } }}
                 />
                 <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>

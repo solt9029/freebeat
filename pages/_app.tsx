@@ -56,6 +56,14 @@ type AppAction =
       type: 'SET_PLAYING_VIDEO_ID'
       payload?: number
     }
+  | {
+      type: 'SET_MAX_PLAYBACK_RATE'
+      payload: number
+    }
+  | {
+      type: 'SET_MIN_PLAYBACK_RATE'
+      payload: number
+    }
 
 type AppContextInterface = {
   state: AppStateInterface
@@ -72,6 +80,8 @@ type AppStateInterface = {
   playbackRate: number
   playingVideoId?: number
   youtubeVideoUrls: string[]
+  maxPlaybackRate: number
+  minPlaybackRate: number
 }
 
 const initialState = {
@@ -84,6 +94,8 @@ const initialState = {
   playbackRate: 1,
   playingVideoId: undefined,
   youtubeVideoUrls: [],
+  maxPlaybackRate: 1.5,
+  minPlaybackRate: 0.75,
 }
 
 export const AppContext = createContext<AppContextInterface>({
@@ -139,7 +151,6 @@ const appReducer = (
         youtubeVideoUrls,
       }
     }
-
     case 'SET_TITLE':
       return { ...state, title: action.payload }
     case 'SET_YOUTUBE_URL':
@@ -148,6 +159,10 @@ const appReducer = (
       return { ...state, playbackRate: action.payload }
     case 'SET_PLAYING_VIDEO_ID':
       return { ...state, playingVideoId: action.payload }
+    case 'SET_MIN_PLAYBACK_RATE':
+      return { ...state, minPlaybackRate: action.payload }
+    case 'SET_MAX_PLAYBACK_RATE':
+      return { ...state, maxPlaybackRate: action.payload }
     default:
       return state
   }
