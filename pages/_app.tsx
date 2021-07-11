@@ -51,6 +51,10 @@ type AppAction =
       type: 'SET_PLAYBACK_RATE'
       payload: number
     }
+  | {
+      type: 'SET_PLAYING_VIDEO_ID'
+      payload?: number
+    }
 
 type AppContextInterface = {
   state: AppStateInterface
@@ -65,6 +69,7 @@ type AppStateInterface = {
   videos: Video[]
   youtubeUrl: string
   playbackRate: number
+  playingVideoId?: number
 }
 
 const initialState = {
@@ -75,6 +80,7 @@ const initialState = {
   videos: [],
   youtubeUrl: '',
   playbackRate: 1,
+  playingVideoId: undefined,
 }
 
 export const AppContext = createContext<AppContextInterface>({
@@ -113,6 +119,8 @@ const appReducer = (
       return { ...state, youtubeUrl: action.payload }
     case 'SET_PLAYBACK_RATE':
       return { ...state, playbackRate: action.payload }
+    case 'SET_PLAYING_VIDEO_ID':
+      return { ...state, playingVideoId: action.payload }
     default:
       return state
   }

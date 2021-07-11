@@ -26,14 +26,13 @@ const useStyles = makeStyles(() => ({
 function YoutubePlayer() {
   const classes = useStyles()
   const playerRef = useRef(null)
-  const [playingVideoId, setPlayingVideoId] = useState<number | undefined>(
-    undefined,
-  )
   const [urls, setUrls] = useState<string[]>([])
   const { state, dispatch } = useContext(AppContext)
 
   useEffect(() => {
-    const bpm = state.videos.find((video) => video.id === playingVideoId)?.bpm
+    const bpm = state.videos.find(
+      (video) => video.id === state.playingVideoId,
+    )?.bpm
     if (bpm && state.defaultBpm) {
       dispatch({
         type: 'SET_PLAYBACK_RATE',
@@ -45,7 +44,7 @@ function YoutubePlayer() {
         payload: 1,
       })
     }
-  }, [state.videos, state.defaultBpm, playingVideoId])
+  }, [state.videos, state.defaultBpm, state.playingVideoId])
 
   const handlePlay = () => {
     const url = new URL(
@@ -55,7 +54,7 @@ function YoutubePlayer() {
     const videoId = state.videos.find(
       (video) => video.youtubeVideoId === youtubeVideoId,
     )?.id
-    setPlayingVideoId(videoId)
+    dispatch({ type: 'SET_PLAYING_VIDEO_ID', payload: videoId })
   }
 
   useEffect(() => {
