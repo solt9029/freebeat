@@ -86,7 +86,6 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         ...state,
         ...action.payload,
         youtubeUrl: '',
-        playbackRate: 1,
         youtubeVideoUrls,
       }
     }
