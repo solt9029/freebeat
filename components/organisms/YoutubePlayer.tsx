@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core'
+import arrayShuffle from 'array-shuffle'
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import ReactPlayer from 'react-player'
 import { AppContext } from '../../pages/_app'
@@ -28,6 +29,7 @@ function YoutubePlayer() {
   const [playingVideoId, setPlayingVideoId] = useState<number | undefined>(
     undefined,
   )
+  const [urls, setUrls] = useState<string[]>([])
   const { state, dispatch } = useContext(AppContext)
 
   useEffect(() => {
@@ -56,9 +58,14 @@ function YoutubePlayer() {
     setPlayingVideoId(videoId)
   }
 
-  const url = state.videos.map(
-    (video) => `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
-  )
+  useEffect(() => {
+    const urls = arrayShuffle(
+      state.videos.map(
+        (video) => `https://www.youtube.com/watch?v=${video.youtubeVideoId}`,
+      ),
+    )
+    setUrls(urls)
+  }, [state.videos])
 
   return (
     <div className={classes.wrapper}>
@@ -72,7 +79,7 @@ function YoutubePlayer() {
           loop
           playbackRate={state.playbackRate}
           onPlay={handlePlay}
-          url={url}
+          url={urls}
         />
       </div>
     </div>
