@@ -155,14 +155,31 @@ const appReducer = (
       return { ...state, title: action.payload }
     case 'SET_YOUTUBE_URL':
       return { ...state, youtubeUrl: action.payload }
-    case 'SET_PLAYBACK_RATE':
-      return { ...state, playbackRate: action.payload }
+    case 'SET_PLAYBACK_RATE': {
+      let playbackRate = action.payload
+      if (playbackRate > state.maxPlaybackRate) {
+        playbackRate = state.maxPlaybackRate
+      } else if (playbackRate < state.minPlaybackRate) {
+        playbackRate = state.minPlaybackRate
+      }
+      return { ...state, playbackRate }
+    }
     case 'SET_PLAYING_VIDEO_ID':
       return { ...state, playingVideoId: action.payload }
-    case 'SET_MIN_PLAYBACK_RATE':
-      return { ...state, minPlaybackRate: action.payload }
-    case 'SET_MAX_PLAYBACK_RATE':
-      return { ...state, maxPlaybackRate: action.payload }
+    case 'SET_MIN_PLAYBACK_RATE': {
+      const playbackRate =
+        state.playbackRate < action.payload
+          ? action.payload
+          : state.playbackRate
+      return { ...state, minPlaybackRate: action.payload, playbackRate }
+    }
+    case 'SET_MAX_PLAYBACK_RATE': {
+      const playbackRate =
+        state.playbackRate > action.payload
+          ? action.payload
+          : state.playbackRate
+      return { ...state, maxPlaybackRate: action.payload, playbackRate }
+    }
     default:
       return state
   }

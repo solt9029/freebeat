@@ -101,7 +101,7 @@ const EditPage = () => {
                   onChange={(event) => {
                     dispatch({
                       type: 'SET_MAX_PLAYBACK_RATE',
-                      payload: parseInt(event.target.value) || 1,
+                      payload: parseFloat(event.target.value) || 1,
                     })
                   }}
                   inputProps={{ min: 1, max: 4, step: 0.1 }}
@@ -120,7 +120,7 @@ const EditPage = () => {
                   onChange={(event) => {
                     dispatch({
                       type: 'SET_MIN_PLAYBACK_RATE',
-                      payload: parseInt(event.target.value) || 1,
+                      payload: parseFloat(event.target.value) || 1,
                     })
                   }}
                   InputProps={{ inputProps: { min: 0.1, max: 1, step: 0.1 } }}
