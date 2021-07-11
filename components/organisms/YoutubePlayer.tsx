@@ -42,7 +42,7 @@ function YoutubePlayer() {
     onError: () => {},
   })
 
-  const videoRef = useRef(null)
+  const playerRef = useRef(null)
 
   useEffect(() => {
     if (videoIds.length === 0 && data) {
@@ -56,7 +56,7 @@ function YoutubePlayer() {
     <div className={classes.wrapper}>
       <div className={classes.content}>
         <ReactPlayer
-          ref={videoRef}
+          ref={playerRef}
           width="100%"
           height="100%"
           playsinline
@@ -65,7 +65,7 @@ function YoutubePlayer() {
           playbackRate={state.playbackRate}
           onPlay={() => {
             const url = new URL(
-              videoRef.current?.player?.player?.player?.getVideoUrl(),
+              playerRef.current?.player?.player?.player?.getVideoUrl(),
             )
             const youtubeVideoId = url.searchParams.get('v')
             const bpm = state.videos.find(
