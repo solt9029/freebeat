@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
-import { AppContext } from '../../pages/_app'
+import { AppContext } from '../../contexts'
 import {
   PlaylistDocument,
   useCreateVideoMutation,

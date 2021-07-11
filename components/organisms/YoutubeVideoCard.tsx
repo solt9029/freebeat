@@ -12,7 +12,7 @@ import {
 import { DeleteOutlined } from '@material-ui/icons'
 import React, { useCallback, useContext } from 'react'
 import { useUpdateVideoMutation } from '../../graphql/generated/graphql-client'
-import { AppContext } from '../../pages/_app'
+import { AppContext } from '../../contexts'
 
 const useStyles = makeStyles(() => ({
   title: {

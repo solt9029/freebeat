@@ -1,7 +1,7 @@
 import { debounce, makeStyles, TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
 import { useUpdatePlaylistTitleMutation } from '../../graphql/generated/graphql-client'
-import { AppContext } from '../../pages/_app'
+import { AppContext } from '../../contexts'
 
 const useStyles = makeStyles(() => ({
   input: {

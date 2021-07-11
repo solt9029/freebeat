@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core'
 import React, { useContext, useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
-import { AppContext } from '../../pages/_app'
+import { AppContext } from '../../contexts'
 
 const useStyles = makeStyles(() => ({
   wrapper: {

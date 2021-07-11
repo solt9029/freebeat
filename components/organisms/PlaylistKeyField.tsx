@@ -1,7 +1,7 @@
 import { TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
 import { setPlaylistKey } from '../../local-storage'
-import { AppContext } from '../../pages/_app'
+import { AppContext } from '../../contexts'
 
 function PlaylistKeyField() {
   const { state, dispatch } = useContext(AppContext)
