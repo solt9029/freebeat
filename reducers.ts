@@ -59,8 +59,16 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         }
         return video
       })
-      console.log({ ...state, videos: videos })
-      return { ...state, videos: videos }
+
+      const playbackRate = calcPlaybackRate(
+        videos,
+        state.playingVideoId,
+        state.defaultBpm,
+        parseFloat(state.maxPlaybackRate) || 1,
+        parseFloat(state.minPlaybackRate) || 1,
+      )
+
+      return { ...state, videos: videos, playbackRate }
     }
 
     case 'REFRESH_STATE': {
