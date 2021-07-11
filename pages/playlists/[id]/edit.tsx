@@ -55,6 +55,7 @@ const EditPage = () => {
           id: parseInt(edge.node.id),
           bpm: edge.node.bpm,
           youtubeVideoId: edge.node.youtubeVideoId,
+          youtubeVideoTitle: edge.node.youtubeVideoTitle,
         })),
       },
     })
@@ -111,13 +112,13 @@ const EditPage = () => {
 
               <Box mt={3}>
                 {data &&
-                  data.playlist.videos.edges.map((edge, index) => (
+                  state.videos.map((video, index) => (
                     <Box m={1} key={index}>
                       <YoutubeVideoCard
-                        bpm={edge.node.bpm}
-                        id={parseInt(edge.node.id)}
-                        youtubeVideoId={edge.node.youtubeVideoId}
-                        youtubeVideoTitle={edge.node.youtubeVideoTitle}
+                        bpm={video.bpm}
+                        id={video.id}
+                        youtubeVideoId={video.youtubeVideoId}
+                        youtubeVideoTitle={video.youtubeVideoTitle}
                       />
                     </Box>
                   ))}

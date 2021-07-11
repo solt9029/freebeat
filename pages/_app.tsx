@@ -10,6 +10,7 @@ import theme from '../theme'
 type Video = {
   id: number
   youtubeVideoId: string
+  youtubeVideoTitle: string
   bpm: number
 }
 
