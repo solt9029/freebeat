@@ -10,7 +10,7 @@ import {
   TextField,
 } from '@material-ui/core'
 import { DeleteOutlined } from '@material-ui/icons'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useContext } from 'react'
 import { useUpdateVideoMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../pages/_app'
 
@@ -45,13 +45,7 @@ type Props = {
 
 function YoutubeVideoCard(props: Props) {
   const classes = useStyles()
-  const { state } = useContext(AppContext)
-
-  const [bpm, setBpm] = useState<number | undefined>(undefined)
-
-  useEffect(() => {
-    setBpm(props.bpm)
-  }, [props.bpm, setBpm])
+  const { state, dispatch } = useContext(AppContext)
 
   const [updateVideo] = useUpdateVideoMutation({
     onCompleted: (data) => {
@@ -77,10 +71,13 @@ function YoutubeVideoCard(props: Props) {
 
   const handleChange = useCallback(
     (event) => {
-      setBpm(parseInt(event.target.value))
+      dispatch({
+        type: 'UPDATE_VIDEO_BPM',
+        payload: { id: props.id, bpm: parseInt(event.target.value) },
+      })
       updateBpm(parseInt(event.target.value))
     },
-    [setBpm, updateBpm],
+    [dispatch, props.id, updateBpm],
   )
 
   return (
@@ -102,7 +99,7 @@ function YoutubeVideoCard(props: Props) {
               type="number"
               className={classes.field}
               label="BPM"
-              value={bpm || ''}
+              value={props.bpm || ''}
               onChange={handleChange}
             />
             <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>

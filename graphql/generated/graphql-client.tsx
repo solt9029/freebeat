@@ -365,7 +365,7 @@ export type CreateVideosMutation = (
 
 export type UpdateVideoMutationVariables = Exact<{
   id: Scalars['Int'];
-  bpm: Scalars['Int'];
+  bpm?: Maybe<Scalars['Int']>;
   key: Scalars['String'];
 }>;
 
@@ -595,7 +595,7 @@ export type CreateVideosMutationHookResult = ReturnType<typeof useCreateVideosMu
 export type CreateVideosMutationResult = Apollo.MutationResult<CreateVideosMutation>;
 export type CreateVideosMutationOptions = Apollo.BaseMutationOptions<CreateVideosMutation, CreateVideosMutationVariables>;
 export const UpdateVideoDocument = gql`
-    mutation updateVideo($id: Int!, $bpm: Int!, $key: String!) {
+    mutation updateVideo($id: Int!, $bpm: Int, $key: String!) {
   updateVideo(input: {id: $id, bpm: $bpm, key: $key}) {
     video {
       id
