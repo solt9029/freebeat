@@ -3,6 +3,8 @@ query playlist($id: Int!) {
     id
     title
     defaultBpm
+    maxPlaybackRate
+    minPlaybackRate
     videos {
       edges {
         node {

@@ -23,7 +23,14 @@ export type AppAction =
     }
   | {
       type: 'REFRESH_STATE'
-      payload: Pick<AppState, 'defaultBpm' | 'title' | 'videos'>
+      payload: Pick<
+        AppState,
+        | 'defaultBpm'
+        | 'title'
+        | 'videos'
+        | 'maxPlaybackRate'
+        | 'minPlaybackRate'
+      >
     }
   | {
       type: 'SET_TITLE'

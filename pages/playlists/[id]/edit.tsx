@@ -17,6 +17,7 @@ import PlaylistKeyField from '../../../components/organisms/PlaylistKeyField'
 import NewVideoForm from '../../../components/organisms/NewVideoForm'
 import PlaylistDefaultBpmField from '../../../components/organisms/PlaylistDefaultBpmField'
 import YoutubePlayer from '../../../components/organisms/YoutubePlayer'
+import MaxPlaybackRateField from '../../../components/organisms/MaxPlaybackRateField'
 
 const EditPage = () => {
   const { state, dispatch } = useContext(AppContext)
@@ -40,6 +41,8 @@ const EditPage = () => {
       payload: {
         defaultBpm: data.playlist.defaultBpm,
         title: data.playlist.title,
+        maxPlaybackRate: data.playlist.maxPlaybackRate?.toString(),
+        minPlaybackRate: data.playlist.minPlaybackRate?.toString(),
         videos: data.playlist.videos.edges.map((edge) => ({
           id: parseInt(edge.node.id),
           bpm: edge.node.bpm,
@@ -93,17 +96,7 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <TextField
-                  fullWidth
-                  label="自動調整時の最大倍速（小数可）"
-                  value={state.maxPlaybackRate?.toString() || ''}
-                  onChange={(event) => {
-                    dispatch({
-                      type: 'SET_MAX_PLAYBACK_RATE',
-                      payload: event.target.value,
-                    })
-                  }}
-                />
+                <MaxPlaybackRateField />
               </Box>
 
               <Box mb={2}>

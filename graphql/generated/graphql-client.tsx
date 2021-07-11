@@ -515,7 +515,7 @@ export type PlaylistQuery = (
   { __typename?: 'Query' }
   & { playlist: (
     { __typename?: 'Base' }
-    & Pick<Base, 'id' | 'title' | 'defaultBpm'>
+    & Pick<Base, 'id' | 'title' | 'defaultBpm' | 'maxPlaybackRate' | 'minPlaybackRate'>
     & { videos: (
       { __typename?: 'VideoConnection' }
       & { edges?: Maybe<Array<Maybe<(
@@ -876,6 +876,8 @@ export const PlaylistDocument = gql`
     id
     title
     defaultBpm
+    maxPlaybackRate
+    minPlaybackRate
     videos {
       edges {
         node {
