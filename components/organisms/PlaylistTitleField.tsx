@@ -1,9 +1,6 @@
 import { debounce, makeStyles, TextField } from '@material-ui/core'
-import React, { useCallback, useContext, useState } from 'react'
-import {
-  usePlaylistQuery,
-  useUpdatePlaylistTitleMutation,
-} from '../../graphql/generated/graphql-client'
+import React, { useCallback, useContext } from 'react'
+import { useUpdatePlaylistTitleMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../pages/_app'
 
 const useStyles = makeStyles(() => ({
@@ -15,17 +12,7 @@ const useStyles = makeStyles(() => ({
 function PlaylistTitleField() {
   const classes = useStyles()
 
-  const { state } = useContext(AppContext)
-
-  const [title, setTitle] = useState('')
-
-  usePlaylistQuery({
-    variables: { id: state.playlistId },
-    onCompleted: (data) => {
-      setTitle(data.playlist.title)
-    },
-    skip: state.playlistId === undefined,
-  })
+  const { state, dispatch } = useContext(AppContext)
 
   const [updatePlaylistTitle] = useUpdatePlaylistTitleMutation({
     onCompleted: (data) => {
@@ -51,17 +38,17 @@ function PlaylistTitleField() {
 
   const handleChange = useCallback(
     (event) => {
-      setTitle(event.target.value)
-      updateTitle(event.target.value)
+      dispatch({ type: 'SET_TITLE', payload: event.target.value || '' })
+      updateTitle(event.target.value || '')
     },
-    [setTitle, updateTitle],
+    [dispatch, updateTitle],
   )
 
   return (
     <TextField
       onChange={handleChange}
       fullWidth
-      value={title}
+      value={state.title}
       InputProps={{
         classes: {
           input: classes.input,

@@ -38,6 +38,10 @@ type AppAction =
       type: 'REFRESH_STATE'
       payload: Pick<AppStateInterface, 'defaultBpm' | 'title' | 'videos'>
     }
+  | {
+      type: 'SET_TITLE'
+      payload: string
+    }
 
 type AppContextInterface = {
   state: AppStateInterface
@@ -92,6 +96,8 @@ const appReducer = (
     }
     case 'REFRESH_STATE':
       return { ...state, ...action.payload }
+    case 'SET_TITLE':
+      return { ...state, title: action.payload }
     default:
       return state
   }
