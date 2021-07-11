@@ -1,6 +1,5 @@
 import { makeStyles } from '@material-ui/core'
-import arrayShuffle from 'array-shuffle'
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import ReactPlayer from 'react-player'
 import { AppContext } from '../../pages/_app'
 
