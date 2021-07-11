@@ -43,7 +43,7 @@ type Props = {
   youtubeVideoTitle?: string
 }
 
-function YoutubeVideoCard(props: Props) {
+function VideoCard(props: Props) {
   const classes = useStyles()
   const { state, dispatch } = useContext(AppContext)
 
@@ -118,4 +118,4 @@ function YoutubeVideoCard(props: Props) {
   )
 }
 
-export default YoutubeVideoCard
+export default VideoCard

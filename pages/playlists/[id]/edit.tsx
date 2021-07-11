@@ -9,7 +9,7 @@ import {
 import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect } from 'react'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
-import YoutubeVideoCard from '../../../components/organisms/YoutubeVideoCard'
+import VideoCard from '../../../components/organisms/VideoCard'
 import { getPlaylistKey } from '../../../local-storage'
 import { AppContext } from '../../../contexts'
 import PlaylistTitleField from '../../../components/organisms/PlaylistTitleField'
@@ -138,7 +138,7 @@ const EditPage = () => {
                 {data &&
                   state.videos.map((video, index) => (
                     <Box m={1} key={index}>
-                      <YoutubeVideoCard
+                      <VideoCard
                         bpm={video.bpm}
                         id={video.id}
                         youtubeVideoId={video.youtubeVideoId}
