@@ -32,8 +32,16 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
     case 'SET_PLAYLIST_ID':
       return { ...state, playlistId: action.payload }
 
-    case 'SET_DEFAULT_BPM':
-      return { ...state, defaultBpm: action.payload }
+    case 'SET_DEFAULT_BPM': {
+      const playbackRate = calcPlaybackRate(
+        state.videos,
+        state.playingVideoId,
+        action.payload,
+        state.maxPlaybackRate,
+        state.minPlaybackRate,
+      )
+      return { ...state, defaultBpm: action.payload, playbackRate }
+    }
 
     case 'SET_VIDEOS': {
       const youtubeVideoUrls = arrayShuffle(
@@ -71,7 +79,6 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         ...action.payload,
         youtubeUrl: '',
         playbackRate: 1,
-        playingVideoId: undefined,
         youtubeVideoUrls,
       }
     }
@@ -105,6 +112,7 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
     }
 
     case 'SET_MIN_PLAYBACK_RATE': {
+      console.log('minmin' + action.payload)
       const playbackRate = calcPlaybackRate(
         state.videos,
         state.playingVideoId,
@@ -112,6 +120,7 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         state.maxPlaybackRate,
         action.payload,
       )
+      console.log(playbackRate)
       return { ...state, minPlaybackRate: action.payload, playbackRate }
     }
 
