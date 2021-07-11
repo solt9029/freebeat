@@ -34,10 +34,6 @@ export type AppAction =
       payload: string
     }
   | {
-      type: 'SET_PLAYBACK_RATE'
-      payload: number
-    }
-  | {
       type: 'SET_PLAYING_VIDEO_ID'
       payload?: number
     }

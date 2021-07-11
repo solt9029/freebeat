@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core'
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import ReactPlayer from 'react-player'
 import { AppContext } from '../../contexts'
 
@@ -26,23 +26,6 @@ function YoutubePlayer() {
   const classes = useStyles()
   const playerRef = useRef(null)
   const { state, dispatch } = useContext(AppContext)
-
-  useEffect(() => {
-    const bpm = state.videos.find(
-      (video) => video.id === state.playingVideoId,
-    )?.bpm
-    if (bpm && state.defaultBpm) {
-      dispatch({
-        type: 'SET_PLAYBACK_RATE',
-        payload: state.defaultBpm / bpm,
-      })
-    } else {
-      dispatch({
-        type: 'SET_PLAYBACK_RATE',
-        payload: 1,
-      })
-    }
-  }, [state.videos, state.defaultBpm, state.playingVideoId])
 
   const handlePlay = () => {
     playerRef.current?.getInternalPlayer()?.setLoop(true)

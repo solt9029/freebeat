@@ -1,6 +1,28 @@
 import arrayShuffle from 'array-shuffle'
 import { AppAction } from './interfaces/actions'
-import { AppState } from './interfaces/state'
+import { AppState, Video } from './interfaces/state'
+
+const calcPlaybackRate = (
+  videos: Video[],
+  playingVideoId?: number,
+  defaultBpm?: number,
+  maxPlaybackRate?: number,
+  minPlaybackRate?: number,
+) => {
+  const bpm = videos.find((video) => video.id === playingVideoId)?.bpm
+
+  if (bpm && defaultBpm) {
+    let playbackRate = defaultBpm / bpm
+    if (playbackRate > maxPlaybackRate) {
+      playbackRate = maxPlaybackRate
+    } else if (playbackRate < minPlaybackRate) {
+      playbackRate = minPlaybackRate
+    }
+    return playbackRate
+  }
+
+  return 1
+}
 
 export const appReducer = (state: AppState, action: AppAction): AppState => {
   switch (action.type) {
@@ -49,6 +71,7 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
         ...action.payload,
         youtubeUrl: '',
         playbackRate: 1,
+        playingVideoId: undefined,
         youtubeVideoUrls,
       }
     }
@@ -59,33 +82,37 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
     case 'SET_YOUTUBE_URL':
       return { ...state, youtubeUrl: action.payload }
 
-    case 'SET_PLAYBACK_RATE': {
-      let playbackRate = action.payload
-      if (playbackRate > state.maxPlaybackRate) {
-        playbackRate = state.maxPlaybackRate
-      } else if (playbackRate < state.minPlaybackRate) {
-        playbackRate = state.minPlaybackRate
-      }
-      return { ...state, playbackRate }
-    }
-
-    case 'SET_PLAYING_VIDEO_ID':
-      return { ...state, playingVideoId: action.payload }
-
-    case 'SET_MIN_PLAYBACK_RATE': {
-      const playbackRate =
-        state.playbackRate < action.payload
-          ? action.payload
-          : state.playbackRate
-      return { ...state, minPlaybackRate: action.payload, playbackRate }
+    case 'SET_PLAYING_VIDEO_ID': {
+      const playbackRate = calcPlaybackRate(
+        state.videos,
+        action.payload,
+        state.defaultBpm,
+        state.maxPlaybackRate,
+        state.minPlaybackRate,
+      )
+      return { ...state, playingVideoId: action.payload, playbackRate }
     }
 
     case 'SET_MAX_PLAYBACK_RATE': {
-      const playbackRate =
-        state.playbackRate > action.payload
-          ? action.payload
-          : state.playbackRate
+      const playbackRate = calcPlaybackRate(
+        state.videos,
+        state.playingVideoId,
+        state.defaultBpm,
+        action.payload,
+        state.minPlaybackRate,
+      )
       return { ...state, maxPlaybackRate: action.payload, playbackRate }
+    }
+
+    case 'SET_MIN_PLAYBACK_RATE': {
+      const playbackRate = calcPlaybackRate(
+        state.videos,
+        state.playingVideoId,
+        state.defaultBpm,
+        state.maxPlaybackRate,
+        action.payload,
+      )
+      return { ...state, minPlaybackRate: action.payload, playbackRate }
     }
 
     default:
