@@ -27,7 +27,21 @@ const EditPage = () => {
 
   const { data } = usePlaylistQuery({
     variables: { id: state.playlistId },
-    onCompleted: () => {},
+    onCompleted: (data) => {
+      dispatch({
+        type: 'REFRESH_STATE',
+        payload: {
+          defaultBpm: data.playlist.defaultBpm,
+          title: data.playlist.title,
+          videos: data.playlist.videos.edges.map((edge) => ({
+            id: parseInt(edge.node.id),
+            bpm: edge.node.bpm,
+            youtubeVideoId: edge.node.youtubeVideoId,
+            youtubeVideoTitle: edge.node.youtubeVideoTitle,
+          })),
+        },
+      })
+    },
     skip: state.playlistId === undefined,
   })
 
@@ -41,25 +55,6 @@ const EditPage = () => {
     })
     dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
   }, [id, dispatch])
-
-  useEffect(() => {
-    if (data?.playlist === undefined) {
-      return
-    }
-    dispatch({
-      type: 'REFRESH_STATE',
-      payload: {
-        defaultBpm: data.playlist.defaultBpm,
-        title: data.playlist.title,
-        videos: data.playlist.videos.edges.map((edge) => ({
-          id: parseInt(edge.node.id),
-          bpm: edge.node.bpm,
-          youtubeVideoId: edge.node.youtubeVideoId,
-          youtubeVideoTitle: edge.node.youtubeVideoTitle,
-        })),
-      },
-    })
-  }, [data?.playlist, dispatch])
 
   return (
     <Box py={5}>
@@ -93,16 +88,30 @@ const EditPage = () => {
               </Box>
 
               <Box mb={2}>
-                <TextField fullWidth label="BPM変化量の許容値" />
+                <TextField
+                  fullWidth
+                  label="最大倍速"
+                  type="number"
+                  InputProps={{ inputProps: { min: 1, max: 4, step: 0.1 } }}
+                />
+              </Box>
+
+              <Box mb={2}>
+                <TextField
+                  fullWidth
+                  label="最小倍速"
+                  type="number"
+                  InputProps={{ inputProps: { min: 0.1, max: 1, step: 0.1 } }}
+                />
               </Box>
 
               <Box mb={2}>
                 <small style={{ color: 'rgba(0, 0, 0, 0.54)' }}>再生順</small>
                 <Select native fullWidth label="再生順">
                   <option>シャッフル</option>
-                  <option>上から順</option>
+                  {/* <option>上から順</option>
                   <option>BPMの昇順</option>
-                  <option>BPMの降順</option>
+                  <option>BPMの降順</option> */}
                 </Select>
               </Box>
             </Grid>
