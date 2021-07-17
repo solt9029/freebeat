@@ -22,6 +22,7 @@ const IndexPage = () => {
       hasMore={data?.playlists?.pageInfo?.hasNextPage}
       loader={<h4>Loading...</h4>}
       next={handleNext}
+      style={{ overflow: 'visible' }}
     >
       <Box pt={4}>
         <Container fixed>

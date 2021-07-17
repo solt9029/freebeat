@@ -6,6 +6,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core'
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 
 const useStyles = makeStyles(() => ({
@@ -37,9 +38,14 @@ type Props = {
 
 function PlaylistCard(props: Props) {
   const classes = useStyles()
+  const router = useRouter()
+
+  const handleClick = () => {
+    router.push(`/playlists/${props.id}/edit`)
+  }
 
   return (
-    <Card variant="outlined" style={{ width: '100%' }}>
+    <Card variant="outlined" style={{ width: '100%' }} onClick={handleClick}>
       <CardMedia
         image={`https://i.ytimg.com/vi/${props.firstYoutubeVideoId}/mqdefault.jpg`}
         style={{
