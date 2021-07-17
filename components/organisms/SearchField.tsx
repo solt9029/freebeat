@@ -5,7 +5,7 @@ import {
   InputBase,
   makeStyles,
 } from '@material-ui/core'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Search } from '@material-ui/icons'
 import { useRouter } from 'next/dist/client/router'
 
@@ -71,6 +71,13 @@ function SearchField() {
     },
     [setKeyword],
   )
+
+  useEffect(() => {
+    const { keyword } = router.query
+    if (keyword) {
+      setKeyword(keyword.toString())
+    }
+  }, [setKeyword, router.query])
 
   return (
     <div className={classes.search}>
