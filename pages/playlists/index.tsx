@@ -6,7 +6,6 @@ import { usePlaylistsQuery } from '../../graphql/generated/graphql-client'
 
 const IndexPage = () => {
   const { data, fetchMore, refetch } = usePlaylistsQuery({
-    variables: { after: null },
     onCompleted: () => {},
   })
 
