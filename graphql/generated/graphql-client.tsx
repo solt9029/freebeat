@@ -538,8 +538,12 @@ export type PlaylistsQuery = (
   { __typename?: 'Query' }
   & { playlists: (
     { __typename?: 'BaseConnection' }
-    & { edges?: Maybe<Array<Maybe<(
+    & { pageInfo: (
+      { __typename?: 'PageInfo' }
+      & Pick<PageInfo, 'hasNextPage' | 'endCursor'>
+    ), edges?: Maybe<Array<Maybe<(
       { __typename?: 'BaseEdge' }
+      & Pick<BaseEdge, 'cursor'>
       & { node?: Maybe<(
         { __typename?: 'Base' }
         & Pick<Base, 'id' | 'title' | 'defaultBpm' | 'createdAt'>
@@ -948,8 +952,13 @@ export type PlaylistLazyQueryHookResult = ReturnType<typeof usePlaylistLazyQuery
 export type PlaylistQueryResult = Apollo.QueryResult<PlaylistQuery, PlaylistQueryVariables>;
 export const PlaylistsDocument = gql`
     query playlists($after: String) {
-  playlists(after: $after, first: 20) {
+  playlists(after: $after, first: 14) {
+    pageInfo {
+      hasNextPage
+      endCursor
+    }
     edges {
+      cursor
       node {
         id
         title
