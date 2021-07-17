@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) =>
   }),
 )
 
+// 検索キーワードを入れたら、debounceでrouter.pushする。そのキーワードに応じてplaylists/indexで出しわけ
 function Navbar() {
   const classes = useStyles()
 
