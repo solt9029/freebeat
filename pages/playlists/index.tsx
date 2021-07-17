@@ -1,20 +1,26 @@
 import { Box, Container, Grid } from '@material-ui/core'
+import { useEffect } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import PlaylistCard from '../../components/organisms/PlaylistCard'
 import { usePlaylistsQuery } from '../../graphql/generated/graphql-client'
 
 const IndexPage = () => {
-  const { data, fetchMore } = usePlaylistsQuery({
+  const { data, fetchMore, refetch } = usePlaylistsQuery({
     variables: { after: null },
     onCompleted: () => {},
   })
 
   const handleNext = () => {
-    console.log('next')
-    fetchMore({
-      variables: { after: data?.playlists?.pageInfo?.endCursor },
-    })
+    if (fetchMore) {
+      fetchMore({
+        variables: { after: data?.playlists?.pageInfo?.endCursor },
+      })
+    }
   }
+
+  useEffect(() => {
+    refetch()
+  }, [refetch])
 
   return (
     <InfiniteScroll
