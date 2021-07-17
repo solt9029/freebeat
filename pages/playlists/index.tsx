@@ -1,12 +1,17 @@
 import { Box, Container, Grid } from '@material-ui/core'
+import { useRouter } from 'next/dist/client/router'
 import { useEffect } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import PlaylistCard from '../../components/organisms/PlaylistCard'
 import { usePlaylistsQuery } from '../../graphql/generated/graphql-client'
 
 const IndexPage = () => {
+  const { isReady, query } = useRouter()
+
   const { data, fetchMore, refetch } = usePlaylistsQuery({
+    variables: { keyword: query?.keyword?.toString() },
     onCompleted: () => {},
+    skip: !isReady,
   })
 
   const handleNext = () => {
@@ -19,7 +24,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     refetch()
-  }, [refetch])
+  }, [refetch, query])
 
   return (
     <InfiniteScroll
