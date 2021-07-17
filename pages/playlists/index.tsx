@@ -30,7 +30,7 @@ const IndexPage = () => {
       next={handleNext}
       style={{ overflow: 'visible' }}
     >
-      <Box pt={4}>
+      <Box py={4}>
         <Container fixed>
           <Grid container spacing={2}>
             {data &&
