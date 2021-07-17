@@ -529,6 +529,35 @@ export type PlaylistQuery = (
   ) }
 );
 
+export type PlaylistsQueryVariables = Exact<{
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type PlaylistsQuery = (
+  { __typename?: 'Query' }
+  & { playlists: (
+    { __typename?: 'BaseConnection' }
+    & { edges?: Maybe<Array<Maybe<(
+      { __typename?: 'BaseEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'Base' }
+        & Pick<Base, 'id' | 'title' | 'defaultBpm' | 'createdAt'>
+        & { videos: (
+          { __typename?: 'VideoConnection' }
+          & { edges?: Maybe<Array<Maybe<(
+            { __typename?: 'VideoEdge' }
+            & { node?: Maybe<(
+              { __typename?: 'Video' }
+              & Pick<Video, 'youtubeVideoId'>
+            )> }
+          )>>> }
+        ) }
+      )> }
+    )>>> }
+  ) }
+);
+
 
 export const CreatePlaylistDocument = gql`
     mutation createPlaylist {
@@ -917,3 +946,52 @@ export function usePlaylistLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type PlaylistQueryHookResult = ReturnType<typeof usePlaylistQuery>;
 export type PlaylistLazyQueryHookResult = ReturnType<typeof usePlaylistLazyQuery>;
 export type PlaylistQueryResult = Apollo.QueryResult<PlaylistQuery, PlaylistQueryVariables>;
+export const PlaylistsDocument = gql`
+    query playlists($after: String) {
+  playlists(after: $after, first: 20) {
+    edges {
+      node {
+        id
+        title
+        defaultBpm
+        createdAt
+        videos(first: 1) {
+          edges {
+            node {
+              youtubeVideoId
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePlaylistsQuery__
+ *
+ * To run a query within a React component, call `usePlaylistsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlaylistsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlaylistsQuery({
+ *   variables: {
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function usePlaylistsQuery(baseOptions?: Apollo.QueryHookOptions<PlaylistsQuery, PlaylistsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlaylistsQuery, PlaylistsQueryVariables>(PlaylistsDocument, options);
+      }
+export function usePlaylistsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlaylistsQuery, PlaylistsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlaylistsQuery, PlaylistsQueryVariables>(PlaylistsDocument, options);
+        }
+export type PlaylistsQueryHookResult = ReturnType<typeof usePlaylistsQuery>;
+export type PlaylistsLazyQueryHookResult = ReturnType<typeof usePlaylistsLazyQuery>;
+export type PlaylistsQueryResult = Apollo.QueryResult<PlaylistsQuery, PlaylistsQueryVariables>;
