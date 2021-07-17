@@ -9,8 +9,7 @@ import {
   makeStyles,
   Typography,
 } from '@material-ui/core'
-import Pagination from '@material-ui/lab/Pagination'
-import { useRouter } from 'next/dist/client/router'
+import Pagination from '../../components/organisms/Pagination'
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -33,7 +32,6 @@ const useStyles = makeStyles(() => ({
 
 const IndexPage = () => {
   const classes = useStyles()
-  const router = useRouter()
 
   return (
     <Box pt={4}>
@@ -161,16 +159,7 @@ const IndexPage = () => {
           </Grid>
         </Grid>
         <Box mt={5}>
-          <Pagination
-            style={{ justifyContent: 'center', display: 'flex' }}
-            count={10}
-            page={2}
-            variant="outlined"
-            color="secondary"
-            onChange={(event, page) => {
-              router.push(`/playlists?page=${page}`)
-            }}
-          />
+          <Pagination />
         </Box>
       </Container>
     </Box>
