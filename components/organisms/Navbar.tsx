@@ -11,9 +11,8 @@ import {
 import React from 'react'
 import Link from 'next/link'
 import { Search } from '@material-ui/icons'
-import Theme from '../../theme'
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles((theme) =>
   createStyles({
     search: {
       position: 'relative',
