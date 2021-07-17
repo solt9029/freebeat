@@ -1,6 +1,13 @@
-import { alpha, createStyles, InputBase, makeStyles } from '@material-ui/core'
-import React from 'react'
+import {
+  alpha,
+  createStyles,
+  debounce,
+  InputBase,
+  makeStyles,
+} from '@material-ui/core'
+import React, { useCallback, useState } from 'react'
 import { Search } from '@material-ui/icons'
+import { useRouter } from 'next/dist/client/router'
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -47,6 +54,23 @@ const useStyles = makeStyles((theme) =>
 
 function SearchField() {
   const classes = useStyles()
+  const router = useRouter()
+  const [keyword, setKeyword] = useState('')
+
+  const pushRoute = useCallback(
+    debounce((value: string) => {
+      router.push(`/playlists?keyword=${value}`)
+    }, 1000),
+    [router],
+  )
+
+  const handleChange = useCallback(
+    (event) => {
+      setKeyword(event.target.value)
+      pushRoute(event.target.value)
+    },
+    [setKeyword],
+  )
 
   return (
     <div className={classes.search}>
@@ -54,6 +78,8 @@ function SearchField() {
         <Search />
       </div>
       <InputBase
+        value={keyword}
+        onChange={handleChange}
         placeholder="検索"
         classes={{
           root: classes.inputRoot,
