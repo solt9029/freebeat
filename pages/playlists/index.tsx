@@ -11,7 +11,7 @@ const IndexPage = () => {
   })
 
   const handleNext = () => {
-    if (fetchMore) {
+    if (data && fetchMore) {
       fetchMore({
         variables: { after: data?.playlists?.pageInfo?.endCursor },
       })
