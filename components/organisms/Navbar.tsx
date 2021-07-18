@@ -136,7 +136,7 @@ function Navbar() {
                 <ListItemIcon>
                   <Info />
                 </ListItemIcon>
-                <ListItemText primary="FreeBeatの使い方" />
+                <ListItemText primary="よくある質問" />
               </ListItem>
             </Link>
           </List>
