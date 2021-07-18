@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect } from 'react'
+import { CSSProperties } from '@material-ui/styles'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
 import VideoCard from '../../../components/organisms/VideoCard'
 import { getPlaylistKey } from '../../../local-storage'
@@ -87,11 +88,12 @@ const EditPage = () => {
     dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
   }, [id, dispatch])
 
-  let style = {}
+  let style: CSSProperties = {}
   if (state.videos.length > 0) {
     style = {
-      background: `linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.8)), url(https://i.ytimg.com/vi/${state.videos[0].youtubeVideoId}/mqdefault.jpg)`,
-      backgroundSize: '100%',
+      backgroundImage: `linear-gradient(to bottom, rgba(230, 230, 230, 0.85), rgba(230, 230, 230, 0.2)), url(https://i.ytimg.com/vi/${state.videos[0].youtubeVideoId}/mqdefault.jpg)`,
+      backgroundSize: '100% auto',
+      backgroundRepeat: 'no-repeat',
     }
   }
 
