@@ -10,6 +10,10 @@ import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 
 const useStyles = makeStyles(() => ({
+  card: {
+    cursor: 'pointer',
+    width: '100%',
+  },
   title: {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
@@ -45,7 +49,7 @@ function PlaylistCard(props: Props) {
   }
 
   return (
-    <Card variant="outlined" style={{ width: '100%' }} onClick={handleClick}>
+    <Card className={classes.card} variant="outlined" onClick={handleClick}>
       <CardMedia
         image={`https://i.ytimg.com/vi/${props.firstYoutubeVideoId}/mqdefault.jpg`}
         style={{
