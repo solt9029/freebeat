@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
+import moment from 'moment'
 
 const useStyles = makeStyles(() => ({
   card: {
@@ -70,7 +71,9 @@ function PlaylistCard(props: Props) {
             </Typography>
           </div>
         }
-        subheader={`BPM${props.defaultBpm}・2021年7月14日`}
+        subheader={`BPM${props.defaultBpm}・${moment(
+          Date.parse(props.createdAt),
+        ).format('YYYY年MM月DD日')}`}
       />
     </Card>
   )
