@@ -533,6 +533,7 @@ export type PlaylistQuery = (
 export type PlaylistsQueryVariables = Exact<{
   after?: Maybe<Scalars['String']>;
   keyword?: Maybe<Scalars['String']>;
+  first: Scalars['Int'];
 }>;
 
 
@@ -953,8 +954,8 @@ export type PlaylistQueryHookResult = ReturnType<typeof usePlaylistQuery>;
 export type PlaylistLazyQueryHookResult = ReturnType<typeof usePlaylistLazyQuery>;
 export type PlaylistQueryResult = Apollo.QueryResult<PlaylistQuery, PlaylistQueryVariables>;
 export const PlaylistsDocument = gql`
-    query playlists($after: String, $keyword: String) {
-  playlists(after: $after, first: 20, keyword: $keyword) {
+    query playlists($after: String, $keyword: String, $first: Int!) {
+  playlists(after: $after, first: $first, keyword: $keyword) {
     pageInfo {
       hasNextPage
       endCursor
@@ -993,10 +994,11 @@ export const PlaylistsDocument = gql`
  *   variables: {
  *      after: // value for 'after'
  *      keyword: // value for 'keyword'
+ *      first: // value for 'first'
  *   },
  * });
  */
-export function usePlaylistsQuery(baseOptions?: Apollo.QueryHookOptions<PlaylistsQuery, PlaylistsQueryVariables>) {
+export function usePlaylistsQuery(baseOptions: Apollo.QueryHookOptions<PlaylistsQuery, PlaylistsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<PlaylistsQuery, PlaylistsQueryVariables>(PlaylistsDocument, options);
       }

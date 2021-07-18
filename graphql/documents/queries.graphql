@@ -18,8 +18,8 @@ query playlist($id: Int!) {
   }
 }
 
-query playlists($after: String, $keyword: String) {
-  playlists(after: $after, first: 20, keyword: $keyword) {
+query playlists($after: String, $keyword: String, $first: Int!) {
+  playlists(after: $after, first: $first, keyword: $keyword) {
     pageInfo {
       hasNextPage
       endCursor

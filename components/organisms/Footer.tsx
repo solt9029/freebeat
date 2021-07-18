@@ -1,7 +1,7 @@
 import { Box, makeStyles } from '@material-ui/core'
 import React from 'react'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   footer: {
     backgroundColor: '#111111',
     textAlign: 'center',
