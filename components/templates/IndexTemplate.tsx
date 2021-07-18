@@ -47,19 +47,21 @@ const IndexTemplate = () => {
   const classes = useStyles()
 
   return (
-    <Container fixed className={classes.container}>
-      <Box mx={2}>
-        <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
-        <Box className={classes.topDescription}>
-          <TopDescription>
-            FreeBeatは、YouTube動画でプレイリストを作り、好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。
-          </TopDescription>
+    <Box mb={15}>
+      <Container fixed className={classes.container}>
+        <Box mx={2}>
+          <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
+          <Box className={classes.topDescription}>
+            <TopDescription>
+              FreeBeatは、YouTube動画でプレイリストを作り、好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。
+            </TopDescription>
+          </Box>
+          <Box className={classes.topLinkButtonList}>
+            <TopLinkButtonList />
+          </Box>
         </Box>
-        <Box className={classes.topLinkButtonList}>
-          <TopLinkButtonList />
-        </Box>
-      </Box>
-    </Container>
+      </Container>
+    </Box>
   )
 }
 

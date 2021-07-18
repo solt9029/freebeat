@@ -8,6 +8,7 @@ import Navbar from '../components/organisms/Navbar'
 import theme from '../theme'
 import { appReducer } from '../reducers'
 import { AppContext, initialState } from '../contexts'
+import Footer from '../components/organisms/Footer'
 
 function App({ Component, pageProps }) {
   const [state, dispatch] = useReducer(appReducer, initialState)
@@ -40,6 +41,7 @@ function App({ Component, pageProps }) {
               <CssBaseline />
               <Navbar />
               <Component {...pageProps} />
+              <Footer />
             </ThemeProvider>
           </StylesProvider>
         </AppContext.Provider>
