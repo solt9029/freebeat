@@ -8,22 +8,16 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  ListSubheader,
   makeStyles,
   Toolbar,
   Typography,
 } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
-import {
-  Add,
-  Inbox,
-  ListAlt,
-  Mail,
-  Menu,
-  QuestionAnswer,
-} from '@material-ui/icons'
+import { Add, Home, Info, ListAlt, Menu } from '@material-ui/icons'
+import { useCreatePlaylistMutation } from '../../graphql/generated/graphql-client'
+import { setPlaylistKey } from '../../local-storage'
 import SearchField from './SearchField'
 
 const useStyles = makeStyles((theme) => ({
@@ -40,6 +34,25 @@ function Navbar() {
   const classes = useStyles()
   const { pathname } = useRouter()
   const [isDrawerOpened, setIsDrawerOpened] = useState(false)
+  const router = useRouter()
+
+  const [createPlaylist] = useCreatePlaylistMutation({
+    onCompleted: (data) => {
+      setPlaylistKey(
+        parseInt(data.createPlaylist.playlist.id),
+        data.createPlaylist.playlist.key,
+      )
+      router.push(`/playlists/${data.createPlaylist.playlist.id}/edit`)
+    },
+    onError: (error) => {
+      console.log(error)
+    },
+  })
+
+  const handleClick = useCallback(() => {
+    createPlaylist()
+    setIsDrawerOpened(false)
+  }, [createPlaylist])
 
   return (
     <div style={{ flexGrow: 1 }}>
@@ -81,7 +94,20 @@ function Navbar() {
         </div>
         <Box mr={3} ml={1}>
           <List>
-            <ListItem button>
+            <Link href="/">
+              <ListItem
+                button
+                onClick={() => {
+                  setIsDrawerOpened(false)
+                }}
+              >
+                <ListItemIcon>
+                  <Home />
+                </ListItemIcon>
+                <ListItemText primary="トップページ" />
+              </ListItem>
+            </Link>
+            <ListItem button onClick={handleClick}>
               <ListItemIcon>
                 <Add />
               </ListItemIcon>
@@ -108,7 +134,7 @@ function Navbar() {
                 }}
               >
                 <ListItemIcon>
-                  <QuestionAnswer />
+                  <Info />
                 </ListItemIcon>
                 <ListItemText primary="FreeBeatの使い方" />
               </ListItem>
