@@ -1,4 +1,12 @@
-import { AppBar, Container, Toolbar, Typography } from '@material-ui/core'
+import {
+  AppBar,
+  Container,
+  IconButton,
+  MenuItem,
+  MenuList,
+  Toolbar,
+  Typography,
+} from '@material-ui/core'
 import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
@@ -11,11 +19,16 @@ function Navbar() {
     <AppBar position="static">
       <Container fixed>
         <Toolbar>
-          <Link href="/">
-            <Container style={{ cursor: 'pointer' }}>
-              <Typography variant="h6">FreeBeat</Typography>
-            </Container>
-          </Link>
+          <Container>
+            <Typography variant="h6" style={{ textDecoration: 'none' }}>
+              <Link href="/">
+                <span style={{ textDecoration: 'none', cursor: 'pointer' }}>
+                  FreeBeat
+                </span>
+              </Link>
+            </Typography>
+          </Container>
+
           {pathname === '/playlists' && <SearchField />}
         </Toolbar>
       </Container>
