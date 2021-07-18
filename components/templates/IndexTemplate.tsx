@@ -1,11 +1,11 @@
-import { Box, Container, makeStyles } from '@material-ui/core'
+import { Box, Container, Grid, makeStyles } from '@material-ui/core'
 import TopDescription from '../atoms/TopDescription'
 import TopTitle from '../atoms/TopTitle'
+import PlaylistCard from '../organisms/PlaylistCard'
 import TopLinkButtonList from '../organisms/TopLinkButtonList'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    textAlign: 'center',
     paddingTop: '70px',
     [theme.breakpoints.up('sm')]: {
       paddingTop: '90px',
@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('lg')]: {
       paddingTop: '100px',
     },
+  },
+  topBox: {
+    textAlign: 'center',
   },
   topDescription: {
     marginTop: '60px',
@@ -49,7 +52,7 @@ const IndexTemplate = () => {
   return (
     <Box mb={15}>
       <Container fixed className={classes.container}>
-        <Box mx={2}>
+        <Box mx={2} mb={15} className={classes.topBox}>
           <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
           <Box className={classes.topDescription}>
             <TopDescription>
@@ -60,6 +63,35 @@ const IndexTemplate = () => {
             <TopLinkButtonList />
           </Box>
         </Box>
+        <Grid container spacing={2}>
+          <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+            <PlaylistCard
+              defaultBpm={150}
+              title={'mudai' || '無題'}
+              firstYoutubeVideoId={'a'}
+              createdAt={'2021/07/14'}
+              id={1}
+            />
+          </Grid>
+          <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+            <PlaylistCard
+              defaultBpm={150}
+              title={'mudai' || '無題'}
+              firstYoutubeVideoId={'a'}
+              createdAt={'2021/07/14'}
+              id={1}
+            />
+          </Grid>
+          <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+            <PlaylistCard
+              defaultBpm={150}
+              title={'mudai' || '無題'}
+              firstYoutubeVideoId={'a'}
+              createdAt={'2021/07/14'}
+              id={1}
+            />
+          </Grid>
+        </Grid>
       </Container>
     </Box>
   )
