@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Box,
   Container,
   Drawer,
   IconButton,
@@ -7,6 +8,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  ListSubheader,
   makeStyles,
   Toolbar,
   Typography,
@@ -14,7 +16,14 @@ import {
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/dist/client/router'
-import { Inbox, Mail, Menu } from '@material-ui/icons'
+import {
+  Add,
+  Inbox,
+  ListAlt,
+  Mail,
+  Menu,
+  QuestionAnswer,
+} from '@material-ui/icons'
 import SearchField from './SearchField'
 
 const useStyles = makeStyles((theme) => ({
@@ -65,16 +74,46 @@ function Navbar() {
           setIsDrawerOpened(false)
         }}
       >
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
+        <div style={{ backgroundColor: '#111111' }}>
+          <Box m={2} style={{ color: 'white' }}>
+            FreeBeat
+          </Box>
+        </div>
+        <Box mr={3} ml={1}>
+          <List>
+            <ListItem button>
               <ListItemIcon>
-                {index % 2 === 0 ? <Inbox /> : <Mail />}
+                <Add />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary="プレイリスト作成" />
             </ListItem>
-          ))}
-        </List>
+            <ListItem button>
+              <ListItemIcon>
+                <ListAlt />
+              </ListItemIcon>
+              <ListItemText primary="プレイリスト一覧" />
+            </ListItem>
+            <ListItem button>
+              <ListItemIcon>
+                <QuestionAnswer />
+              </ListItemIcon>
+              <ListItemText primary="FreeBeatの使い方" />
+            </ListItem>
+          </List>
+          <Box
+            mx={2}
+            mb={2}
+            style={{
+              position: 'fixed',
+              bottom: 0,
+            }}
+          >
+            Created by{' '}
+            <a href="https://twitter.com/solt9029" target="_blank">
+              @solt9029
+            </a>
+          </Box>
+        </Box>
       </Drawer>
     </div>
   )
