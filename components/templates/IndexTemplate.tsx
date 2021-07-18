@@ -50,7 +50,7 @@ const IndexTemplate = () => {
   const classes = useStyles()
 
   return (
-    <Box mb={15}>
+    <Box mb={20}>
       <Container fixed className={classes.container}>
         <Box mx={2} mb={15} className={classes.topBox}>
           <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
@@ -63,35 +63,70 @@ const IndexTemplate = () => {
             <TopLinkButtonList />
           </Box>
         </Box>
-        <Grid container spacing={2}>
-          <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-            <PlaylistCard
-              defaultBpm={150}
-              title={'mudai' || '無題'}
-              firstYoutubeVideoId={'a'}
-              createdAt={'2021/07/14'}
-              id={1}
-            />
+        <Box mb={10}>
+          <h1>おすすめプレイリスト</h1>
+          <Grid container spacing={2}>
+            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+              <PlaylistCard
+                defaultBpm={150}
+                title={'mudai' || '無題'}
+                firstYoutubeVideoId={'a'}
+                createdAt={'2021/07/14'}
+                id={1}
+              />
+            </Grid>
+            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+              <PlaylistCard
+                defaultBpm={150}
+                title={'mudai' || '無題'}
+                firstYoutubeVideoId={'a'}
+                createdAt={'2021/07/14'}
+                id={1}
+              />
+            </Grid>
+            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+              <PlaylistCard
+                defaultBpm={150}
+                title={'mudai' || '無題'}
+                firstYoutubeVideoId={'a'}
+                createdAt={'2021/07/14'}
+                id={1}
+              />
+            </Grid>
           </Grid>
-          <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-            <PlaylistCard
-              defaultBpm={150}
-              title={'mudai' || '無題'}
-              firstYoutubeVideoId={'a'}
-              createdAt={'2021/07/14'}
-              id={1}
-            />
+        </Box>
+        <Box mb={10}>
+          <h1>最近作成されたプレイリスト</h1>
+          <Grid container spacing={2}>
+            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+              <PlaylistCard
+                defaultBpm={150}
+                title={'mudai' || '無題'}
+                firstYoutubeVideoId={'a'}
+                createdAt={'2021/07/14'}
+                id={1}
+              />
+            </Grid>
+            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+              <PlaylistCard
+                defaultBpm={150}
+                title={'mudai' || '無題'}
+                firstYoutubeVideoId={'a'}
+                createdAt={'2021/07/14'}
+                id={1}
+              />
+            </Grid>
+            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
+              <PlaylistCard
+                defaultBpm={150}
+                title={'mudai' || '無題'}
+                firstYoutubeVideoId={'a'}
+                createdAt={'2021/07/14'}
+                id={1}
+              />
+            </Grid>
           </Grid>
-          <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-            <PlaylistCard
-              defaultBpm={150}
-              title={'mudai' || '無題'}
-              firstYoutubeVideoId={'a'}
-              createdAt={'2021/07/14'}
-              id={1}
-            />
-          </Grid>
-        </Grid>
+        </Box>
       </Container>
     </Box>
   )
