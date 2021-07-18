@@ -87,18 +87,32 @@ function Navbar() {
               </ListItemIcon>
               <ListItemText primary="プレイリスト作成" />
             </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <ListAlt />
-              </ListItemIcon>
-              <ListItemText primary="プレイリスト一覧" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <QuestionAnswer />
-              </ListItemIcon>
-              <ListItemText primary="FreeBeatの使い方" />
-            </ListItem>
+            <Link href="/playlists">
+              <ListItem
+                button
+                onClick={() => {
+                  setIsDrawerOpened(false)
+                }}
+              >
+                <ListItemIcon>
+                  <ListAlt />
+                </ListItemIcon>
+                <ListItemText primary="プレイリスト一覧" />
+              </ListItem>
+            </Link>
+            <Link href="/help">
+              <ListItem
+                button
+                onClick={() => {
+                  setIsDrawerOpened(false)
+                }}
+              >
+                <ListItemIcon>
+                  <QuestionAnswer />
+                </ListItemIcon>
+                <ListItemText primary="FreeBeatの使い方" />
+              </ListItem>
+            </Link>
           </List>
           <Box
             mx={2}
