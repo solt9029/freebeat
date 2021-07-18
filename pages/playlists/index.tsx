@@ -18,6 +18,22 @@ const IndexPage = () => {
     if (data && fetchMore) {
       fetchMore({
         variables: { after: data?.playlists?.pageInfo?.endCursor },
+        updateQuery: (previousResult, { fetchMoreResult }) => {
+          if (!fetchMoreResult) {
+            return previousResult
+          }
+
+          const newEdges = fetchMoreResult.playlists.edges
+          const pageInfo = fetchMoreResult.playlists.pageInfo
+
+          return {
+            playlists: {
+              ...previousResult.playlists,
+              pageInfo,
+              edges: [...previousResult.playlists.edges, ...newEdges],
+            },
+          }
+        },
       })
     }
   }

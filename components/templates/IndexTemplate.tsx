@@ -51,10 +51,16 @@ const useStyles = makeStyles((theme) => ({
 const IndexTemplate = () => {
   const classes = useStyles()
 
-  const recentPlaylistsQuery = usePlaylistsQuery({ variables: { first: 3 } })
+  const recentPlaylistsQuery = usePlaylistsQuery({
+    variables: { first: 3 },
+  })
+  const recommendedPlaylistsQuery = usePlaylistsQuery({
+    variables: { first: 3, ids: [1, 2, 3] },
+  })
 
   useEffect(() => {
     recentPlaylistsQuery.refetch()
+    recommendedPlaylistsQuery.refetch()
   }, [recentPlaylistsQuery])
 
   return (
@@ -74,40 +80,8 @@ const IndexTemplate = () => {
         <Box mb={10}>
           <h1>おすすめプレイリスト</h1>
           <Grid container spacing={2}>
-            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-              <PlaylistCard
-                defaultBpm={150}
-                title={'mudai' || '無題'}
-                firstYoutubeVideoId={'a'}
-                createdAt={'2021/07/14'}
-                id={1}
-              />
-            </Grid>
-            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-              <PlaylistCard
-                defaultBpm={150}
-                title={'mudai' || '無題'}
-                firstYoutubeVideoId={'a'}
-                createdAt={'2021/07/14'}
-                id={1}
-              />
-            </Grid>
-            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-              <PlaylistCard
-                defaultBpm={150}
-                title={'mudai' || '無題'}
-                firstYoutubeVideoId={'a'}
-                createdAt={'2021/07/14'}
-                id={1}
-              />
-            </Grid>
-          </Grid>
-        </Box>
-        <Box mb={10}>
-          <h1>最近作成されたプレイリスト</h1>
-          <Grid container spacing={2}>
-            {recentPlaylistsQuery.data &&
-              recentPlaylistsQuery.data.playlists.edges.map((edge, index) => {
+            {recommendedPlaylistsQuery.data &&
+              recommendedPlaylistsQuery.data.playlists.edges.map((edge) => {
                 return (
                   <Grid
                     item
@@ -116,7 +90,36 @@ const IndexTemplate = () => {
                     sm={6}
                     xs={12}
                     zeroMinWidth
-                    key={index}
+                    key={edge.node.id}
+                  >
+                    <PlaylistCard
+                      defaultBpm={edge.node.defaultBpm}
+                      title={edge.node.title || '無題'}
+                      firstYoutubeVideoId={
+                        edge.node.videos.edges[0]?.node?.youtubeVideoId
+                      }
+                      createdAt={edge.node.createdAt}
+                      id={parseInt(edge.node.id)}
+                    />
+                  </Grid>
+                )
+              })}
+          </Grid>
+        </Box>
+        <Box mb={10}>
+          <h1>最近作成されたプレイリスト</h1>
+          <Grid container spacing={2}>
+            {recentPlaylistsQuery.data &&
+              recentPlaylistsQuery.data.playlists.edges.map((edge) => {
+                return (
+                  <Grid
+                    item
+                    lg={4}
+                    md={4}
+                    sm={6}
+                    xs={12}
+                    zeroMinWidth
+                    key={edge.node.id}
                   >
                     <PlaylistCard
                       defaultBpm={edge.node.defaultBpm}
