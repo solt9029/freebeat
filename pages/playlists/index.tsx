@@ -24,7 +24,7 @@ const IndexPage = () => {
 
   useEffect(() => {
     refetch()
-  }, [refetch, query])
+  }, [refetch])
 
   return (
     <>

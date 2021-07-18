@@ -1,4 +1,6 @@
 import { Box, Container, Grid, makeStyles } from '@material-ui/core'
+import { useEffect } from 'react'
+import { usePlaylistsQuery } from '../../graphql/generated/graphql-client'
 import TopDescription from '../atoms/TopDescription'
 import TopTitle from '../atoms/TopTitle'
 import PlaylistCard from '../organisms/PlaylistCard'
@@ -49,6 +51,12 @@ const useStyles = makeStyles((theme) => ({
 const IndexTemplate = () => {
   const classes = useStyles()
 
+  const recentPlaylistsQuery = usePlaylistsQuery({ variables: { first: 3 } })
+
+  useEffect(() => {
+    recentPlaylistsQuery.refetch()
+  }, [recentPlaylistsQuery])
+
   return (
     <Box mb={20}>
       <Container fixed className={classes.container}>
@@ -98,33 +106,30 @@ const IndexTemplate = () => {
         <Box mb={10}>
           <h1>最近作成されたプレイリスト</h1>
           <Grid container spacing={2}>
-            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-              <PlaylistCard
-                defaultBpm={150}
-                title={'mudai' || '無題'}
-                firstYoutubeVideoId={'a'}
-                createdAt={'2021/07/14'}
-                id={1}
-              />
-            </Grid>
-            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-              <PlaylistCard
-                defaultBpm={150}
-                title={'mudai' || '無題'}
-                firstYoutubeVideoId={'a'}
-                createdAt={'2021/07/14'}
-                id={1}
-              />
-            </Grid>
-            <Grid item lg={4} md={4} sm={6} xs={12} zeroMinWidth>
-              <PlaylistCard
-                defaultBpm={150}
-                title={'mudai' || '無題'}
-                firstYoutubeVideoId={'a'}
-                createdAt={'2021/07/14'}
-                id={1}
-              />
-            </Grid>
+            {recentPlaylistsQuery.data &&
+              recentPlaylistsQuery.data.playlists.edges.map((edge, index) => {
+                return (
+                  <Grid
+                    item
+                    lg={4}
+                    md={4}
+                    sm={6}
+                    xs={12}
+                    zeroMinWidth
+                    key={index}
+                  >
+                    <PlaylistCard
+                      defaultBpm={edge.node.defaultBpm}
+                      title={edge.node.title || '無題'}
+                      firstYoutubeVideoId={
+                        edge.node.videos.edges[0]?.node?.youtubeVideoId
+                      }
+                      createdAt={edge.node.createdAt}
+                      id={parseInt(edge.node.id)}
+                    />
+                  </Grid>
+                )
+              })}
           </Grid>
         </Box>
       </Container>
