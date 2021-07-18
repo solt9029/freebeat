@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core'
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import ReactPlayer from 'react-player'
 import { AppContext } from '../../contexts'
 
@@ -26,6 +26,7 @@ function YoutubePlayer() {
   const classes = useStyles()
   const playerRef = useRef(null)
   const { state, dispatch } = useContext(AppContext)
+  const [isReady, setIsReady] = useState(false)
 
   const handlePlay = () => {
     playerRef.current?.getInternalPlayer()?.setLoop(true)
@@ -50,7 +51,10 @@ function YoutubePlayer() {
           controls
           playbackRate={state.playbackRate}
           onPlay={handlePlay}
-          url={state.youtubeVideoUrls}
+          onReady={() => {
+            setIsReady(true)
+          }}
+          url={isReady ? state.youtubeVideoUrls : []}
         />
       </div>
     </div>

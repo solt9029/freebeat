@@ -61,7 +61,7 @@ const IndexTemplate = () => {
   useEffect(() => {
     recentPlaylistsQuery.refetch()
     recommendedPlaylistsQuery.refetch()
-  }, [recentPlaylistsQuery])
+  }, [recentPlaylistsQuery.refetch, recommendedPlaylistsQuery.refetch])
 
   return (
     <Box mb={20}>

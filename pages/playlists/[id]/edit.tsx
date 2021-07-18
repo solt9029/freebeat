@@ -1,4 +1,11 @@
-import { Box, Container, Grid, Select, Typography } from '@material-ui/core'
+import {
+  Box,
+  Container,
+  Grid,
+  makeStyles,
+  Select,
+  Typography,
+} from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect } from 'react'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
@@ -13,8 +20,28 @@ import YoutubePlayer from '../../../components/organisms/YoutubePlayer'
 import MaxPlaybackRateField from '../../../components/organisms/MaxPlaybackRateField'
 import MinPlaybackRateField from '../../../components/organisms/MinPlaybackRateField'
 
+const useStyles = makeStyles(() => ({
+  container: {
+    position: 'relative',
+    zIndex: 0,
+    '&::before': {
+      background: 'inherit',
+      content: '""',
+      filter: 'blur(3px)',
+      backgroundColor: 'white',
+      position: 'absolute',
+      top: '0px',
+      bottom: '0px',
+      right: '0px',
+      left: '0px',
+      zIndex: -1,
+    },
+  },
+}))
+
 const EditPage = () => {
   const { state, dispatch } = useContext(AppContext)
+  const classes = useStyles()
 
   const {
     query: { id },
@@ -60,8 +87,16 @@ const EditPage = () => {
     dispatch({ type: 'SET_PLAYLIST_ID', payload: parseInt(id.toString()) })
   }, [id, dispatch])
 
+  let style = {}
+  if (state.videos.length > 0) {
+    style = {
+      background: `linear-gradient(to bottom, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.8)), url(https://i.ytimg.com/vi/${state.videos[0].youtubeVideoId}/mqdefault.jpg)`,
+      backgroundSize: '100%',
+    }
+  }
+
   return (
-    <Box py={5}>
+    <Box py={5} className={classes.container} style={style}>
       <Container>
         <Grid spacing={3} container>
           <Grid item xs={12} sm={6} md={4}>
