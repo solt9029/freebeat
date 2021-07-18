@@ -229,6 +229,7 @@ export type QueryPlaylistsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
+  ids?: Maybe<Array<Scalars['Int']>>;
   keyword?: Maybe<Scalars['String']>;
   last?: Maybe<Scalars['Int']>;
 };

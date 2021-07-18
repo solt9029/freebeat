@@ -1,5 +1,4 @@
 import { Box, CircularProgress, Container, Grid } from '@material-ui/core'
-import { List } from '@material-ui/icons'
 import { useRouter } from 'next/dist/client/router'
 import { useEffect } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
