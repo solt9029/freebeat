@@ -1,4 +1,5 @@
 import { Box, CircularProgress, Container, Grid } from '@material-ui/core'
+import { List } from '@material-ui/icons'
 import { useRouter } from 'next/dist/client/router'
 import { useEffect } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
@@ -39,7 +40,7 @@ const IndexPage = () => {
         next={handleNext}
         style={{ overflow: 'visible' }}
       >
-        <Box py={4}>
+        <Box py={8}>
           <Container fixed>
             <Grid container spacing={2}>
               {data &&
