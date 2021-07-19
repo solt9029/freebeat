@@ -52,3 +52,7 @@ export type AppAction =
       type: 'SET_MIN_PLAYBACK_RATE'
       payload?: string
     }
+  | {
+      type: 'SET_IS_SNACKBAR_OPENED'
+      payload: boolean
+    }

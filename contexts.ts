@@ -13,6 +13,7 @@ export const initialState = {
   youtubeVideoUrls: [],
   maxPlaybackRate: '',
   minPlaybackRate: '',
+  isSnackbarOpened: false,
 }
 
 export const AppContext = createContext<AppContextInterface>({

@@ -17,4 +17,5 @@ export type AppState = {
   youtubeVideoUrls: string[]
   maxPlaybackRate?: string
   minPlaybackRate?: string
+  isSnackbarOpened: boolean
 }

@@ -129,6 +129,9 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
       return { ...state, minPlaybackRate: action.payload, playbackRate }
     }
 
+    case 'SET_IS_SNACKBAR_OPENED':
+      return { ...state, isSnackbarOpened: action.payload }
+
     default:
       return state
   }
