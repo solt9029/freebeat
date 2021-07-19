@@ -53,6 +53,6 @@ export type AppAction =
       payload?: string
     }
   | {
-      type: 'SET_IS_SNACKBAR_OPENED'
-      payload: boolean
+      type: 'SET_SNACKBAR_SEVERITY'
+      payload?: string
     }

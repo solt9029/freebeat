@@ -1,6 +1,14 @@
-import { Box, Container, Grid, Select, Typography } from '@material-ui/core'
+import {
+  Box,
+  Container,
+  Grid,
+  Select,
+  Snackbar,
+  Typography,
+} from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect } from 'react'
+import { Alert } from '@material-ui/lab'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
 import VideoCard from '../../../components/organisms/VideoCard'
 import { getPlaylistKey } from '../../../local-storage'
@@ -129,6 +137,9 @@ const EditPage = () => {
             </Grid>
           </Grid>
         </Box>
+        {/* <Snackbar>
+          <Alert></Alert>
+        </Snackbar> */}
       </Container>
     </Box>
   )
