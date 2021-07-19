@@ -8,14 +8,14 @@ import { usePlaylistsQuery } from '../../graphql/generated/graphql-client'
 const IndexPage = () => {
   const { isReady, query } = useRouter()
 
-  const { data, fetchMore, refetch } = usePlaylistsQuery({
+  const { data, fetchMore, refetch, called } = usePlaylistsQuery({
     variables: { keyword: query?.keyword?.toString(), first: 20 },
     onCompleted: () => {},
     skip: !isReady,
   })
 
   const handleNext = () => {
-    if (data && fetchMore) {
+    if (data && called && fetchMore) {
       fetchMore({
         variables: { after: data?.playlists?.pageInfo?.endCursor },
         updateQuery: (previousResult, { fetchMoreResult }) => {
@@ -55,8 +55,9 @@ const IndexPage = () => {
         next={handleNext}
         style={{ overflow: 'visible' }}
       >
-        <Box py={8}>
+        <Box py={4}>
           <Container fixed>
+            <h1>みんなの作成したプレイリスト</h1>
             <Grid container spacing={2}>
               {data &&
                 data.playlists.edges.map((edge, index) => {
