@@ -35,14 +35,6 @@ const EditPage = () => {
   })
 
   useEffect(() => {
-    console.log('did mount')
-    dispatch({
-      type: 'SET_SNACKBAR',
-      payload: { text: '読み込みが完了しました', color: 'success' },
-    })
-  }, [])
-
-  useEffect(() => {
     if (data?.playlist === undefined) {
       return
     }
@@ -80,12 +72,13 @@ const EditPage = () => {
     <Box py={5}>
       <Snackbar
         open={state.snackbar !== undefined}
-        autoHideDuration={5000}
+        autoHideDuration={3000}
         onClose={() => {
           dispatch({ type: 'SET_SNACKBAR', payload: undefined })
         }}
       >
         <Alert
+          variant="filled"
           onClose={() => {
             dispatch({ type: 'SET_SNACKBAR', payload: undefined })
           }}

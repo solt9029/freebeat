@@ -19,6 +19,10 @@ function PlaylistTitleField() {
       console.log(data)
     },
     onError: (error) => {
+      dispatch({
+        type: 'SET_SNACKBAR',
+        payload: { text: 'タイトルの更新に失敗しました', color: 'error' },
+      })
       console.log(error)
     },
   })

@@ -11,6 +11,13 @@ function PlaylistDefaultBpmField() {
       console.log(data)
     },
     onError: (error) => {
+      dispatch({
+        type: 'SET_SNACKBAR',
+        payload: {
+          text: 'デフォルトのBPMの更新に失敗しました',
+          color: 'error',
+        },
+      })
       console.log(error)
     },
   })

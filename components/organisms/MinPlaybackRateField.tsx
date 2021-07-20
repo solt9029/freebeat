@@ -12,6 +12,13 @@ function MinPlaybackRateField() {
         console.log(data)
       },
       onError: (error) => {
+        dispatch({
+          type: 'SET_SNACKBAR',
+          payload: {
+            text: '自動調整時の最小倍速の更新に失敗しました',
+            color: 'error',
+          },
+        })
         console.log(error)
       },
     })

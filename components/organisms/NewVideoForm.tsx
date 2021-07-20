@@ -18,6 +18,13 @@ function NewVideoForm() {
       { query: PlaylistDocument, variables: { id: state.playlistId } },
     ],
     onError: (error) => {
+      dispatch({
+        type: 'SET_SNACKBAR',
+        payload: {
+          text: 'YouTube動画の追加に失敗しました',
+          color: 'error',
+        },
+      })
       console.log(error)
     },
   })
@@ -30,6 +37,13 @@ function NewVideoForm() {
       { query: PlaylistDocument, variables: { id: state.playlistId } },
     ],
     onError: (error) => {
+      dispatch({
+        type: 'SET_SNACKBAR',
+        payload: {
+          text: 'YouTubeプレイリストの追加に失敗しました',
+          color: 'error',
+        },
+      })
       console.log(error)
     },
   })
