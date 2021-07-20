@@ -6,13 +6,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '3rem',
     fontWeight: 'bold',
     [theme.breakpoints.up('sm')]: {
-      fontSize: '4.4rem',
+      fontSize: '3.5rem',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '6rem',
-    },
-    [theme.breakpoints.up('lg')]: {
-      fontSize: '7rem',
+      fontSize: '4rem',
     },
   },
 }))

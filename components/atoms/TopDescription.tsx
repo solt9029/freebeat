@@ -4,17 +4,8 @@ import React from 'react'
 const useStyles = makeStyles((theme) => ({
   description: {
     lineHeight: 1.8,
-    fontSize: '1.5rem',
+    fontSize: '1.1rem',
     fontWeight: 100,
-    [theme.breakpoints.up('sm')]: {
-      fontSize: '1.7rem',
-    },
-    [theme.breakpoints.up('md')]: {
-      fontSize: '1.9rem',
-    },
-    [theme.breakpoints.up('lg')]: {
-      fontSize: '2.2rem',
-    },
   },
 }))
 

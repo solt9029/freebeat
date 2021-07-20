@@ -15,9 +15,6 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       paddingTop: '100px',
     },
-    [theme.breakpoints.up('lg')]: {
-      paddingTop: '100px',
-    },
   },
   topBox: {
     textAlign: 'center',
@@ -30,20 +27,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       marginTop: '80px',
     },
-    [theme.breakpoints.up('lg')]: {
-      marginTop: '90px',
-    },
   },
   topLinkButtonList: {
-    marginTop: '70px',
+    marginTop: '60px',
     [theme.breakpoints.up('sm')]: {
-      marginTop: '90px',
+      marginTop: '65px',
     },
     [theme.breakpoints.up('md')]: {
-      marginTop: '100px',
-    },
-    [theme.breakpoints.up('lg')]: {
-      marginTop: '110px',
+      marginTop: '70px',
     },
   },
 }))
@@ -66,7 +57,7 @@ const IndexTemplate = () => {
   return (
     <Box mb={6}>
       <Container fixed className={classes.container}>
-        <Box mx={2} mb={15} className={classes.topBox}>
+        <Box mx={2} mb={10} className={classes.topBox}>
           <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
           <Box className={classes.topDescription}>
             <TopDescription>
@@ -87,7 +78,7 @@ const IndexTemplate = () => {
                     item
                     lg={4}
                     md={4}
-                    sm={6}
+                    sm={4}
                     xs={12}
                     zeroMinWidth
                     key={edge.node.id}
@@ -116,7 +107,7 @@ const IndexTemplate = () => {
                     item
                     lg={4}
                     md={4}
-                    sm={6}
+                    sm={4}
                     xs={12}
                     zeroMinWidth
                     key={edge.node.id}
