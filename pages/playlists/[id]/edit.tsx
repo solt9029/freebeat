@@ -107,7 +107,7 @@ const EditPage = () => {
               <Grid item sm={12} xs={12}>
                 <Button
                   onClick={() => {
-                    const url = `${window.location.protocol}//${window.location.host}/playlists/${state.playlistId}`
+                    const url = `${window.location.protocol}//${window.location.host}/playlists/${state.playlistId}/edit`
                     const newWindow = window.open(
                       '',
                       'child',
