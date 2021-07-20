@@ -64,7 +64,7 @@ const IndexTemplate = () => {
   }, [recentPlaylistsQuery.refetch, recommendedPlaylistsQuery.refetch])
 
   return (
-    <Box mb={20}>
+    <Box mb={6}>
       <Container fixed className={classes.container}>
         <Box mx={2} mb={15} className={classes.topBox}>
           <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
