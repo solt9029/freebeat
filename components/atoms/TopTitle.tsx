@@ -3,13 +3,16 @@ import React from 'react'
 
 const useStyles = makeStyles((theme) => ({
   title: {
-    fontSize: '3rem',
-    fontWeight: 'bold',
+    fontSize: '1.8rem',
+    lineHeight: '3.4rem',
+    fontWeight: 900,
     [theme.breakpoints.up('sm')]: {
-      fontSize: '3.5rem',
+      fontSize: '3.2rem',
+      lineHeight: '5rem',
     },
     [theme.breakpoints.up('md')]: {
-      fontSize: '4rem',
+      fontSize: '3.5rem',
+      lineHeight: '5.5rem',
     },
   },
 }))

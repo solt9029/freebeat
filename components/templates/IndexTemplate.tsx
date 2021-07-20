@@ -8,24 +8,24 @@ import TopLinkButtonList from '../organisms/TopLinkButtonList'
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    paddingTop: '70px',
+    paddingTop: '55px',
     [theme.breakpoints.up('sm')]: {
-      paddingTop: '90px',
+      paddingTop: '55px',
     },
     [theme.breakpoints.up('md')]: {
-      paddingTop: '100px',
+      paddingTop: '60px',
     },
   },
   topBox: {
     textAlign: 'center',
   },
   topDescription: {
-    marginTop: '60px',
+    marginTop: '50px',
     [theme.breakpoints.up('sm')]: {
-      marginTop: '70px',
+      marginTop: '60px',
     },
     [theme.breakpoints.up('md')]: {
-      marginTop: '80px',
+      marginTop: '60px',
     },
   },
   topLinkButtonList: {
@@ -58,10 +58,22 @@ const IndexTemplate = () => {
     <Box mb={6}>
       <Container fixed className={classes.container}>
         <Box mx={2} mb={10} className={classes.topBox}>
-          <TopTitle>統一されたBPMで集中して作業しよう</TopTitle>
+          <Box mb={6}>
+            <img
+              src="/icon.png"
+              width="100px"
+              style={{ borderRadius: '25%' }}
+            />
+          </Box>
+          <TopTitle>
+            <span style={{ display: 'inline-block' }}>統一されたBPMで</span>
+            <span style={{ display: 'inline-block' }}>集中して作業しよう</span>
+          </TopTitle>
           <Box className={classes.topDescription}>
             <TopDescription>
-              FreeBeatは、YouTube動画でプレイリストを作り、好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。
+              FreeBeatは、YouTube動画でプレイリストを作り、
+              <br />
+              好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。
             </TopDescription>
           </Box>
           <Box className={classes.topLinkButtonList}>
@@ -69,7 +81,7 @@ const IndexTemplate = () => {
           </Box>
         </Box>
         <Box mb={10}>
-          <h1>おすすめプレイリスト</h1>
+          <h2>おすすめプレイリスト</h2>
           <Grid container spacing={2}>
             {recommendedPlaylistsQuery.data &&
               recommendedPlaylistsQuery.data.playlists.edges.map((edge) => {
@@ -98,7 +110,7 @@ const IndexTemplate = () => {
           </Grid>
         </Box>
         <Box mb={10}>
-          <h1>最近作成されたプレイリスト</h1>
+          <h2>最近作成されたプレイリスト</h2>
           <Grid container spacing={2}>
             {recentPlaylistsQuery.data &&
               recentPlaylistsQuery.data.playlists.edges.map((edge) => {
