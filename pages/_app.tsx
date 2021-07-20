@@ -27,6 +27,15 @@ function App({ Component, pageProps }) {
           name="viewport"
           content="width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1"
         />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="FreeBeat" />
+        <meta
+          name="twitter:description"
+          content="YouTube動画でプレイリストを作り、好きなBPMに合わせた倍速再生ができる、作業用音楽プレイヤーです。"
+        />
+        <meta name="twitter:url" content="http://freebeat.vercel.app" />
+        <meta name="twitter:site" content="@solt9029" />
+        <meta name="twitter:creator" content="@solt9029" />
       </Head>
       <style jsx global>{`
         body {
@@ -49,5 +58,3 @@ function App({ Component, pageProps }) {
     </>
   )
 }
-
-export default App
