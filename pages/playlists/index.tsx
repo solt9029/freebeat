@@ -55,7 +55,7 @@ const IndexPage = () => {
         next={handleNext}
         style={{ overflow: 'visible' }}
       >
-        <Box py={4}>
+        <Box py={4} mb={6}>
           <Container fixed>
             <h1>みんなの作成したプレイリスト</h1>
             <Grid container spacing={2}>
