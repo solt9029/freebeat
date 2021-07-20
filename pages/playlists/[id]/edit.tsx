@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Grid,
   Select,
@@ -9,6 +10,7 @@ import {
 import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect } from 'react'
 import { Alert, Color } from '@material-ui/lab'
+import { Info, Twitter } from '@material-ui/icons'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
 import VideoCard from '../../../components/organisms/VideoCard'
 import { getPlaylistKey } from '../../../local-storage'
@@ -101,6 +103,30 @@ const EditPage = () => {
               </Grid>
               <Grid item sm={12} xs={12}>
                 <PlaylistKeyField />
+              </Grid>
+              <Grid item sm={12} xs={12}>
+                <Button
+                  onClick={() => {
+                    const url = `${window.location.protocol}//${window.location.host}/playlists/${state.playlistId}`
+                    const newWindow = window.open(
+                      '',
+                      'child',
+                      'width=600, height=300',
+                    )
+                    newWindow.location.href = `https://twitter.com/share?text=${state.title}(BPM${state.defaultBpm})&hashtags=FreeBeat&url=${url}&count=none&lang=ja`
+                  }}
+                >
+                  <Twitter /> ツイートする
+                </Button>
+                <a
+                  href="/help"
+                  target="_blank"
+                  style={{ textDecoration: 'none' }}
+                >
+                  <Button style={{ paddingLeft: '1rem' }}>
+                    <Info /> よくある質問
+                  </Button>
+                </a>
               </Grid>
             </Grid>
           </Grid>
