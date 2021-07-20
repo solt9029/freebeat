@@ -19,7 +19,7 @@ type Props = {
 
 function DeleteVideoButton(props: Props) {
   const classes = useStyles()
-  const { state } = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
 
   const [deleteVideo] = useDeleteVideoMutation({
     onCompleted: (data) => {
@@ -29,6 +29,10 @@ function DeleteVideoButton(props: Props) {
       { query: PlaylistDocument, variables: { id: state.playlistId } },
     ],
     onError: (error) => {
+      dispatch({
+        type: 'SET_SNACKBAR',
+        payload: { text: '動画の削除に失敗しました', color: 'error' },
+      })
       console.log(error)
     },
   })
