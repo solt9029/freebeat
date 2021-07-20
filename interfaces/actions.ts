@@ -1,4 +1,4 @@
-import { AppState, Video } from './state'
+import { AppState, Snackbar, Video } from './state'
 
 export type AppAction =
   | {
@@ -53,6 +53,6 @@ export type AppAction =
       payload?: string
     }
   | {
-      type: 'SET_SNACKBAR_SEVERITY'
-      payload?: string
+      type: 'SET_SNACKBAR'
+      payload?: Snackbar
     }

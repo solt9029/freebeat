@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core'
 import { useRouter } from 'next/dist/client/router'
 import { useContext, useEffect } from 'react'
-import { Alert } from '@material-ui/lab'
+import { Alert, Color } from '@material-ui/lab'
 import { usePlaylistQuery } from '../../../graphql/generated/graphql-client'
 import VideoCard from '../../../components/organisms/VideoCard'
 import { getPlaylistKey } from '../../../local-storage'
@@ -33,6 +33,14 @@ const EditPage = () => {
     onCompleted: () => {},
     skip: state.playlistId === undefined,
   })
+
+  useEffect(() => {
+    console.log('did mount')
+    dispatch({
+      type: 'SET_SNACKBAR',
+      payload: { text: '読み込みが完了しました', color: 'success' },
+    })
+  }, [])
 
   useEffect(() => {
     if (data?.playlist === undefined) {
@@ -70,6 +78,22 @@ const EditPage = () => {
 
   return (
     <Box py={5}>
+      <Snackbar
+        open={state.snackbar !== undefined}
+        autoHideDuration={5000}
+        onClose={() => {
+          dispatch({ type: 'SET_SNACKBAR', payload: undefined })
+        }}
+      >
+        <Alert
+          onClose={() => {
+            dispatch({ type: 'SET_SNACKBAR', payload: undefined })
+          }}
+          severity={state.snackbar?.color as Color}
+        >
+          {state.snackbar?.text}
+        </Alert>
+      </Snackbar>
       <Container>
         <Grid spacing={3} container>
           <Grid item xs={12} sm={6} md={4}>
@@ -137,9 +161,6 @@ const EditPage = () => {
             </Grid>
           </Grid>
         </Box>
-        {/* <Snackbar>
-          <Alert></Alert>
-        </Snackbar> */}
       </Container>
     </Box>
   )

@@ -5,6 +5,11 @@ export type Video = {
   bpm: number
 }
 
+export type Snackbar = {
+  color: string
+  text: string
+}
+
 export type AppState = {
   playlistId?: number
   key: string
@@ -17,5 +22,5 @@ export type AppState = {
   youtubeVideoUrls: string[]
   maxPlaybackRate?: string
   minPlaybackRate?: string
-  snackbarSeverity?: string
+  snackbar: Snackbar
 }
