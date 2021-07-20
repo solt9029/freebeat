@@ -36,6 +36,12 @@ function App({ Component, pageProps }) {
         <meta name="twitter:url" content="http://freebeat.vercel.app" />
         <meta name="twitter:site" content="@solt9029" />
         <meta name="twitter:creator" content="@solt9029" />
+        <meta
+          name="twitter:image"
+          content="https://freebeat.vercel.app/icon.png"
+        ></meta>
+        <title>FreeBeat</title>
+        <link rel="icon" href="/icon.png" type="image/png"></link>
       </Head>
       <style jsx global>{`
         body {
