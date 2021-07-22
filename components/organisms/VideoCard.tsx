@@ -51,6 +51,10 @@ function YoutubeVideoCard(props: Props) {
       console.log(data)
     },
     onError: (error) => {
+      dispatch({
+        type: 'SET_SNACKBAR',
+        payload: { text: 'BPMの更新に失敗しました', color: 'error' },
+      })
       console.log(error)
     },
   })
