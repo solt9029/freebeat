@@ -11,6 +11,7 @@ import {
 import React, { useCallback, useContext } from 'react'
 import { useUpdateVideoMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../contexts'
+import { writeVideoBpmQuery } from '../../apollo-client'
 import DeleteVideoButton from './DeleteVideoButton'
 
 const useStyles = makeStyles(() => ({
@@ -74,13 +75,11 @@ function YoutubeVideoCard(props: Props) {
 
   const handleChange = useCallback(
     (event) => {
-      dispatch({
-        type: 'UPDATE_VIDEO_BPM',
-        payload: { id: props.id, bpm: parseInt(event.target.value) },
-      })
+      // TODO: VideoCardを描画するときにapolloのキャッシュではなくcontext stateを参照しているので更新に時間がかかってしまってる
+      writeVideoBpmQuery(props.id, event.target.value)
       updateBpm(parseInt(event.target.value))
     },
-    [dispatch, props.id, updateBpm],
+    [dispatch, props.id, updateBpm, writeVideoBpmQuery],
   )
 
   return (

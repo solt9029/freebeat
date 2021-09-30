@@ -166,13 +166,13 @@ const EditPage = () => {
 
               <Box mt={3}>
                 {data &&
-                  state.videos.map((video, index) => (
+                  data.playlist.videos.edges.map((video, index) => (
                     <Box m={1} key={index}>
                       <VideoCard
-                        bpm={video.bpm}
-                        id={video.id}
-                        youtubeVideoId={video.youtubeVideoId}
-                        youtubeVideoTitle={video.youtubeVideoTitle}
+                        bpm={video.node.bpm}
+                        id={parseInt(video.node.id)}
+                        youtubeVideoId={video.node.youtubeVideoId}
+                        youtubeVideoTitle={video.node.youtubeVideoTitle}
                       />
                     </Box>
                   ))}
