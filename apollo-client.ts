@@ -37,3 +37,29 @@ export const writeVideoBpmQuery = (id: number, bpm: number) => {
     },
   })
 }
+
+export const writePlaylistDefaultBpmQuery = (
+  id: number,
+  defaultBpm: number,
+) => {
+  apolloClient.writeQuery({
+    query: gql`
+      query playlist($id: Int!) {
+        playlist(id: $id) {
+          id
+          defaultBpm
+        }
+      }
+    `,
+    data: {
+      playlist: {
+        __typename: 'Base',
+        id: id,
+        defaultBpm: defaultBpm,
+      },
+    },
+    variables: {
+      id: id,
+    },
+  })
+}

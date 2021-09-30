@@ -2,6 +2,7 @@ import { debounce, TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
 import { useUpdatePlaylistDefaultBpmMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../contexts'
+import { writePlaylistDefaultBpmQuery } from '../../apollo-client'
 
 function PlaylistDefaultBpmField() {
   const { state, dispatch } = useContext(AppContext)
@@ -37,10 +38,10 @@ function PlaylistDefaultBpmField() {
 
   const handleChange = useCallback(
     (event) => {
-      dispatch({ type: 'SET_DEFAULT_BPM', payload: event.target.value })
+      writePlaylistDefaultBpmQuery(state.playlistId, event.target.value)
       updateDefaultBpm(parseInt(event.target.value))
     },
-    [dispatch, updateDefaultBpm],
+    [updateDefaultBpm, state.playlistId, writePlaylistDefaultBpmQuery],
   )
 
   return (
