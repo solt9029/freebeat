@@ -90,9 +90,6 @@ export const appReducer = (state: AppState, action: AppAction): AppState => {
       }
     }
 
-    case 'SET_TITLE':
-      return { ...state, title: action.payload }
-
     case 'SET_YOUTUBE_URL':
       return { ...state, youtubeUrl: action.payload }
 

@@ -33,10 +33,6 @@ export type AppAction =
       >
     }
   | {
-      type: 'SET_TITLE'
-      payload: string
-    }
-  | {
       type: 'SET_YOUTUBE_URL'
       payload: string
     }

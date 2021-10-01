@@ -2,6 +2,7 @@ import { debounce, makeStyles, TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
 import { useUpdatePlaylistTitleMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../contexts'
+import { writePlaylistTitleQuery } from '../../apollo-client'
 
 const useStyles = makeStyles(() => ({
   input: {
@@ -42,7 +43,7 @@ function PlaylistTitleField() {
 
   const handleChange = useCallback(
     (event) => {
-      dispatch({ type: 'SET_TITLE', payload: event.target.value || '' })
+      writePlaylistTitleQuery(state.playlistId, event.target.value || '')
       updateTitle(event.target.value || '')
     },
     [dispatch, updateTitle],

@@ -76,6 +76,7 @@ function YoutubeVideoCard(props: Props) {
   const handleChange = useCallback(
     (event) => {
       // TODO: VideoCardを描画するときにapolloのキャッシュではなくcontext stateを参照しているので更新に時間がかかってしまってる
+      // TODO: update playback rate
       writeVideoBpmQuery(props.id, event.target.value)
       updateBpm(parseInt(event.target.value))
     },

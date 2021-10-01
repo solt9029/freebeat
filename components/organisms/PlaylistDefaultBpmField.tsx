@@ -39,6 +39,7 @@ function PlaylistDefaultBpmField() {
   const handleChange = useCallback(
     (event) => {
       writePlaylistDefaultBpmQuery(state.playlistId, event.target.value)
+      // TODO: update playback rate here
       updateDefaultBpm(parseInt(event.target.value))
     },
     [updateDefaultBpm, state.playlistId, writePlaylistDefaultBpmQuery],
