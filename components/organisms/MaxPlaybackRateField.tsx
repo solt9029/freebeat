@@ -2,6 +2,7 @@ import { debounce, TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
 import { useUpdatePlaylistMaxPlaybackRateMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../contexts'
+import { writePlaylistMaxPlaybackRateQuery } from '../../apollo-client'
 
 function MaxPlaybackRateField() {
   const { state, dispatch } = useContext(AppContext)
@@ -38,10 +39,8 @@ function MaxPlaybackRateField() {
 
   const handleChange = useCallback(
     (event) => {
-      dispatch({
-        type: 'SET_MAX_PLAYBACK_RATE',
-        payload: event.target.value,
-      })
+      // TODO: update playback rate here
+      writePlaylistMaxPlaybackRateQuery(state.playlistId, event.target.value)
       updateMaxPlaybackRate(parseFloat(event.target.value))
     },
     [dispatch, updateMaxPlaybackRate],

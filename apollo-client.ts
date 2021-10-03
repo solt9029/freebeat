@@ -2,6 +2,8 @@ import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client'
 import { relayStylePagination } from '@apollo/client/utilities'
 import {
   PLAYLIST_DEFAULT_BPM_QUERY,
+  PLAYLIST_MAX_PLAYBACK_RATE_QUERY,
+  PLAYLIST_MIN_PLAYBACK_RATE_QUERY,
   PLAYLIST_TITLE_QUERY,
   VIDEO_BPM_QUERY,
 } from './graphql/documents/queries'
@@ -52,6 +54,28 @@ export const writePlaylistTitleQuery = (id: number, title: string) => {
   apolloClient.writeQuery({
     query: PLAYLIST_TITLE_QUERY,
     data: { playlist: { __typename: 'Base', id, title } },
+    variables: { id: id },
+  })
+}
+
+export const writePlaylistMaxPlaybackRateQuery = (
+  id: number,
+  maxPlaybackRate: number,
+) => {
+  apolloClient.writeQuery({
+    query: PLAYLIST_MAX_PLAYBACK_RATE_QUERY,
+    data: { playlist: { __typename: 'Base', id, maxPlaybackRate } },
+    variables: { id: id },
+  })
+}
+
+export const writePlaylistMinPlaybackRateQuery = (
+  id: number,
+  minPlaybackRate: number,
+) => {
+  apolloClient.writeQuery({
+    query: PLAYLIST_MIN_PLAYBACK_RATE_QUERY,
+    data: { playlist: { __typename: 'Base', id, minPlaybackRate } },
     variables: { id: id },
   })
 }

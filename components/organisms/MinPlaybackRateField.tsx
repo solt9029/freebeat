@@ -2,6 +2,7 @@ import { debounce, TextField } from '@material-ui/core'
 import React, { useCallback, useContext } from 'react'
 import { useUpdatePlaylistMinPlaybackRateMutation } from '../../graphql/generated/graphql-client'
 import { AppContext } from '../../contexts'
+import { writePlaylistMinPlaybackRateQuery } from '../../apollo-client'
 
 function MinPlaybackRateField() {
   const { state, dispatch } = useContext(AppContext)
@@ -38,10 +39,8 @@ function MinPlaybackRateField() {
 
   const handleChange = useCallback(
     (event) => {
-      dispatch({
-        type: 'SET_MIN_PLAYBACK_RATE',
-        payload: event.target.value,
-      })
+      // TODO: update playback rate here
+      writePlaylistMinPlaybackRateQuery(state.playlistId, event.target.value)
       updateMinPlaybackRate(parseFloat(event.target.value))
     },
     [dispatch, updateMinPlaybackRate],
