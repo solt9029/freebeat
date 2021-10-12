@@ -39,7 +39,7 @@ function Navbar() {
   const [createPlaylist] = useCreatePlaylistMutation({
     onCompleted: (data) => {
       setPlaylistKey(
-        parseInt(data.createPlaylist.playlist.id),
+        data.createPlaylist.playlist.id,
         data.createPlaylist.playlist.key,
       )
       router.push(`/playlists/${data.createPlaylist.playlist.id}/edit`)
