@@ -62,7 +62,7 @@ const IndexPage = () => {
                           edge.node.videos.edges[0]?.node?.youtubeVideoId
                         }
                         createdAt={edge.node.createdAt}
-                        id={parseInt(edge.node.id)}
+                        id={edge.node.id}
                       />
                     </Grid>
                   )

@@ -50,7 +50,7 @@ const EditPage = () => {
         maxPlaybackRate: data.playlist.maxPlaybackRate?.toString(),
         minPlaybackRate: data.playlist.minPlaybackRate?.toString(),
         videos: data.playlist.videos.edges.map((edge) => ({
-          id: parseInt(edge.node.id),
+          id: edge.node.id,
           bpm: edge.node.bpm,
           youtubeVideoId: edge.node.youtubeVideoId,
           youtubeVideoTitle: edge.node.youtubeVideoTitle,
@@ -170,7 +170,7 @@ const EditPage = () => {
                     <Box m={1} key={index}>
                       <VideoCard
                         bpm={video.node.bpm}
-                        id={parseInt(video.node.id)}
+                        id={video.node.id}
                         youtubeVideoId={video.node.youtubeVideoId}
                         youtubeVideoTitle={video.node.youtubeVideoTitle}
                       />

@@ -54,6 +54,9 @@ const IndexTemplate = () => {
     recommendedPlaylistsQuery.refetch()
   }, [recentPlaylistsQuery.refetch, recommendedPlaylistsQuery.refetch])
 
+  console.log({ recommend: recommendedPlaylistsQuery.data })
+  console.log({ recent: recentPlaylistsQuery.data })
+
   return (
     <Box mb={6}>
       <Container fixed className={classes.container}>
