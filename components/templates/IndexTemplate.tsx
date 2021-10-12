@@ -46,7 +46,7 @@ const IndexTemplate = () => {
     variables: { first: 3 },
   })
   const recommendedPlaylistsQuery = usePlaylistsQuery({
-    variables: { first: 3, ids: [1, 2, 3] },
+    variables: { first: 3, ids: ['1', '2', '3'] },
   })
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-query playlist($id: ID!) {
+query playlist($id: Int!) {
   playlist(id: $id) {
     id
     title
@@ -18,7 +18,7 @@ query playlist($id: ID!) {
   }
 }
 
-query playlists($after: String, $keyword: String, $first: Int!, $ids: [ID!]) {
+query playlists($after: String, $keyword: String, $first: Int!, $ids: [Int!]) {
   playlists(after: $after, first: $first, keyword: $keyword, ids: $ids) {
     pageInfo {
     hasNextPage

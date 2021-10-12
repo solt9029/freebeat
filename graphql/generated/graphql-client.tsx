@@ -20,7 +20,7 @@ export type Base = {
   __typename?: 'Base';
   createdAt: Scalars['ISO8601DateTime'];
   defaultBpm?: Maybe<Scalars['Int']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   maxPlaybackRate?: Maybe<Scalars['Float']>;
   minPlaybackRate?: Maybe<Scalars['Float']>;
   title: Scalars['String'];
@@ -75,7 +75,7 @@ export type CreateVideoInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
   key: Scalars['String'];
-  playlistId: Scalars['ID'];
+  playlistId: Scalars['Int'];
   youtubeVideoId: Scalars['String'];
 };
 
@@ -92,7 +92,7 @@ export type CreateVideosInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
   key: Scalars['String'];
-  playlistId: Scalars['ID'];
+  playlistId: Scalars['Int'];
   youtubePlaylistId: Scalars['String'];
 };
 
@@ -108,7 +108,7 @@ export type CreateVideosPayload = {
 export type DeleteVideoInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
 };
 
@@ -124,7 +124,7 @@ export type Detail = {
   __typename?: 'Detail';
   createdAt: Scalars['ISO8601DateTime'];
   defaultBpm?: Maybe<Scalars['Int']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
   maxPlaybackRate?: Maybe<Scalars['Float']>;
   minPlaybackRate?: Maybe<Scalars['Float']>;
@@ -234,7 +234,7 @@ export type Query = {
 
 
 export type QueryPlaylistArgs = {
-  id: Scalars['ID'];
+  id: Scalars['Int'];
 };
 
 
@@ -242,7 +242,7 @@ export type QueryPlaylistsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
-  ids?: Maybe<Array<Scalars['ID']>>;
+  ids?: Maybe<Array<Scalars['Int']>>;
   keyword?: Maybe<Scalars['String']>;
   last?: Maybe<Scalars['Int']>;
 };
@@ -252,7 +252,7 @@ export type UpdatePlaylistDefaultBpmInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
   defaultBpm?: Maybe<Scalars['Int']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
 };
 
@@ -268,7 +268,7 @@ export type UpdatePlaylistDefaultBpmPayload = {
 export type UpdatePlaylistInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
   playlistInput: PlaylistInput;
 };
@@ -277,7 +277,7 @@ export type UpdatePlaylistInput = {
 export type UpdatePlaylistMaxPlaybackRateInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
   maxPlaybackRate?: Maybe<Scalars['Float']>;
 };
@@ -294,7 +294,7 @@ export type UpdatePlaylistMaxPlaybackRatePayload = {
 export type UpdatePlaylistMinPlaybackRateInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
   minPlaybackRate?: Maybe<Scalars['Float']>;
 };
@@ -319,7 +319,7 @@ export type UpdatePlaylistPayload = {
 export type UpdatePlaylistTitleInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
   title: Scalars['String'];
 };
@@ -337,7 +337,7 @@ export type UpdateVideoInput = {
   bpm?: Maybe<Scalars['Int']>;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
 };
 
@@ -353,7 +353,7 @@ export type Video = {
   __typename?: 'Video';
   bpm?: Maybe<Scalars['Int']>;
   createdAt: Scalars['ISO8601DateTime'];
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   playlist: Base;
   playlistId: Scalars['Int'];
   updatedAt: Scalars['ISO8601DateTime'];
@@ -396,7 +396,7 @@ export type CreatePlaylistMutation = (
 );
 
 export type UpdatePlaylistDefaultBpmMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   defaultBpm?: Maybe<Scalars['Int']>;
   key: Scalars['String'];
 }>;
@@ -414,7 +414,7 @@ export type UpdatePlaylistDefaultBpmMutation = (
 );
 
 export type UpdatePlaylistTitleMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   title: Scalars['String'];
   key: Scalars['String'];
 }>;
@@ -432,7 +432,7 @@ export type UpdatePlaylistTitleMutation = (
 );
 
 export type UpdatePlaylistMaxPlaybackRateMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   maxPlaybackRate?: Maybe<Scalars['Float']>;
   key: Scalars['String'];
 }>;
@@ -450,7 +450,7 @@ export type UpdatePlaylistMaxPlaybackRateMutation = (
 );
 
 export type UpdatePlaylistMinPlaybackRateMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   minPlaybackRate?: Maybe<Scalars['Float']>;
   key: Scalars['String'];
 }>;
@@ -468,7 +468,7 @@ export type UpdatePlaylistMinPlaybackRateMutation = (
 );
 
 export type CreateVideoMutationVariables = Exact<{
-  playlistId: Scalars['ID'];
+  playlistId: Scalars['Int'];
   youtubeVideoId: Scalars['String'];
   key: Scalars['String'];
 }>;
@@ -486,7 +486,7 @@ export type CreateVideoMutation = (
 );
 
 export type CreateVideosMutationVariables = Exact<{
-  playlistId: Scalars['ID'];
+  playlistId: Scalars['Int'];
   youtubePlaylistId: Scalars['String'];
   key: Scalars['String'];
 }>;
@@ -504,7 +504,7 @@ export type CreateVideosMutation = (
 );
 
 export type UpdateVideoMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   bpm?: Maybe<Scalars['Int']>;
   key: Scalars['String'];
 }>;
@@ -522,7 +522,7 @@ export type UpdateVideoMutation = (
 );
 
 export type DeleteVideoMutationVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
   key: Scalars['String'];
 }>;
 
@@ -539,7 +539,7 @@ export type DeleteVideoMutation = (
 );
 
 export type PlaylistQueryVariables = Exact<{
-  id: Scalars['ID'];
+  id: Scalars['Int'];
 }>;
 
 
@@ -565,7 +565,7 @@ export type PlaylistsQueryVariables = Exact<{
   after?: Maybe<Scalars['String']>;
   keyword?: Maybe<Scalars['String']>;
   first: Scalars['Int'];
-  ids?: Maybe<Array<Scalars['ID']> | Scalars['ID']>;
+  ids?: Maybe<Array<Scalars['Int']> | Scalars['Int']>;
 }>;
 
 
@@ -634,7 +634,7 @@ export type CreatePlaylistMutationHookResult = ReturnType<typeof useCreatePlayli
 export type CreatePlaylistMutationResult = Apollo.MutationResult<CreatePlaylistMutation>;
 export type CreatePlaylistMutationOptions = Apollo.BaseMutationOptions<CreatePlaylistMutation, CreatePlaylistMutationVariables>;
 export const UpdatePlaylistDefaultBpmDocument = gql`
-    mutation updatePlaylistDefaultBpm($id: ID!, $defaultBpm: Int, $key: String!) {
+    mutation updatePlaylistDefaultBpm($id: Int!, $defaultBpm: Int, $key: String!) {
   updatePlaylistDefaultBpm(input: {id: $id, defaultBpm: $defaultBpm, key: $key}) {
     playlist {
       id
@@ -671,7 +671,7 @@ export type UpdatePlaylistDefaultBpmMutationHookResult = ReturnType<typeof useUp
 export type UpdatePlaylistDefaultBpmMutationResult = Apollo.MutationResult<UpdatePlaylistDefaultBpmMutation>;
 export type UpdatePlaylistDefaultBpmMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistDefaultBpmMutation, UpdatePlaylistDefaultBpmMutationVariables>;
 export const UpdatePlaylistTitleDocument = gql`
-    mutation updatePlaylistTitle($id: ID!, $title: String!, $key: String!) {
+    mutation updatePlaylistTitle($id: Int!, $title: String!, $key: String!) {
   updatePlaylistTitle(input: {id: $id, title: $title, key: $key}) {
     playlist {
       id
@@ -708,7 +708,7 @@ export type UpdatePlaylistTitleMutationHookResult = ReturnType<typeof useUpdateP
 export type UpdatePlaylistTitleMutationResult = Apollo.MutationResult<UpdatePlaylistTitleMutation>;
 export type UpdatePlaylistTitleMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistTitleMutation, UpdatePlaylistTitleMutationVariables>;
 export const UpdatePlaylistMaxPlaybackRateDocument = gql`
-    mutation updatePlaylistMaxPlaybackRate($id: ID!, $maxPlaybackRate: Float, $key: String!) {
+    mutation updatePlaylistMaxPlaybackRate($id: Int!, $maxPlaybackRate: Float, $key: String!) {
   updatePlaylistMaxPlaybackRate(
     input: {id: $id, maxPlaybackRate: $maxPlaybackRate, key: $key}
   ) {
@@ -747,7 +747,7 @@ export type UpdatePlaylistMaxPlaybackRateMutationHookResult = ReturnType<typeof 
 export type UpdatePlaylistMaxPlaybackRateMutationResult = Apollo.MutationResult<UpdatePlaylistMaxPlaybackRateMutation>;
 export type UpdatePlaylistMaxPlaybackRateMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistMaxPlaybackRateMutation, UpdatePlaylistMaxPlaybackRateMutationVariables>;
 export const UpdatePlaylistMinPlaybackRateDocument = gql`
-    mutation updatePlaylistMinPlaybackRate($id: ID!, $minPlaybackRate: Float, $key: String!) {
+    mutation updatePlaylistMinPlaybackRate($id: Int!, $minPlaybackRate: Float, $key: String!) {
   updatePlaylistMinPlaybackRate(
     input: {id: $id, minPlaybackRate: $minPlaybackRate, key: $key}
   ) {
@@ -786,7 +786,7 @@ export type UpdatePlaylistMinPlaybackRateMutationHookResult = ReturnType<typeof 
 export type UpdatePlaylistMinPlaybackRateMutationResult = Apollo.MutationResult<UpdatePlaylistMinPlaybackRateMutation>;
 export type UpdatePlaylistMinPlaybackRateMutationOptions = Apollo.BaseMutationOptions<UpdatePlaylistMinPlaybackRateMutation, UpdatePlaylistMinPlaybackRateMutationVariables>;
 export const CreateVideoDocument = gql`
-    mutation createVideo($playlistId: ID!, $youtubeVideoId: String!, $key: String!) {
+    mutation createVideo($playlistId: Int!, $youtubeVideoId: String!, $key: String!) {
   createVideo(
     input: {playlistId: $playlistId, youtubeVideoId: $youtubeVideoId, key: $key}
   ) {
@@ -825,7 +825,7 @@ export type CreateVideoMutationHookResult = ReturnType<typeof useCreateVideoMuta
 export type CreateVideoMutationResult = Apollo.MutationResult<CreateVideoMutation>;
 export type CreateVideoMutationOptions = Apollo.BaseMutationOptions<CreateVideoMutation, CreateVideoMutationVariables>;
 export const CreateVideosDocument = gql`
-    mutation createVideos($playlistId: ID!, $youtubePlaylistId: String!, $key: String!) {
+    mutation createVideos($playlistId: Int!, $youtubePlaylistId: String!, $key: String!) {
   createVideos(
     input: {playlistId: $playlistId, youtubePlaylistId: $youtubePlaylistId, key: $key}
   ) {
@@ -864,7 +864,7 @@ export type CreateVideosMutationHookResult = ReturnType<typeof useCreateVideosMu
 export type CreateVideosMutationResult = Apollo.MutationResult<CreateVideosMutation>;
 export type CreateVideosMutationOptions = Apollo.BaseMutationOptions<CreateVideosMutation, CreateVideosMutationVariables>;
 export const UpdateVideoDocument = gql`
-    mutation updateVideo($id: ID!, $bpm: Int, $key: String!) {
+    mutation updateVideo($id: Int!, $bpm: Int, $key: String!) {
   updateVideo(input: {id: $id, bpm: $bpm, key: $key}) {
     video {
       id
@@ -901,7 +901,7 @@ export type UpdateVideoMutationHookResult = ReturnType<typeof useUpdateVideoMuta
 export type UpdateVideoMutationResult = Apollo.MutationResult<UpdateVideoMutation>;
 export type UpdateVideoMutationOptions = Apollo.BaseMutationOptions<UpdateVideoMutation, UpdateVideoMutationVariables>;
 export const DeleteVideoDocument = gql`
-    mutation deleteVideo($id: ID!, $key: String!) {
+    mutation deleteVideo($id: Int!, $key: String!) {
   deleteVideo(input: {id: $id, key: $key}) {
     playlist {
       id
@@ -937,7 +937,7 @@ export type DeleteVideoMutationHookResult = ReturnType<typeof useDeleteVideoMuta
 export type DeleteVideoMutationResult = Apollo.MutationResult<DeleteVideoMutation>;
 export type DeleteVideoMutationOptions = Apollo.BaseMutationOptions<DeleteVideoMutation, DeleteVideoMutationVariables>;
 export const PlaylistDocument = gql`
-    query playlist($id: ID!) {
+    query playlist($id: Int!) {
   playlist(id: $id) {
     id
     title
@@ -986,7 +986,7 @@ export type PlaylistQueryHookResult = ReturnType<typeof usePlaylistQuery>;
 export type PlaylistLazyQueryHookResult = ReturnType<typeof usePlaylistLazyQuery>;
 export type PlaylistQueryResult = Apollo.QueryResult<PlaylistQuery, PlaylistQueryVariables>;
 export const PlaylistsDocument = gql`
-    query playlists($after: String, $keyword: String, $first: Int!, $ids: [ID!]) {
+    query playlists($after: String, $keyword: String, $first: Int!, $ids: [Int!]) {
   playlists(after: $after, first: $first, keyword: $keyword, ids: $ids) {
     pageInfo {
       hasNextPage
